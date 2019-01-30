@@ -1,2 +1,2 @@
-# BetaChop
-A Meal Booking App
+# 🍽BetaChop 🥗🌯🥘🍛🥙🍖🍗
+A Meal Booking App 🍯🍜🥬🍽🍴🦐🍳🍲🥯
