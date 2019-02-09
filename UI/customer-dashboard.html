@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" type="text/css" href="./css/style.css" />
+    <link rel="stylesheet" type="text/css" href="./css/dashboard.css" />
+    <link rel="shortcut icon" type="image/png" href="img/favicon.png" />
+    <!-- <script src="./js/dashboard.js" type="text/javascript" /> -->
+
+    <title>BetaChop🍗</title>
+  </head>
+
+  <body>
+    <nav class="menu">
+      <ul id="menu-list">
+        <li>
+          <a href="">Today's Menu</a>
+        </li>
+        <li>
+          <a href="">Order History</a>
+        </li>
+        <li>
+          <a href="">Notification</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="wrapper">
+      <header class="logo">
+        <div class="top">
+          <button aria-expanded="false" aria-controls="menu-list">
+            <span class="open">☰</span>
+            <span class="close"> × </span>
+          </button>
+          <a href="home.html"><img src="./img/logo.svg"/></a>
+        </div>
+      </header>
+
+      <div class="inner">
+        <div class="right-content">
+          <div class="meal">
+            <h4>Today's Meal</h4>
+          </div>
+        </div>
+        <div></div>
+      </div>
+      <footer class="footer">
+        <h2>©2019 Betachop</h2>
+        <h3>Made with ❤️ by Timi Tejumola</h3>
+      </footer>
+    </div>
+
+    <script>
+      const somethingElse = document.querySelector(".top");
+      const navButton = somethingElse.querySelector("button[aria-expanded]");
+      function toggleNav({ target }) {
+        const expanded =
+          target.getAttribute("aria-expanded") === "true" || false;
+        navButton.setAttribute("aria-expanded", !expanded);
+        console.log(expanded);
+      }
+      navButton.addEventListener("click", toggleNav);
+    </script>
+  </body>
+</html>

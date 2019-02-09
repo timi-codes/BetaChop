@@ -1,0 +1,172 @@
+:root {
+  --cream-green: #01c2b6;
+  --orange: #fb9246;
+  --black: #292929;
+  --yellow: #fbb416;
+  --highlight: rgba(94, 254, 53, 0.25);
+  --light-grey: #c4c4c490;
+  --dark-grey: #a6a6a6;
+  --background: #f4f6f9;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: var(--background);
+  text-align: start;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas: "logo logo" "content content " "footer footer";
+}
+
+.logo {
+  justify-items: start;
+  grid-area: logo;
+  margin: 0;
+}
+
+#menu-list {
+  background-color: white;
+  width: 200px;
+  height: 100vh;
+  grid-row: 1;
+}
+
+.menu ul {
+  display: grid;
+  list-style: none;
+  padding: 0;
+  grid-template-columns: 1fr;
+  align-content: start;
+  margin: 0;
+}
+
+.menu li {
+  display: block;
+}
+
+.menu a {
+  display: block;
+  text-decoration: none;
+  color: var(--black);
+  padding: 15px 15px;
+}
+
+.menu a:hover {
+  background-color: var(--cream-green);
+}
+
+/* .menu {
+    order: -1;
+    perspective: 800px;
+} */
+
+[aria-controls="menu-list"] {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.menu ul {
+  max-height: 0;
+  overflow: hidden;
+  transform: rotateX(90deg);
+  transition: all 0.5s;
+}
+
+[aria-expanded="true"] ~ ul {
+  display: grid;
+  max-height: 100vh;
+  transform: rotate(0);
+}
+
+[aria-expanded="false"] .close {
+  display: none;
+}
+
+[aria-expanded="true"] .close {
+  display: inline-block;
+}
+
+[aria-expanded="true"] .open {
+  display: none;
+}
+
+.logo button {
+  margin-bottom: 10px;
+  width: 50px;
+  padding: 10px 10px;
+  background-color: white;
+  box-shadow: 1px 1px 1px var(--light-grey);
+  font-size: 18px;
+  border: 0;
+  color: white;
+  background: white;
+  font-weight: 400;
+  border-radius: 3px;
+  margin: 1rem 2rem 1rem 1rem;
+  text-transform: uppercase;
+}
+
+.top {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+}
+
+.top img {
+  width: 160px;
+}
+
+.top a {
+  align-self: center;
+  margin-top: 7px;
+}
+
+.logo button span {
+  color: var(--black);
+  font-weight: 900;
+  text-align: center;
+  max-width: 100%;
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-self: start;
+  grid-area: content;
+  margin: 0;
+}
+
+.left-content {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  z-index: 1;
+}
+
+.right-content .meal {
+  background-color: var(--cream-green);
+  color: white;
+}
+
+.right-content h4 {
+  padding: 10px 0;
+  margin-left: 12px;
+  font-weight: 500;
+  font-size: 14px;
+  margin-top: 0;
+}
+
+@media (min-width: 768px) {
+  [aria-controls="menu-list"] {
+    display: none;
+  }
+  .top img {
+    width: 100%;
+  }
+}
