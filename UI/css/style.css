@@ -96,7 +96,7 @@ p {
   display: grid;
   grid-area: logo;
   margin: 1.5rem 0;
-  place-items: center;
+  /* place-items: center; */
 }
 
 .logo img {
@@ -232,7 +232,7 @@ input[type="password"]:focus {
 @media (min-width: 1024px) {
   .logo {
     align-items: end;
-    justify-items: start;
+    justify-items: space-between;
     padding: 1rem 0;
   }
   .logo img {
