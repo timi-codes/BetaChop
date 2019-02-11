@@ -189,15 +189,21 @@ li a.active {
 }
 
 .right-content h4 {
-  padding: 10px 0;
-  margin-left: 12px;
-  font-weight: 500;
-  font-size: 14px;
+  padding: 12px 30px;
+  font-weight: 400;
+  font-size: 13px;
   margin-top: 0;
   text-transform: uppercase;
   text-align: center;
-  box-shadow: 1px 1px 1px var(--light-grey);
+  /* box-shadow: 1px 1px 1px var(--light-grey); */
+  background-color:var(--dark-grey);
+  border-radius: 3px;
 }
+
+.right-content h4:hover {
+  cursor:pointer;
+}
+
 
 /**food content**/
 
@@ -311,6 +317,53 @@ td .delete {
  margin-top:10px
 }
 
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1000000; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: none; /* Enable scroll if needed */
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  border-radius: 5px;
+  width: 30%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+
+
+
+
+
+
 @media (min-width: 768px) {
   [aria-controls="menu-list"] {
     display: none;
@@ -355,11 +408,7 @@ td .delete {
   .inner {
     width: 100%;
   }
-  .right-content h4 {
-    margin-left: 20px;
-    font-weight: 500;
-    font-size: 16px;
-  }
+
 
   .menu {
     display: grid;
