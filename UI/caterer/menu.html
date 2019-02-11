@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../css/dashboard.css" />
+    <link rel="shortcut icon" type="image/png" href="../img/favicon.png" />
+    <!-- <script src="./js/dashboard.js" type="text/javascript" /> -->
+
+    <title>BetaChop🍗</title>
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <header class="logo">
+        <div class="top">
+          <button aria-expanded="false" aria-controls="menu-list">
+            <span class="open">☰</span>
+            <span class="close"> × </span>
+          </button>
+          <a href="../index.html"><img src="../img/logo.svg"/></a>
+          <div class="current-user web-user">
+            <img src="../img/account-icon.svg" />
+            <h4>White House</h4>
+          </div>
+        </div>
+      </header>
+
+      <nav class="menu">
+        <div class="current-user  mobile-user">
+          <img src="../img/account-icon.svg" />
+          <h4>White House</h4>
+        </div>
+        <ul id="menu-list">
+          <li>
+            <a href="dashboard.html" href="">Today's Menu</a>
+          </li>
+          <li>
+            <a class="active" href="menu.html">Menu Options</a>
+          </li>
+          <li>
+            <a href="history.html">Order History</a>
+          </li>
+          <li>
+            <a href="../index.html">Logout</a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="inner">
+        <div class="right-content">
+          <div class="meal addBtn">
+            <h4>+ Add New</h4>
+          </div>
+        </div>
+        <div class="food-content">
+          <table>
+            <tr>
+              <td><img src="../img/jollof.png" /></td>
+              <td>Jollof Rice and Chicken</td>
+              <td>₦ 400</td>
+              <td>Breakfast</td>
+              <td>Timi Tejumola</td>
+              <td>
+                <button>Edit</button><button class="delete">Delete</button>
+              </td>
+            </tr>
+            <tr>
+              <td><img src="../img/chickenndchips.jpg" /></td>
+              <td>Chicken & Chips</td>
+              <td>₦ 1500</td>
+              <td>Dinner</td>
+              <td>Bose Oye</td>
+              <td>
+                <button class="addBtn">Edit</button
+                ><button class="delete">Delete</button>
+              </td>
+            </tr>
+            <tr>
+              <td><img src="../img/spagetti.png" /></td>
+              <td>Spaghetti & Turkey</td>
+              <td>₦ 500</td>
+              <td>Breakfast</td>
+              <td>Bode Kilani</td>
+              <td>
+                <button>Edit</button><button class="delete">Delete</button>
+              </td>
+            </tr>
+            <tr>
+              <td><img src="../img/poridge.png" /></td>
+              <td>Yam Poridge</td>
+              <td>₦ 500</td>
+              <td>Lunch</td>
+              <td>Timi Tejumola</td>
+              <td>
+                <button>Edit</button><button class="delete">Delete</button>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <footer class="footer">
+        <h2>©2019 Betachop</h2>
+        <h3>Made with ❤️ by Timi Tejumola</h3>
+      </footer>
+    </div>
+
+    <div id="addNewModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <div class="modal-inner-content">
+          <div class="cuisine add-new menu"><p>Upload</p></div>
+          <input
+            type="text"
+            id="foodname"
+            name="foodname"
+            placeholder="Food Name"
+          />
+          <textarea
+            id="description"
+            placeholder="Enter Description / Add-Ons"
+          ></textarea>
+          <input
+            type="text"
+            id="amount"
+            name="amount"
+            placeholder="Amount(₦)"
+          />
+          <button class="add-to-menu">Add to menu</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const somethingElse = document.querySelector(".top");
+      const navButton = somethingElse.querySelector("button[aria-expanded]");
+      function toggleNav({ target }) {
+        const expanded =
+          target.getAttribute("aria-expanded") === "true" || false;
+        navButton.setAttribute("aria-expanded", !expanded);
+        console.log(expanded);
+      }
+      navButton.addEventListener("click", toggleNav);
+
+      var modal = document.getElementById("addNewModal");
+      var btn = document.querySelector(".addBtn");
+      var span = document.getElementsByClassName(".close")[0];
+
+      btn.onclick = function() {
+        modal.style.display = "block";
+      };
+
+      span.onclick = function() {
+        modal.style.display = "none";
+      };
+
+      window.onclick = function(event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      };
+    </script>
+  </body>
+</html>
