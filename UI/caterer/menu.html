@@ -34,25 +34,25 @@
           <h4>White House</h4>
         </div>
         <ul id="menu-list">
-            <li>
-                <a href="dashboard.html"  href="">Today's Menu</a>
-            </li>
-            <li>
-                <a class="active" href="menu.html">Menu Options</a>
-            </li>
-            <li>
-                <a  href="history.html">Order History</a>
-            </li>
-            <li>
-                <a href="../index.html">Logout</a>
-            </li>
+          <li>
+            <a href="dashboard.html" href="">Today's Menu</a>
+          </li>
+          <li>
+            <a class="active" href="menu.html">Menu Options</a>
+          </li>
+          <li>
+            <a href="history.html">Order History</a>
+          </li>
+          <li>
+            <a href="../index.html">Logout</a>
+          </li>
         </ul>
       </nav>
 
       <div class="inner">
         <div class="right-content">
-          <div class="meal">
-            <h4 >+ Add New</h4>
+          <div class="meal addBtn">
+            <h4>+ Add New</h4>
           </div>
         </div>
         <div class="food-content">
@@ -63,7 +63,9 @@
               <td>₦ 400</td>
               <td>Breakfast</td>
               <td>Timi Tejumola</td>
-              <td><button class="addBtn">Edit</button><button class="delete">Delete</button></td>
+              <td>
+                <button>Edit</button><button class="delete">Delete</button>
+              </td>
             </tr>
             <tr>
               <td><img src="../img/chickenndchips.jpg" /></td>
@@ -71,7 +73,10 @@
               <td>₦ 1500</td>
               <td>Dinner</td>
               <td>Bose Oye</td>
-              <td><button class="addBtn">Edit</button><button class="delete">Delete</button></td>
+              <td>
+                <button class="addBtn">Edit</button
+                ><button class="delete">Delete</button>
+              </td>
             </tr>
             <tr>
               <td><img src="../img/spagetti.png" /></td>
@@ -79,7 +84,9 @@
               <td>₦ 500</td>
               <td>Breakfast</td>
               <td>Bode Kilani</td>
-              <td><button >Edit</button><button class="delete">Delete</button></td>
+              <td>
+                <button>Edit</button><button class="delete">Delete</button>
+              </td>
             </tr>
             <tr>
               <td><img src="../img/poridge.png" /></td>
@@ -87,7 +94,9 @@
               <td>₦ 500</td>
               <td>Lunch</td>
               <td>Timi Tejumola</td>
-              <td><button >Edit</button><button class="delete">Delete</button></td>
+              <td>
+                <button>Edit</button><button class="delete">Delete</button>
+              </td>
             </tr>
           </table>
         </div>
@@ -98,13 +107,31 @@
       </footer>
     </div>
 
-
     <div id="addNewModal" class="modal">
       <div class="modal-content">
         <span class="close">&times;</span>
-        <>
+        <div class="modal-inner-content">
+          <div class="cuisine add-new menu"><p>Upload</p></div>
+          <input
+            type="text"
+            id="foodname"
+            name="foodname"
+            placeholder="Food Name"
+          />
+          <textarea
+            id="description"
+            placeholder="Enter Description / Add-Ons"
+          ></textarea>
+          <input
+            type="text"
+            id="amount"
+            name="amount"
+            placeholder="Amount(₦)"
+          />
+          <button class="add-to-menu">Add to menu</button>
+        </div>
       </div>
-  </div>
+    </div>
 
     <script>
       const somethingElse = document.querySelector(".top");
@@ -117,23 +144,23 @@
       }
       navButton.addEventListener("click", toggleNav);
 
-    var modal = document.getElementById('addNewModal');
-    var btn = document.querySelector(".addBtn");
-    var span = document.getElementsByClassName(".close")[0];
+      var modal = document.getElementById("addNewModal");
+      var btn = document.querySelector(".addBtn");
+      var span = document.getElementsByClassName(".close")[0];
 
-    btn.onclick = function() {
-      modal.style.display = "block";
-    }
+      btn.onclick = function() {
+        modal.style.display = "block";
+      };
 
-    span.onclick = function() {
-      modal.style.display = "none";
-    }
-
-    window.onclick = function(event) {
-      if (event.target == modal) {
+      span.onclick = function() {
         modal.style.display = "none";
-      }
-    }
+      };
+
+      window.onclick = function(event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      };
     </script>
   </body>
 </html>
