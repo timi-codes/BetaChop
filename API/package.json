@@ -5,7 +5,8 @@
   "main": "v1/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon v1/index.js"
+    "start": "nodemon --exec babel-node v1/index.js",
+    "build": "babel --presets env -d lib/ src"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,10 @@
   },
   "homepage": "https://github.com/timi-codes/BetaChop#readme",
   "dependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.3.1",
     "express": "^4.16.4"
   },
   "devDependencies": {
