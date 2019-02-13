@@ -1,0 +1,24 @@
+{
+  "name": "betachop",
+  "version": "1.0.0",
+  "description": "a meal book app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/timi-codes/BetaChop.git"
+  },
+  "keywords": [
+    "food",
+    "chop",
+    "betachop"
+  ],
+  "author": "timi-codes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/timi-codes/BetaChop/issues"
+  },
+  "homepage": "https://github.com/timi-codes/BetaChop#readme"
+}
