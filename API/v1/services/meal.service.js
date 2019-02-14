@@ -6,7 +6,7 @@ const MealService = {
     return dummyData.meals.map((meal) => {
       const newMeal = new Meal();
       newMeal.id = meal.id;
-      newMeal.newMeal = meal.name;
+      newMeal.name = meal.name;
       newMeal.size = meal.size;
       newMeal.price = meal.price;
 
@@ -14,17 +14,21 @@ const MealService = {
     });
   },
 
-  addMeal(meal) {
+  addAMeal(meal) {
     const mealLength = dummyData.meals.length;
     const lastId = dummyData.meals[mealLength - 1].id;
     const newId = lastId + 1;
-    meal.id = newId;
-    dummyData.meals.push(meal);
+
+    const newMeal = meal;
+    newMeal.id = newId;
+
+    dummyData.meals.push(newMeal);
     return meal;
   },
 
   getAMeal(id) {
-    return dummyData.meals.find(meal => meal.id === id) || {};
+    const foundMeal = dummyData.meals.find(meal => meal.id === Number(id));
+    return foundMeal || {};
   },
 };
 
