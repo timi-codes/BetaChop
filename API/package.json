@@ -2,9 +2,11 @@
   "name": "betachop",
   "version": "1.0.0",
   "description": "a meal book app",
-  "main": "index.js",
+  "main": "v1/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --exec babel-node v1/index.js",
+    "build": "babel --presets env -d lib/ src"
   },
   "repository": {
     "type": "git",
@@ -20,5 +22,18 @@
   "bugs": {
     "url": "https://github.com/timi-codes/BetaChop/issues"
   },
-  "homepage": "https://github.com/timi-codes/BetaChop#readme"
+  "homepage": "https://github.com/timi-codes/BetaChop#readme",
+  "dependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.3.1",
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "eslint": "^5.13.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "nodemon": "^1.18.10"
+  }
 }
