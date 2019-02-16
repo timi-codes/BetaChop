@@ -57,13 +57,29 @@ const MealService = {
   },
 
   /**
-   * @description Finds a meal record from meal Array
+   * @description Finds a meal record from meal Dummy Data
    * @param { int } id
    * @returns {object} meal
    */
   getAMeal(id) {
     const foundMeal = dummyData.meals.find(meal => meal.id === Number(id));
     return foundMeal || {};
+  },
+
+  /**
+   * @description Delete a meal record from meal Dummy Data
+   * @param { int } id
+   * @returns {object} meal
+   */
+  deleteAMeal(id) {
+    const foundMeal = dummyData.meals.find(meal => meal.id === Number(id));
+    if (foundMeal) {
+      const index = dummyData.meals.indexOf(foundMeal);
+      if (index > -1) {
+        dummyData.meals.splice(index, 1);
+      }
+    }
+    return foundMeal;
   },
 };
 
