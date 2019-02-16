@@ -89,6 +89,32 @@ const MealController = {
       })
       .status(200);
   },
+
+  /**
+   * @description get a specific meal
+   * @param {object} req
+   * @param {object} res
+   * @returns {object} response
+   */
+  deleteAMeal(req, res) {
+    const { id } = req.params;
+    const deletedMeal = MealService.deleteAMeal(id);
+
+    if (deletedMeal == null) {
+      return res
+        .json({
+          message: `Meal not found with id ${id}`,
+        })
+        .status(404);
+    }
+
+    return res
+      .json({
+        status: 'success',
+        message: 'meal was successfully deleted',
+      })
+      .status(200);
+  },
 };
 
 export default MealController;
