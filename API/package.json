@@ -4,7 +4,7 @@
   "description": "a meal book app",
   "main": "v1/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "start": "nodemon --exec babel-node v1/index.js",
     "build": "babel --presets env -d lib/ src"
   },
@@ -32,9 +32,12 @@
     "express": "^4.16.4"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.1",
     "eslint": "^5.13.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.16.0",
+    "mocha": "^5.2.0",
     "nodemon": "^1.18.10"
   }
 }
