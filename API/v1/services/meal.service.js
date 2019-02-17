@@ -82,5 +82,4 @@ const MealService = {
     return foundMeal;
   },
 };
-
 export default MealService;
