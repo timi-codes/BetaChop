@@ -171,4 +171,49 @@ describe('Meal', () => {
         });
     });
   });
+
+  /**
+   * Test  DELETE /meals/:id route
+   */
+  describe('DELETE /meal/:id', () => {
+    it('it should delete a meal given the id', (done) => {
+      const mealId = Number(dummyData.meals[0].id);
+
+      chai
+        .request(app)
+        .delete(`/api/v1/meals/${mealId}`)
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a('object');
+          res.body.should.have.property('message').eql('Meal was successfully deleted');
+          done();
+        });
+    });
+
+    it('it should not DELETE a meal that is not available', (done) => {
+      const mealId = 10000;
+      chai
+        .request(app)
+        .put(`/api/v1/meals/${mealId}`)
+        .end((err, res) => {
+          res.should.have.status(400);
+          res.body.should.be.a('object');
+          res.body.should.have.property('message').eql(`Meal with id ${mealId} cannot be found`);
+          done();
+        });
+    });
+
+    it('it should throw an error when a number is not passed as id', (done) => {
+      const mealId = 'o';
+      chai
+        .request(app)
+        .put(`/api/v1/meals/${mealId}`)
+        .end((err, res) => {
+          res.should.have.status(400);
+          res.body.should.be.a('object');
+          res.body.should.have.property('message').eql('Invalid ID. ID must be a number');
+          done();
+        });
+    });
+  });
 });
