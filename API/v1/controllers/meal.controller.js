@@ -34,7 +34,7 @@ const MealController = {
     if (!req.body.name || !req.body.price || !req.body.size) {
       return res.status(400).send({
         status: 'error',
-        message: 'Meal parameters can not be empty',
+        message: 'All parameters are required',
       });
     }
 
@@ -43,6 +43,7 @@ const MealController = {
     return res
       .json({
         status: 'success',
+        message: 'Meal successfully added!',
         data: createdMeal,
       })
       .status(201);
@@ -57,17 +58,26 @@ const MealController = {
   updateAMeal(req, res) {
     const newMeal = req.body;
     const { id } = req.params;
+
+    if (Number.isNaN(Number(id))) {
+      return res.status(400).json({
+        status: 'error',
+        message: 'Invalid ID. ID must be a number',
+      });
+    }
+
     const updateMeal = MealService.updateAMeal(id, newMeal);
 
     if (updateMeal == null) {
-      return res
-        .json({
-          message: `Meal not found with id ${id}`,
-        })
-        .status(404);
+      return res.status(400).json({
+        status: 'error',
+        message: `Meal with id ${id} cannot be found`,
+      });
     }
     return res
       .json({
+        status: 'success',
+        message: 'Meal was successfully updated',
         data: updateMeal,
       })
       .status(201);
@@ -81,7 +91,24 @@ const MealController = {
    */
   getAMeal(req, res) {
     const { id } = req.params;
+
+    if (Number.isNaN(Number(id))) {
+      return res.status(400).json({
+        status: 'error',
+        message: 'Invalid ID. ID must be a number',
+      });
+    }
+
     const foundMeal = MealService.getAMeal(id);
+    const foundMealKeys = Object.keys(foundMeal);
+
+    if (foundMealKeys.length === 0) {
+      return res.status(404).json({
+        status: 'error',
+        message: 'Meal cannot be found',
+      });
+    }
+
     return res
       .json({
         status: 'success',
@@ -98,12 +125,21 @@ const MealController = {
    */
   deleteAMeal(req, res) {
     const { id } = req.params;
+
+    if (Number.isNaN(Number(id))) {
+      return res.status(400).json({
+        status: 'error',
+        message: 'Invalid ID. ID must be a number',
+      });
+    }
+
     const deletedMeal = MealService.deleteAMeal(id);
 
     if (deletedMeal == null) {
       return res
         .json({
-          message: `Meal not found with id ${id}`,
+          status: 'error',
+          message: `Meal with id ${id} cannot be found`,
         })
         .status(404);
     }
@@ -111,7 +147,7 @@ const MealController = {
     return res
       .json({
         status: 'success',
-        message: 'meal was successfully deleted',
+        message: 'Meal was successfully deleted',
       })
       .status(200);
   },
