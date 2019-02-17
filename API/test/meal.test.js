@@ -119,4 +119,56 @@ describe('Meal', () => {
         });
     });
   });
+
+  /**
+   * Test  PUT /meals/:id route
+   */
+  describe('PUT /meals/:id', () => {
+    it('it should update a book given the id', (done) => {
+      const mealId = Number(dummyData.meals[0].id);
+      const updateMeal = { name: 'Coconut Rice', price: '300' };
+      chai
+        .request(app)
+        .put(`/api/v1/meals/${mealId}`)
+        .send(updateMeal)
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a('object');
+          res.body.should.have.property('message').eql('Meal was successfully updated');
+          res.body.data.should.have.property('name').eql('Coconut Rice');
+          res.body.data.should.have.property('price').eql('300');
+          done();
+        });
+    });
+
+    it('it should not PUT a meal that is not available', (done) => {
+      const mealId = 10000;
+      const updateMeal = { name: 'Coconut Rice', price: '300' };
+      chai
+        .request(app)
+        .put(`/api/v1/meals/${mealId}`)
+        .send(updateMeal)
+        .end((err, res) => {
+          res.should.have.status(400);
+          res.body.should.be.a('object');
+          res.body.should.have.property('message').eql(`Meal with id ${mealId} cannot be found`);
+          done();
+        });
+    });
+
+    it('it should throw an error when a number is not passed as id', (done) => {
+      const mealId = 'o';
+      const updateMeal = { name: 'Coconut Rice', price: '300' };
+      chai
+        .request(app)
+        .put(`/api/v1/meals/${mealId}`)
+        .send(updateMeal)
+        .end((err, res) => {
+          res.should.have.status(400);
+          res.body.should.be.a('object');
+          res.body.should.have.property('message').eql('Invalid ID. ID must be a number');
+          done();
+        });
+    });
+  });
 });
