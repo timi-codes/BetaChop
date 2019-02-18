@@ -38,6 +38,40 @@ const OrderController = {
       order: orderedMeal,
     });
   },
+
+  /**
+   * @description update a order record
+   * @param {object} req
+   * @param {object} res
+   * @returns {object} apiResponse
+   */
+  updateAnOrder(req, res) {
+    const { mealId, type } = req.body;
+    const { id } = req.params;
+
+    if (Number.isNaN(Number(id))) {
+      return res.status(400).json({
+        status: 'error',
+        message: 'Invalid ID. ID must be a number',
+      });
+    }
+
+    const updateOrder = OrderService.updateAnOrder(id, mealId, type);
+
+    if (updateOrder == null) {
+      return res.status(400).json({
+        status: 'error',
+        message: `Order with id ${id} or Meal with id ${mealId} cannot be found`,
+      });
+    }
+    return res
+      .json({
+        status: 'success',
+        message: 'Order was successfully updated',
+        data: updateOrder,
+      })
+      .status(201);
+  },
 };
 
 export default OrderController;

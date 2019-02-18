@@ -30,6 +30,24 @@ const OrderService = {
 
     return foundMeal;
   },
+
+  /**
+   * @description Updates an existing order with a new order object
+   * @param { int } id
+   * @param {object} updatedOrder
+   * @returns {object} updated order
+   */
+  updateAnOrder(orderId, mealId, type) {
+    const foundOrder = dummyData.orders.find(order => order.id === Number(orderId));
+    const newMeal = dummyData.meals.find(meal => meal.id === Number(mealId));
+
+    if (foundOrder && newMeal) {
+      foundOrder.type = type;
+      foundOrder.meal = newMeal;
+      return foundOrder;
+    }
+    return null;
+  },
 };
 
 export default OrderService;
