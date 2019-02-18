@@ -5,6 +5,6 @@ A Meal Booking App 🍯🍜🥬🍽🍴🦐🍳🍲🥯
 
 [![Build Status](https://travis-ci.org/timi-codes/BetaChop.svg?branch=develop)](https://travis-ci.org/timi-codes/BetaChop)
 
-[Link to github pages](https://timi-codes.github.io/BetaChop/UI/index.html)
+[LINK TO GITHUB PAGES](https://timi-codes.github.io/BetaChop/UI/index.html)
 
-[Link to pivotal tracker](https://www.pivotaltracker.com/n/projects/2242112)
+[LINK TO PIVOTAL TRACKER](https://www.pivotaltracker.com/n/projects/2242112)
