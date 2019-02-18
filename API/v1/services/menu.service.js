@@ -27,7 +27,7 @@ const MenuService = {
    * @returns {Array} menu object array
    */
   fetchMenu() {
-    return dummyData.meal.find(meal => meal.available === true);
+    return dummyData.meals.filter(meal => meal.available === true);
   },
 };
 
