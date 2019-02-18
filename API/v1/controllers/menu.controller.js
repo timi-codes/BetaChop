@@ -15,7 +15,7 @@ const MenuController = {
    * @returns {Array} menu object array
    */
   fetchMenu(req, res) {
-    const allMenu = MenuService.fetchMenu;
+    const allMenu = MenuService.fetchMenu();
 
     if (allMenu == null) {
       return res.status(200).json({
