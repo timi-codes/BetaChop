@@ -31,4 +31,27 @@ export default {
       price: '300',
     },
   ],
+
+  orders: [
+    {
+      id: 1,
+      type: 'lunch',
+      meal: {
+        id: 5,
+        name: 'Semo',
+        size: 'Small',
+        price: '300',
+      },
+    },
+    {
+      id: 2,
+      type: 'dinner',
+      meal: {
+        id: 2,
+        name: 'Semo',
+        size: 'Small',
+        price: '300',
+      },
+    },
+  ],
 };
