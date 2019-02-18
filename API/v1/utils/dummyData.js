@@ -5,30 +5,35 @@ export default {
       name: 'Jollof Rice',
       size: 'Medium',
       price: '500',
+      available: true,
     },
     {
       id: 2,
       name: 'Fried Rice',
       size: 'Medium',
       price: '200',
+      available: false,
     },
     {
       id: 3,
       name: 'Chicken & Chips',
       size: 'Large',
       price: '1500',
+      available: false,
     },
     {
       id: 4,
       name: 'Eba',
       size: 'Medium',
       price: '300',
+      available: false,
     },
     {
       id: 5,
       name: 'Semo',
       size: 'Small',
       price: '300',
+      available: true,
     },
   ],
 
@@ -54,4 +59,6 @@ export default {
       },
     },
   ],
+
+  menu: [],
 };

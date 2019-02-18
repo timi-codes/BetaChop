@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import mealRoutes from './routes/meal.route';
 import orderRoutes from './routes/order.route';
+import menuRoutes from './routes/menu.route';
 
 const app = express();
 const port = process.env.PORT || 7778;
@@ -15,6 +16,7 @@ app.get('/', (req, res) => {
 
 app.use(`${API_VERSION}/meals`, mealRoutes);
 app.use(`${API_VERSION}/orders`, orderRoutes);
+app.use(`${API_VERSION}/menu`, menuRoutes);
 
 if (!module.parent) {
   app.listen(port, () => {

@@ -4,5 +4,6 @@ export default class Meal {
     this.name = null;
     this.size = null;
     this.price = null;
+    this.available = null;
   }
 }

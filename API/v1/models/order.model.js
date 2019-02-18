@@ -1,7 +1,6 @@
 export default class Order {
   constructor() {
-    this.id = null;
-    this.type = null;
+    this.date = null;
     this.meal = null;
   }
 }
