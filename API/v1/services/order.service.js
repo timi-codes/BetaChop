@@ -8,6 +8,20 @@ import Order from '../models/order.model';
  */
 const OrderService = {
   /**
+   * @description Retrieve and return all orders from our dummyy data
+   * @returns {Array} order object array
+   */
+  fetchAllOrders() {
+    return dummyData.orders.map((order) => {
+      const newOrder = new Order();
+      newOrder.id = order.id;
+      newOrder.type = order.type;
+      newOrder.meal = order.meal;
+      return newOrder;
+    });
+  },
+
+  /**
    * @description Order a meal
    * @returns {Array} order object array
    */
