@@ -1,5 +1,4 @@
 import OrderService from '../services/order.service';
-
 /**
  * order controller performs controls  request and response -
  * order a meal,
@@ -7,6 +6,22 @@ import OrderService from '../services/order.service';
  * get all orders,
  */
 const OrderController = {
+  /**
+   * @description retrieve and return all orders from our data
+   * @param {object} req
+   * @param {object} res
+   * @returns {Array} order object array
+   */
+  fetchAllOrders(req, res) {
+    const allOrders = OrderService.fetchAllOrders();
+    return res
+      .json({
+        status: 'success',
+        data: allOrders,
+      })
+      .status(200);
+  },
+
   /**
    * @description order a meal
    * @param {object} req
