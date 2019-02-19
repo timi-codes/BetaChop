@@ -95,4 +95,21 @@ describe('Menu', () => {
         });
     });
   });
+
+  /**
+   * GET the /menu/ route
+   */
+  describe('GET /menu', () => {
+    it('it should get all menu for today', (done) => {
+      chai
+        .request(app)
+        .get('/api/v1/menu')
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a('object');
+          res.body.data.should.be.a('array');
+          done();
+        });
+    });
+  });
 });
