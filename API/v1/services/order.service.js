@@ -1,5 +1,4 @@
 import dummyData from '../utils/dummyData';
-import Meal from '../models/meal.model';
 import Order from '../models/order.model';
 
 /**
@@ -26,7 +25,7 @@ const OrderService = {
    * @returns {Array} order object array
    */
   orderAMeal(id, type) {
-    const foundMeal = dummyData.meals.find(meal => meal.id === Number(id));
+    const foundMeal = dummyData.menu.find(meal => meal.id === Number(id));
 
     if (foundMeal) {
       const orderLength = dummyData.orders.length;
@@ -53,7 +52,7 @@ const OrderService = {
    */
   updateAnOrder(orderId, mealId, type) {
     const foundOrder = dummyData.orders.find(order => order.id === Number(orderId));
-    const newMeal = dummyData.meals.find(meal => meal.id === Number(mealId));
+    const newMeal = dummyData.menu.find(meal => meal.id === Number(mealId));
 
     if (foundOrder && newMeal) {
       foundOrder.type = type;
