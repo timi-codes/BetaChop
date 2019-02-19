@@ -1,6 +1,6 @@
 <!-- ## ![alt text](https://res.cloudinary.com/betachop/image/upload/c_scale,h_42,w_190/v1550524399/betachop/beta-chop-logo.png) -->
 
-# BetaChop🍽🥗🍗 &middot; [![Build Status](https://travis-ci.org/timi-codes/BetaChop.svg?branch=develop)](https://travis-ci.org/timi-codes/BetaChop)
+# BetaChop 🍽🥗🍗 &middot; [![Build Status](https://travis-ci.org/timi-codes/BetaChop.svg?branch=develop)](https://travis-ci.org/timi-codes/BetaChop)
 
 > Betachop helps user(customer) find and order available resturants and available meal for the day. Vendors can also set up menu for the day and recieve orders.
 

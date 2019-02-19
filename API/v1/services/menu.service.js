@@ -14,6 +14,13 @@ const MenuService = {
 
     if (foundMeal) {
       foundMeal.available = true;
+
+      // checks if meal has already been added to menulist
+      const isAdded = dummyData.menu.find(meal => meal.id === Number(id));
+
+      if (isAdded) {
+        return 'Meal has already been added to menu list';
+      }
       dummyData.menu.push(foundMeal);
     }
 
