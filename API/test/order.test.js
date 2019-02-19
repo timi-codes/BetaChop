@@ -204,4 +204,20 @@ describe('Order', () => {
         });
     });
   });
+
+  /**
+   * Test the GET /orders route
+   */
+  describe('GET /orders ', () => {
+    it('it should get all orders', (done) => {
+      chai
+        .request(app)
+        .get('/api/v1/orders')
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.data.should.be.a('array');
+          done();
+        });
+    });
+  });
 });
