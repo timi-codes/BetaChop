@@ -86,7 +86,7 @@ describe('Order', () => {
     });
 
     it('it should throw an error when a number is not passed as mealId', (done) => {
-      const id = '5c';
+      const id = '5c'; // Invalid mealId
       const validMeal = {
         mealId: id,
         type: 'breakfast',
@@ -99,6 +99,107 @@ describe('Order', () => {
           res.should.have.status(400);
           res.body.should.be.a('object');
           res.body.should.have.property('message').eql('Invalid mealId. mealId must be a number');
+          done();
+        });
+    });
+  });
+
+  /**
+   * Test the PUT /orders/:orderId route
+   */
+  describe('PUT /orders/:orderId', () => {
+    it("it should update an ordered meal with another meal available in today's menu", (done) => {
+      const orderId = Number(dummyData.orders[0].id);
+      // This meal is available for today's menu
+      const availableMealId = Number(dummyData.menu[0].id);
+
+      const newOrder = {
+        mealId: availableMealId,
+        type: 'dinner',
+      };
+
+      chai
+        .request(app)
+        .put(`/api/v1/orders/${orderId}`)
+        .send(newOrder)
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a('object');
+          res.body.should.have.property('message').eql('Order was successfully updated');
+          res.body.data.should.have.property('type').eql('dinner');
+          res.body.data.meal.should.have.property('name').eql('Jollof Rice');
+
+          done();
+        });
+    });
+
+    it("it should throw an error when order is updated with a meal that is not available in today's menu", (done) => {
+      const orderId = Number(dummyData.orders[0].id);
+
+      // This meal is not available in today's menu
+      const unAvailableMealId = Number(dummyData.meals[1].id);
+
+      const newOrder = {
+        mealId: unAvailableMealId,
+        type: 'dinner',
+      };
+
+      chai
+        .request(app)
+        .put(`/api/v1/orders/${orderId}`)
+        .send(newOrder)
+        .end((err, res) => {
+          res.should.have.status(400);
+          res.body.should.be.a('object');
+          res.body.should.have
+            .property('message')
+            .eql(`Order with id ${orderId} or Meal with id ${unAvailableMealId} cannot be found`);
+          done();
+        });
+    });
+
+    it('it should throw an error when wrong orderId is passed', (done) => {
+      // This meal is not available in today's menu
+      const orderId = 100;
+      const availableMealId = Number(dummyData.menu[0].id);
+
+      const newOrder = {
+        mealId: availableMealId,
+        type: 'dinner',
+      };
+
+      chai
+        .request(app)
+        .put(`/api/v1/orders/${orderId}`)
+        .send(newOrder)
+        .end((err, res) => {
+          res.should.have.status(400);
+          res.body.should.be.a('object');
+          res.body.should.have
+            .property('message')
+            .eql(`Order with id ${orderId} or Meal with id ${availableMealId} cannot be found`);
+          done();
+        });
+    });
+
+    it('it should throw an error when  orderId or mealId is not a number', (done) => {
+      // This meal is not available in today's menu
+      const orderId = '1c';
+      const availableMealId = Number(dummyData.menu[0].id);
+
+      const newOrder = {
+        mealId: availableMealId,
+        type: 'dinner',
+      };
+
+      chai
+        .request(app)
+        .put(`/api/v1/orders/${orderId}`)
+        .send(newOrder)
+        .end((err, res) => {
+          res.should.have.status(400);
+          res.body.should.be.a('object');
+          res.body.should.have.property('message').eql("Invalid ID. ID's must be a number");
           done();
         });
     });

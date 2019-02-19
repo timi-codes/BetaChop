@@ -71,10 +71,10 @@ const OrderController = {
     const { mealId, type } = req.body;
     const { id } = req.params;
 
-    if (Number.isNaN(Number(id) || Number.isNaN(Number(mealId)))) {
+    if (Number.isNaN(Number(id)) || Number.isNaN(Number(mealId))) {
       return res.status(400).json({
         status: 'error',
-        message: 'Invalid ID. ID must be a number',
+        message: "Invalid ID. ID's must be a number",
       });
     }
 

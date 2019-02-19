@@ -75,5 +75,12 @@ export default {
       price: '300',
       available: true,
     },
+    {
+      id: 4,
+      name: 'Eba',
+      size: 'Medium',
+      price: '300',
+      available: true,
+    },
   ],
 };
