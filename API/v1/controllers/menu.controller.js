@@ -37,6 +37,13 @@ const MenuController = {
   setUpMenu(req, res) {
     const { id } = req.body;
 
+    if (!id) {
+      return res.status(400).send({
+        status: 'error',
+        message: 'meal id is required',
+      });
+    }
+
     if (Number.isNaN(Number(id))) {
       return res.status(400).json({
         status: 'error',
@@ -55,7 +62,7 @@ const MenuController = {
 
     if (typeof addMeal === 'string') {
       const msg = addMeal;
-      return res.status(404).json({
+      return res.status(200).json({
         status: 'status',
         message: msg,
       });

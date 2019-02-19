@@ -35,6 +35,14 @@ export default {
       price: '300',
       available: false,
     },
+
+    {
+      id: 6,
+      name: 'Poridge',
+      size: 'Small',
+      price: '200',
+      available: false,
+    },
   ],
 
   orders: [
