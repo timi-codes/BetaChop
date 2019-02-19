@@ -137,7 +137,8 @@ describe('Order', () => {
       const orderId = Number(dummyData.orders[0].id);
 
       // This meal is not available in today's menu
-      const unAvailableMealId = Number(dummyData.meals[1].id);
+      const meal = dummyData.meals[5];
+      const unAvailableMealId = Number(meal.id);
 
       const newOrder = {
         mealId: unAvailableMealId,
