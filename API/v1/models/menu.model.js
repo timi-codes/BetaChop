@@ -1,6 +1,1 @@
-export default class Menu {
-  constructor() {
-    this.id = null;
-    this.date = null;
-  }
-}
+export default class Menu {}

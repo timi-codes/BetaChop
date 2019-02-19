@@ -38,6 +38,13 @@ const OrderController = {
 
     const { mealId, type } = req.body;
 
+    if (Number.isNaN(Number(mealId))) {
+      return res.status(400).json({
+        status: 'error',
+        message: 'Invalid mealId. mealId must be a number',
+      });
+    }
+
     const orderedMeal = OrderService.orderAMeal(mealId, type);
 
     if (orderedMeal == null) {
@@ -55,7 +62,7 @@ const OrderController = {
   },
 
   /**
-   * @description update a order record
+   * @description update an order record
    * @param {object} req
    * @param {object} res
    * @returns {object} apiResponse
@@ -64,7 +71,7 @@ const OrderController = {
     const { mealId, type } = req.body;
     const { id } = req.params;
 
-    if (Number.isNaN(Number(id))) {
+    if (Number.isNaN(Number(id) || Number.isNaN(Number(mealId)))) {
       return res.status(400).json({
         status: 'error',
         message: 'Invalid ID. ID must be a number',

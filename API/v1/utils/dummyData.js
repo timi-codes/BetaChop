@@ -43,9 +43,9 @@ export default {
       type: 'lunch',
       meal: {
         id: 5,
-        name: 'Semo',
-        size: 'Small',
-        price: '300',
+        name: 'Eba',
+        size: 'Medium',
+        price: '400',
       },
     },
     {
@@ -60,5 +60,20 @@ export default {
     },
   ],
 
-  menu: [],
+  menu: [
+    {
+      id: 1,
+      name: 'Jollof Rice',
+      size: 'Medium',
+      price: '500',
+      available: true,
+    },
+    {
+      id: 2,
+      name: 'Fried Rice',
+      size: 'Medium',
+      price: '200',
+      available: true,
+    },
+  ],
 };
