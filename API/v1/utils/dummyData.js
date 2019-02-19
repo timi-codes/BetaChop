@@ -5,7 +5,7 @@ export default {
       name: 'Jollof Rice',
       size: 'Medium',
       price: '500',
-      available: true,
+      available: false,
     },
     {
       id: 2,
@@ -33,7 +33,7 @@ export default {
       name: 'Semo',
       size: 'Small',
       price: '300',
-      available: true,
+      available: false,
     },
   ],
 

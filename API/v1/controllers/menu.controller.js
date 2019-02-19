@@ -1,11 +1,9 @@
 import MenuService from '../services/menu.service';
 
 /**
- * meal controller performs controls  request and response -
- * fetching all meal,
- * adding a new meal,
- * updating an existing meal and
- * getting a particular meal
+ * menu controller performs controls  request and response -
+ * fetching today's menu,
+ * setup menu for today,
  */
 const MenuController = {
   /**
@@ -16,8 +14,9 @@ const MenuController = {
    */
   fetchMenu(req, res) {
     const allMenu = MenuService.fetchMenu();
+    const foundMealKeys = Object.keys(allMenu);
 
-    if (allMenu == null) {
+    if (foundMealKeys.length === 0) {
       return res.status(200).json({
         status: 'success',
         message: 'Menu list for today is empty',
@@ -30,7 +29,7 @@ const MenuController = {
   },
 
   /**
-   * @description setup a menu record
+   * @description add a meal to today menu
    * @param {object} req
    * @param {object} res
    * @returns {object} apiResponse
@@ -48,12 +47,18 @@ const MenuController = {
     const addMeal = MenuService.setUpMenu(id);
 
     if (addMeal == null) {
-      return res
-        .json({
-          status: 'error',
-          message: `Meal with id ${id} cannot be found`,
-        })
-        .status(404);
+      return res.status(404).json({
+        status: 'error',
+        message: `Meal with id ${id} cannot be found`,
+      });
+    }
+
+    if (typeof addMeal === 'string') {
+      const msg = addMeal;
+      return res.status(404).json({
+        status: 'status',
+        message: msg,
+      });
     }
 
     return res
