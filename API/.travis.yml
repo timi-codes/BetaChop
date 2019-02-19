@@ -1,6 +1,7 @@
 language: node_js
 node_js:
   - "stable"
+before_install: cd BetaChop
 install:
   - npm install
 script:
