@@ -4,12 +4,10 @@
   "description": "a meal book app",
   "main": "v1/index.js",
   "scripts": {
-    "test": "mocha --require @babel/register --timeout 10000 --exit",
+    "test": "nyc ---reporter=html --reporter=text mocha test/**.test.js --timeout 10000 --exit",
     "start": "nodemon --exec babel-node v1/index.js",
     "build": "babel --presets env -d lib/ src",
-    "coveralls": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
-    "coverage": "nyc --reporter=lcov --reporter=text-lcov --require babel-core/register  _mocha --exit test/*.js",
-    "report-coverage": "nyc report --reporter=text-lcov | coveralls"
+    "coverage": "nyc report ---reporter=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",
@@ -42,7 +40,6 @@
     "eslint": "^5.13.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.16.0",
-    "istanbul": "^0.4.5",
     "mocha": "^5.2.0",
     "nodemon": "^1.18.10"
   }
