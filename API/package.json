@@ -7,7 +7,8 @@
     "test": "nyc --require @babel/register ---reporter=html --reporter=text mocha test/**.test.js --timeout 10000 --exit",
     "start": "nodemon --exec babel-node v1/index.js",
     "build": "babel --presets env -d lib/ src",
-    "coverage": "nyc report ---reporter=text-lcov | coveralls"
+    "coverage": "nyc report ---reporter=text-lcov | coveralls",
+    "report-coverage": "cat ./coverage/lcov.info | coveralls"
   },
   "repository": {
     "type": "git",
