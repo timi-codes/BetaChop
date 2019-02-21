@@ -5,3 +5,15 @@ UI/node_modules/
 .DS_STORE
 ./UI/.DS_STORE
 ./API/.DS_STORE
+
+# Coverage directory
+API/coverage/
+
+# nyc directory
+API/.nyc_output/
+
+# npm
+npm-debug.log
+
+# .env file
+.env
