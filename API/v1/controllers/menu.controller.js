@@ -21,10 +21,10 @@ const MenuController = {
 
     if (menuKeys.length === 0) {
       response.setSuccess(200, 'Menu list for today is empty', null);
-      response.send(res);
+      return response.send(res);
     }
     response.setSuccess(200, null, allMenu);
-    response.send(res);
+    return response.send(res);
   },
 
   /**
@@ -38,28 +38,28 @@ const MenuController = {
 
     if (!id) {
       response.setError(400, 'meal id is required');
-      response.send(res);
+      return response.send(res);
     }
 
     if (Number.isNaN(Number(id))) {
       response.setError(400, 'Invalid ID. ID must be a number');
-      response.send(res);
+      return response.send(res);
     }
 
     const addMeal = MenuService.setUpMenu(id);
 
     if (addMeal == null) {
       response.setError(404, `Meal with id ${id} cannot be found`);
-      response.send(res);
+      return response.send(res);
     }
 
     if (typeof addMeal === 'string') {
       const msg = addMeal;
       response.setSuccess(200, msg, null);
-      response.send(res);
+      return response.send(res);
     }
     response.setSuccess(201, 'Meal successfully added to Menu List', addMeal);
-    response.send(res);
+    return response.send(res);
   },
 };
 
