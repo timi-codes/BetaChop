@@ -21,9 +21,9 @@ const MenuController = {
 
     if (menuKeys.length === 0) {
       response.setSuccess(200, 'Menu list for today is empty', null);
-      return response.send(res);
+    } else {
+      response.setSuccess(200, null, allMenu);
     }
-    response.setSuccess(200, null, allMenu);
     return response.send(res);
   },
 
