@@ -57,6 +57,8 @@ class ResponseGenerator {
       message: this.message,
     });
   }
+
+  exec() {}
 }
 
 export default ResponseGenerator;
