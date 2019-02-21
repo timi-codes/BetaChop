@@ -34,13 +34,13 @@ const MenuController = {
    * @returns {object} apiResponse
    */
   setUpMenu(req, res) {
-    // const { id } = req.body;
-    // let addMeal = null;
-    // if (Number.isNaN(Number(id))) {
-    //   addMeal = null;
-    // } else {
-    //   addMeal = MenuService.setUpMenu(id);
-    // }
+    const { id } = req.body;
+    let addMeal = null;
+    if (Number.isNaN(Number(id))) {
+      addMeal = null;
+    } else {
+      addMeal = MenuService.setUpMenu(id);
+    }
     // if (!id) {
     //   response.setError(400, 'meal id is required');
     // } else if (Number.isNaN(Number(id))) {
