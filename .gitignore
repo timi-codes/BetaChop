@@ -1,6 +1,9 @@
 API/node_modules/
 UI/node_modules/
 
+# Babel build directory
+./API/build/
+
 # DS_STORE
 .DS_STORE
 ./UI/.DS_STORE
