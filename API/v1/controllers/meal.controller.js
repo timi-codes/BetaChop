@@ -109,12 +109,10 @@ const MealController = {
       });
     }
 
-    return res
-      .json({
-        status: 'success',
-        data: foundMeal,
-      })
-      .status(200);
+    return res.status(200).json({
+      status: 'success',
+      data: foundMeal,
+    });
   },
 
   /**

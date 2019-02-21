@@ -14,9 +14,9 @@ const MenuController = {
    */
   fetchMenu(req, res) {
     const allMenu = MenuService.fetchMenu();
-    const foundMealKeys = Object.keys(allMenu);
+    const menuKeys = Object.keys(allMenu);
 
-    if (foundMealKeys.length === 0) {
+    if (menuKeys.length === 0) {
       return res.status(200).json({
         status: 'success',
         message: 'Menu list for today is empty',
