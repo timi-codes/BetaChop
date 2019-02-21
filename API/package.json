@@ -8,7 +8,9 @@
     "start": "nodemon --exec babel-node v1/index.js",
     "build": "babel --presets env -d lib/ src",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "coveralls": "nyc npm test&& nyc report --reporter=text-lcov | coveralls"
+    "coveralls": "nyc npm test&& nyc report --reporter=text-lcov | coveralls",
+    "report-coverage": "nyc report --reporter=text-lcov | coveralls",
+    "codeclimate-report": "codeclimate-test-reporter < ./coverage/lcov.info"
   },
   "repository": {
     "type": "git",
