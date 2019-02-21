@@ -35,12 +35,13 @@ const MenuController = {
    */
   setUpMenu(req, res) {
     const { id } = req.body;
+    const isANumber = Number.isNaN(Number(id));
     const menu = MenuService.setUpMenu(id);
-    const addMeal = Number.isNaN(Number(id)) ? null : menu;
+    const addMeal = isANumber ? null : menu;
 
     if (!id) {
       response.setError(400, 'meal id is required');
-    } else if (Number.isNaN(Number(id))) {
+    } else if (isANumber) {
       response.setError(400, 'Invalid ID. ID must be a number');
     } else if (addMeal == null) {
       response.setError(404, `Meal with id ${id} cannot be found`);
