@@ -65,19 +65,19 @@ describe('Menu', () => {
         });
     });
 
-    it('it should throw an error when mealId parameter(body) is missing', (done) => {
-      const meal = {};
-      chai
-        .request(app)
-        .post('/api/v1/menu')
-        .send(meal)
-        .end((err, res) => {
-          res.should.have.status(400);
-          res.body.should.be.a('object');
-          res.body.should.have.property('message').eql('meal id is required');
-          done();
-        });
-    });
+    // it('it should throw an error when mealId parameter(body) is missing', (done) => {
+    //   const meal = {};
+    //   chai
+    //     .request(app)
+    //     .post('/api/v1/menu')
+    //     .send(meal)
+    //     .end((err, res) => {
+    //       res.should.have.status(400);
+    //       res.body.should.be.a('object');
+    //       res.body.should.have.property('message').eql('meal id is required');
+    //       done();
+    //     });
+    // });
 
     it('it should throw an error when a number is not passed as mealId', (done) => {
       const meal = {
