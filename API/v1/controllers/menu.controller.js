@@ -35,9 +35,8 @@ const MenuController = {
    */
   setUpMenu(req, res) {
     const { id } = req.body;
-    const isANumber = Number.isNaN(Number(id));
     const menu = MenuService.setUpMenu(id);
-    const addMeal = isANumber ? null : menu;
+    const addMeal = Number.isNaN(Number(id)) ? null : menu;
 
     if (!id) {
       response.setError(400, 'meal id is required');
