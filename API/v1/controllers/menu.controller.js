@@ -35,13 +35,12 @@ const MenuController = {
    */
   setUpMenu(req, res) {
     const { id } = req.body;
-    const menu = MenuService.setUpMenu(id);
     let addMeal;
 
     if (Number.isNaN(Number(id))) {
       addMeal = null;
     } else {
-      addMeal = menu;
+      addMeal = MenuService.setUpMenu(id);
     }
 
     if (!id) {
