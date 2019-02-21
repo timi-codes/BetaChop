@@ -41,11 +41,16 @@ const MenuController = {
 
     if (!id) {
       response.setError(400, 'meal id is required');
-    } else if (isANumber) {
+    }
+
+    if (isANumber) {
       response.setError(400, 'Invalid ID. ID must be a number');
-    } else if (addMeal == null) {
+    }
+    if (addMeal == null) {
       response.setError(404, `Meal with id ${id} cannot be found`);
-    } else if (typeof addMeal === 'string') {
+    }
+
+    if (typeof addMeal === 'string') {
       const msg = addMeal;
       response.setSuccess(200, msg, null);
     } else {
