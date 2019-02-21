@@ -148,11 +148,13 @@
       var btn = document.querySelector(".addBtn");
       var span = document.getElementsByClassName(".close")[0];
 
-      btn.onclick = function() {
+      btn.onclick = function(e) {
+        e.preventDefault();
         modal.style.display = "block";
       };
 
       span.onclick = function() {
+        e.preventDefault();
         modal.style.display = "none";
       };
 
