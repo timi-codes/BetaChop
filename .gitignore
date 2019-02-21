@@ -1,5 +1,5 @@
 ./API/node_modules/
-./zzzUI/node_modules/
+./UI/node_modules/
 
 # Babel build directory
 ./API/build/
