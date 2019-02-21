@@ -18,7 +18,7 @@ const OrderController = {
   fetchAllOrders(req, res) {
     const allOrders = OrderService.fetchAllOrders();
     response.setSuccess(200, null, allOrders);
-    return response.send(res);
+    response.send(res);
   },
 
   /**
@@ -30,25 +30,25 @@ const OrderController = {
   orderAMeal(req, res) {
     if (!req.body.mealId || !req.body.type) {
       response.setSuccess(400, 'All parameters are required', null);
-      return response.send(res);
+      response.send(res);
     }
 
     const { mealId, type } = req.body;
 
     if (Number.isNaN(Number(mealId))) {
       response.setError(400, 'Invalid mealId. mealId must be a number');
-      return response.send(res);
+      response.send(res);
     }
 
     const orderedMeal = OrderService.orderAMeal(mealId, type);
 
     if (orderedMeal == null) {
       response.setError(404, 'This meal cannot be found');
-      return response.send(res);
+      response.send(res);
     }
 
     response.setSuccess(200, 'Your order has been placed', orderedMeal);
-    return response.send(res);
+    response.send(res);
   },
 
   /**
@@ -63,17 +63,17 @@ const OrderController = {
 
     if (Number.isNaN(Number(id)) || Number.isNaN(Number(mealId))) {
       response.setError(400, "Invalid ID. ID's must be a number");
-      return response.send(res);
+      response.send(res);
     }
 
     const updateOrder = OrderService.updateAnOrder(id, mealId, type);
 
     if (updateOrder == null) {
       response.setError(400, `Order with id ${id} or Meal with id ${mealId} cannot be found`);
-      return response.send(res);
+      response.send(res);
     }
     response.setSuccess(201, 'Order was successfully updated', updateOrder);
-    return response.send(res);
+    response.send(res);
   },
 };
 
