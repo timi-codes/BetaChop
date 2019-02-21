@@ -103,19 +103,15 @@ const MealController = {
   deleteAMeal(req, res) {
     const { id } = req.params;
 
-    if (Number.isNaN(Number(id))) {
-      response.setError(400, 'Invalid ID. ID must be a number');
-      return response.send(res);
-    }
-
     const deletedMeal = MealService.deleteAMeal(id);
 
-    if (deletedMeal == null) {
+    if (Number.isNaN(Number(id))) {
+      response.setError(400, 'Invalid ID. ID must be a number');
+    } else if (deletedMeal == null) {
       response.setError(404, `Meal with id ${id} cannot be found`);
-      return response.send(res);
+    } else {
+      response.setSuccess(200, 'Meal was successfully deleted', null);
     }
-
-    response.setSuccess(200, 'Meal was successfully deleted', null);
     return response.send(res);
   },
 };
