@@ -45,7 +45,7 @@ describe('Order', () => {
         .post('/api/v1/orders')
         .send(validMeal)
         .end((err, res) => {
-          res.should.have.status(200);
+          res.should.have.status(404);
           res.body.should.be.a('object');
           res.body.should.have.property('message').eql('This meal cannot be found');
           done();
@@ -123,7 +123,7 @@ describe('Order', () => {
         .put(`/api/v1/orders/${orderId}`)
         .send(newOrder)
         .end((err, res) => {
-          res.should.have.status(200);
+          res.should.have.status(201);
           res.body.should.be.a('object');
           res.body.should.have.property('message').eql('Order was successfully updated');
           res.body.data.should.have.property('type').eql('dinner');

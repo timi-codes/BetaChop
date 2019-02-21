@@ -25,7 +25,7 @@ describe('Menu', () => {
         .post('/api/v1/menu')
         .send(meal)
         .end((err, res) => {
-          res.should.have.status(200);
+          res.should.have.status(201);
           res.body.should.have.property('message').eql('Meal successfully added to Menu List');
           res.body.data.should.have.property('id').eql(mealId);
           done();

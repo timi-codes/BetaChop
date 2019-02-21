@@ -1,4 +1,7 @@
 import OrderService from '../services/order.service';
+import ResponseGenerator from '../utils/ResponseGenerator';
+
+const response = new ResponseGenerator();
 /**
  * order controller performs controls  request and response -
  * order a meal,
@@ -14,12 +17,8 @@ const OrderController = {
    */
   fetchAllOrders(req, res) {
     const allOrders = OrderService.fetchAllOrders();
-    return res
-      .json({
-        status: 'success',
-        data: allOrders,
-      })
-      .status(200);
+    response.setSuccess(200, null, allOrders);
+    return response.send(res);
   },
 
   /**
@@ -30,35 +29,26 @@ const OrderController = {
    */
   orderAMeal(req, res) {
     if (!req.body.mealId || !req.body.type) {
-      return res.status(400).send({
-        status: 'error',
-        message: 'All parameters are required',
-      });
+      response.setSuccess(400, 'All parameters are required', null);
+      return response.send(res);
     }
 
     const { mealId, type } = req.body;
 
     if (Number.isNaN(Number(mealId))) {
-      return res.status(400).json({
-        status: 'error',
-        message: 'Invalid mealId. mealId must be a number',
-      });
+      response.setError(400, 'Invalid mealId. mealId must be a number');
+      return response.send(res);
     }
 
     const orderedMeal = OrderService.orderAMeal(mealId, type);
 
     if (orderedMeal == null) {
-      return res.status(200).json({
-        status: 'error',
-        message: 'This meal cannot be found',
-      });
+      response.setError(404, 'This meal cannot be found');
+      return response.send(res);
     }
 
-    return res.status(200).json({
-      status: 'success',
-      message: 'Your order has been placed',
-      order: orderedMeal,
-    });
+    response.setSuccess(200, 'Your order has been placed', orderedMeal);
+    return response.send(res);
   },
 
   /**
@@ -72,27 +62,18 @@ const OrderController = {
     const { id } = req.params;
 
     if (Number.isNaN(Number(id)) || Number.isNaN(Number(mealId))) {
-      return res.status(400).json({
-        status: 'error',
-        message: "Invalid ID. ID's must be a number",
-      });
+      response.setError(400, "Invalid ID. ID's must be a number");
+      return response.send(res);
     }
 
     const updateOrder = OrderService.updateAnOrder(id, mealId, type);
 
     if (updateOrder == null) {
-      return res.status(400).json({
-        status: 'error',
-        message: `Order with id ${id} or Meal with id ${mealId} cannot be found`,
-      });
+      response.setError(400, `Order with id ${id} or Meal with id ${mealId} cannot be found`);
+      return response.send(res);
     }
-    return res
-      .json({
-        status: 'success',
-        message: 'Order was successfully updated',
-        data: updateOrder,
-      })
-      .status(201);
+    response.setSuccess(201, 'Order was successfully updated', updateOrder);
+    return response.send(res);
   },
 };
 

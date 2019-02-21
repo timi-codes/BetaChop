@@ -1,4 +1,7 @@
 import MenuService from '../services/menu.service';
+import ResponseGenerator from '../utils/ResponseGenerator';
+
+const response = new ResponseGenerator();
 
 /**
  * menu controller performs controls  request and response -
@@ -17,15 +20,11 @@ const MenuController = {
     const menuKeys = Object.keys(allMenu);
 
     if (menuKeys.length === 0) {
-      return res.status(200).json({
-        status: 'success',
-        message: 'Menu list for today is empty',
-      });
+      response.setSuccess(200, 'Menu list for today is empty', null);
+      return response.send(res);
     }
-    return res.status(200).json({
-      status: 'success',
-      data: allMenu,
-    });
+    response.setSuccess(200, null, allMenu);
+    return response.send(res);
   },
 
   /**
@@ -38,43 +37,29 @@ const MenuController = {
     const { id } = req.body;
 
     if (!id) {
-      return res.status(400).send({
-        status: 'error',
-        message: 'meal id is required',
-      });
+      response.setError(400, 'meal id is required');
+      return response.send(res);
     }
 
     if (Number.isNaN(Number(id))) {
-      return res.status(400).json({
-        status: 'error',
-        message: 'Invalid ID. ID must be a number',
-      });
+      response.setError(400, 'Invalid ID. ID must be a number');
+      return response.send(res);
     }
 
     const addMeal = MenuService.setUpMenu(id);
 
     if (addMeal == null) {
-      return res.status(404).json({
-        status: 'error',
-        message: `Meal with id ${id} cannot be found`,
-      });
+      response.setError(404, `Meal with id ${id} cannot be found`);
+      return response.send(res);
     }
 
     if (typeof addMeal === 'string') {
       const msg = addMeal;
-      return res.status(200).json({
-        status: 'status',
-        message: msg,
-      });
+      response.setSuccess(200, msg, null);
+      return response.send(res);
     }
-
-    return res
-      .json({
-        status: 'success',
-        message: 'Meal successfully added to Menu List',
-        data: addMeal,
-      })
-      .status(201);
+    response.setSuccess(201, 'Meal successfully added to Menu List', addMeal);
+    return response.send(res);
   },
 };
 

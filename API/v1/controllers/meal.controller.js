@@ -1,6 +1,8 @@
 import MealService from '../services/meal.service';
 import ResponseGenerator from '../utils/ResponseGenerator';
 
+const response = new ResponseGenerator();
+
 /**
  * meal controller performs controls  request and response -
  * fetching all meal,
@@ -8,9 +10,6 @@ import ResponseGenerator from '../utils/ResponseGenerator';
  * updating an existing meal and
  * getting a particular meal
  */
-
-const response = new ResponseGenerator();
-
 const MealController = {
   /**
    * @description retrieve and return all meals from our data
