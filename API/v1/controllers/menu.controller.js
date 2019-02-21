@@ -35,25 +35,21 @@ const MenuController = {
    */
   setUpMenu(req, res) {
     const { id } = req.body;
-    let addMeal = null;
-    if (Number.isNaN(Number(id))) {
-      addMeal = null;
+    const addMeal = MenuService.setUpMenu(id);
+
+    if (!id) {
+      response.setError(400, 'meal id is required');
+    } else if (Number.isNaN(Number(id))) {
+      response.setError(400, 'Invalid ID. ID must be a number');
+    } else if (addMeal == null) {
+      response.setError(404, `Meal with id ${id} cannot be found`);
+    } else if (typeof addMeal === 'string') {
+      const msg = addMeal;
+      response.setSuccess(200, msg, null);
     } else {
-      addMeal = MenuService.setUpMenu(id);
+      response.setSuccess(201, 'Meal successfully added to Menu List', addMeal);
     }
-    // if (!id) {
-    //   response.setError(400, 'meal id is required');
-    // } else if (Number.isNaN(Number(id))) {
-    //   response.setError(400, 'Invalid ID. ID must be a number');
-    // } else if (addMeal == null) {
-    //   response.setError(404, `Meal with id ${id} cannot be found`);
-    // } else if (typeof addMeal === 'string') {
-    //   const msg = addMeal;
-    //   response.setSuccess(200, msg, null);
-    // } else {
-    //   response.setSuccess(201, 'Meal successfully added to Menu List', addMeal);
-    // }
-    // return response.send(res);
+    return response.send(res);
   },
 };
 

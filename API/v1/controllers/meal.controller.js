@@ -32,7 +32,7 @@ const MealController = {
    */
   addAMeal(req, res) {
     if (!req.body.name || !req.body.price || !req.body.size) {
-      response.setError(400, 'All parameters are required', null);
+      response.setError(400, 'All parameters are required');
       return response.send(res);
     }
 
@@ -60,7 +60,7 @@ const MealController = {
     const updateMeal = MealService.updateAMeal(id, newMeal);
 
     if (updateMeal == null) {
-      response.setError(400, `Meal with id ${id} cannot be found`, null);
+      response.setError(400, `Meal with id ${id} cannot be found`);
       return response.send(res);
     }
 
