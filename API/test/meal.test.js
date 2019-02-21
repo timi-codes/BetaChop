@@ -61,7 +61,7 @@ describe('Meal', () => {
         .post('/api/v1/meals')
         .send(meal)
         .end((err, res) => {
-          res.should.have.status(200);
+          res.should.have.status(201);
           res.body.should.be.a('object');
           res.body.should.have.property('message').eql('Meal successfully added!');
           res.body.data.should.have.property('id');

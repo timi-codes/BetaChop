@@ -1,4 +1,7 @@
 import MealService from '../services/meal.service';
+import ResponseGenerator from '../utils/ResponseGenerator';
+
+const response = new ResponseGenerator();
 
 /**
  * meal controller performs controls  request and response -
@@ -7,6 +10,7 @@ import MealService from '../services/meal.service';
  * updating an existing meal and
  * getting a particular meal
  */
+
 const MealController = {
   /**
    * @description retrieve and return all meals from our data
@@ -16,12 +20,8 @@ const MealController = {
    */
   fetchAllMeals(req, res) {
     const allMeals = MealService.fetchAllMeals();
-    return res
-      .json({
-        status: 'success',
-        data: allMeals,
-      })
-      .status(200);
+    response.setSuccess(200, '', allMeals);
+    return response.send(res);
   },
 
   /**
@@ -32,21 +32,14 @@ const MealController = {
    */
   addAMeal(req, res) {
     if (!req.body.name || !req.body.price || !req.body.size) {
-      return res.status(400).send({
-        status: 'error',
-        message: 'All parameters are required',
-      });
+      response.setError(400, 'All parameters are required', null);
+      return response.send(res);
     }
 
     const newMeal = req.body;
     const createdMeal = MealService.addAMeal(newMeal);
-    return res
-      .json({
-        status: 'success',
-        message: 'Meal successfully added!',
-        data: createdMeal,
-      })
-      .status(201);
+    response.setSuccess(201, 'Meal successfully added!', createdMeal);
+    return response.send(res);
   },
 
   /**
@@ -60,27 +53,19 @@ const MealController = {
     const { id } = req.params;
 
     if (Number.isNaN(Number(id))) {
-      return res.status(400).json({
-        status: 'error',
-        message: 'Invalid ID. ID must be a number',
-      });
+      response.setSuccess(400, 'Invalid ID. ID must be a number', null);
+      return response.send(res);
     }
 
     const updateMeal = MealService.updateAMeal(id, newMeal);
 
     if (updateMeal == null) {
-      return res.status(400).json({
-        status: 'error',
-        message: `Meal with id ${id} cannot be found`,
-      });
+      response.setError(400, `Meal with id ${id} cannot be found`, null);
+      return response.send(res);
     }
-    return res
-      .json({
-        status: 'success',
-        message: 'Meal was successfully updated',
-        data: updateMeal,
-      })
-      .status(201);
+
+    response.setSuccess(200, 'Meal was successfully updated', updateMeal);
+    return response.send(res);
   },
 
   /**
@@ -93,28 +78,20 @@ const MealController = {
     const { id } = req.params;
 
     if (Number.isNaN(Number(id))) {
-      return res.status(400).json({
-        status: 'error',
-        message: 'Invalid ID. ID must be a number',
-      });
+      response.setError(400, 'Invalid ID. ID must be a number');
+      return response.send(res);
     }
 
     const foundMeal = MealService.getAMeal(id);
     const foundMealKeys = Object.keys(foundMeal);
 
     if (foundMealKeys.length === 0) {
-      return res.status(404).json({
-        status: 'error',
-        message: 'Meal cannot be found',
-      });
+      response.setError(404, 'Meal cannot be found');
+      return response.send(res);
     }
 
-    return res
-      .json({
-        status: 'success',
-        data: foundMeal,
-      })
-      .status(200);
+    response.setSuccess(200, null, foundMeal);
+    return response.send(res);
   },
 
   /**
@@ -127,29 +104,19 @@ const MealController = {
     const { id } = req.params;
 
     if (Number.isNaN(Number(id))) {
-      return res.status(400).json({
-        status: 'error',
-        message: 'Invalid ID. ID must be a number',
-      });
+      response.setError(400, 'Invalid ID. ID must be a number');
+      return response.send(res);
     }
 
     const deletedMeal = MealService.deleteAMeal(id);
 
     if (deletedMeal == null) {
-      return res
-        .json({
-          status: 'error',
-          message: `Meal with id ${id} cannot be found`,
-        })
-        .status(404);
+      response.setError(404, `Meal with id ${id} cannot be found`);
+      return response.send(res);
     }
 
-    return res
-      .json({
-        status: 'success',
-        message: 'Meal was successfully deleted',
-      })
-      .status(200);
+    response.setSuccess(200, 'Meal was successfully deleted', null);
+    return response.send(res);
   },
 };
 
