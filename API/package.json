@@ -6,7 +6,7 @@
   "scripts": {
     "test": "nyc --require @babel/register ---reporter=html --reporter=text mocha test/**.test.js --timeout 10000 --exit",
     "start": "nodemon --exec babel-node v1/index.js",
-    "build": "babel --presets env -d lib/ src",
+    "build": "rimraf build/ && babel ./ --out-dir build/ --ignore ./node_modules,./coverage,./.babelrc,./package.json,./npm-debug.log,./.travis.yml,./.eslintrc.js,../UI,../README.md",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
@@ -42,6 +42,7 @@
     "eslint-plugin-import": "^2.16.0",
     "mocha": "^5.2.0",
     "nodemon": "^1.18.10",
-    "nyc": "^13.3.0"
+    "nyc": "^13.3.0",
+    "rimraf": "^2.6.3"
   }
 }

@@ -7,10 +7,10 @@ UI/node_modules/
 ./API/.DS_STORE
 
 # Coverage directory
-API/coverage/
+./API/coverage/
 
 # nyc directory
-API/.nyc_output
+./API/.nyc_output
 
 # npm
 npm-debug.log
