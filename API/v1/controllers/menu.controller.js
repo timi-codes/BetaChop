@@ -38,28 +38,28 @@ const MenuController = {
 
     if (!id) {
       response.setError(400, 'meal id is required');
-      return response.send(res);
+      response.send(res);
     }
 
     if (Number.isNaN(Number(id))) {
       response.setError(400, 'Invalid ID. ID must be a number');
-      return response.send(res);
+      response.send(res);
     }
 
     const addMeal = MenuService.setUpMenu(id);
 
     if (addMeal == null) {
       response.setError(404, `Meal with id ${id} cannot be found`);
-      return response.send(res);
+      response.send(res);
     }
 
     if (typeof addMeal === 'string') {
       const msg = addMeal;
       response.setSuccess(200, msg, null);
-      return response.send(res);
+      response.send(res);
     }
     response.setSuccess(201, 'Meal successfully added to Menu List', addMeal);
-    return response.send(res);
+    response.send(res);
   },
 };
 
