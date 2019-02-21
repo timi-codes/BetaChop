@@ -41,19 +41,19 @@ const MenuController = {
     } else {
       addMeal = MenuService.setUpMenu(id);
     }
-    // if (!id) {
-    //   response.setError(400, 'meal id is required');
-    // } else if (Number.isNaN(Number(id))) {
-    //   response.setError(400, 'Invalid ID. ID must be a number');
-    // } else if (addMeal == null) {
-    //   response.setError(404, `Meal with id ${id} cannot be found`);
-    // } else if (typeof addMeal === 'string') {
-    //   const msg = addMeal;
-    //   response.setSuccess(200, msg, null);
-    // } else {
-    //   response.setSuccess(201, 'Meal successfully added to Menu List', addMeal);
-    // }
-    // return response.send(res);
+    if (!id) {
+      response.setError(400, 'meal id is required');
+    } else if (Number.isNaN(Number(id))) {
+      response.setError(400, 'Invalid ID. ID must be a number');
+    } else if (addMeal == null) {
+      response.setError(404, `Meal with id ${id} cannot be found`);
+    } else if (typeof addMeal === 'string') {
+      const msg = addMeal;
+      response.setSuccess(200, msg, null);
+    } else {
+      response.setSuccess(201, 'Meal successfully added to Menu List', addMeal);
+    }
+    return response.send(res);
   },
 };
 
