@@ -14,13 +14,6 @@ app.use(`${API_VERSION}/meals`, mealRoutes);
 app.use(`${API_VERSION}/orders`, orderRoutes);
 app.use(`${API_VERSION}/menu`, menuRoutes);
 
-app.get('*', (request, response) => {
-  response.status(404).json({
-    status: 404,
-    error: 'The route you are trying to access does not exist',
-  });
-});
-
 if (!module.parent) {
   app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
