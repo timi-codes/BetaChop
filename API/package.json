@@ -5,8 +5,11 @@
   "main": "v1/index.js",
   "scripts": {
     "test": "nyc --require @babel/register ---reporter=html --reporter=text mocha test/**.test.js --timeout 10000 --exit",
-    "start": "nodemon --exec babel-node v1/index.js",
-    "build": "babel --presets env -d lib/ src",
+    "dev": "nodemon --exec babel-node v1/index.js",
+    "start": "node build/v1/index.js",
+    "build-babel": "babel ./ --out-dir build/ --ignore ./node_modules,./coverage,./.babelrc,./package.json,./npm-debug.log,./.travis.yml,./.eslintrc.js,./UI,./README.md",
+    "clean": "rm -rf build && mkdir build",
+    "build": "npm run clean && npm run build-babel",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
