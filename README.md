@@ -14,6 +14,10 @@
 
 UI Template for the application can be found here [Github pages](https://timi-codes.github.io/BetaChop/UI/index.html).
 
+## Heroku App
+
+Application was deployed to Heroku. Use public URL [https://betachop.herokuapp.com](https://timi-codes.github.io/BetaChop/UI/index.html) with API endpoints.
+
 ## Pivotal Tracker
 
 Pivotal Tracker Stories can found here [Pivotal tracker](https://www.pivotaltracker.com/n/projects/2242112).
