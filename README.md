@@ -1,6 +1,6 @@
 <!-- ## ![alt text](https://res.cloudinary.com/betachop/image/upload/c_scale,h_42,w_190/v1550524399/betachop/beta-chop-logo.png) -->
 
-# BetaChop 🍽🥗🍗 &middot; [![Build Status](https://travis-ci.org/timi-codes/BetaChop.svg?branch=develop)](https://travis-ci.org/timi-codes/BetaChop) [![Coverage Status](https://coveralls.io/repos/github/timi-codes/BetaChop/badge.svg?branch=develop)](https://coveralls.io/github/timi-codes/BetaChop?branch=develop) [![Maintainability](https://api.codeclimate.com/v1/badges/da4ef2d2fe0db5b689ec/maintainability)](https://codeclimate.com/github/timi-codes/BetaChop/maintainability)
+# BetaChop 🍽🥗🍗 &middot; [![Build Status](https://travis-ci.org/timi-codes/BetaChop.svg?branch=develop)](https://travis-ci.org/timi-codes/BetaChop) [![Coverage Status](https://coveralls.io/repos/github/timi-codes/BetaChop/badge.svg?branch=develop)](https://coveralls.io/github/timi-codes/BetaChop?branch=develop&service=github) [![Maintainability](https://api.codeclimate.com/v1/badges/da4ef2d2fe0db5b689ec/maintainability)](https://codeclimate.com/github/timi-codes/BetaChop/maintainability)
 
 > Betachop helps user(customer) find and order available resturants and available meal for the day. Vendors can also set up menu for the day and recieve orders.
 
