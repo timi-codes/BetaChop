@@ -20,6 +20,7 @@ const MenuController = {
     const menuKeys = Object.keys(allMenu);
 
     if (menuKeys.length === 0) {
+      /* istanbul ignore next */
       response.setSuccess(200, 'Menu list for today is empty', null);
     } else {
       response.setSuccess(200, null, allMenu);
