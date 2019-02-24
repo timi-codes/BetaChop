@@ -105,10 +105,8 @@ const MealController = {
     const deletedMeal = MealService.deleteAMeal(id);
 
     if (Number.isNaN(Number(id))) {
-      /* istanbul ignore next */
       response.setError(400, 'Invalid ID. ID must be a number');
     } else if (deletedMeal == null) {
-      /* istanbul ignore next */
       response.setError(404, `Meal with id ${id} cannot be found`);
     } else {
       response.setSuccess(200, 'Meal was successfully deleted', null);
