@@ -1,6 +1,6 @@
 # node_modules
-./API/node_modules/
-./UI/node_modules/
+API/node_modules/
+UI/node_modules/
 
 # Babel build directory
 API/build/
