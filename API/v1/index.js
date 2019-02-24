@@ -14,9 +14,7 @@ app.use(`${API_VERSION}/meals`, mealRoutes);
 app.use(`${API_VERSION}/orders`, orderRoutes);
 app.use(`${API_VERSION}/menu`, menuRoutes);
 
-app.get('/', (req, res) => {
-  res.send('My server is runninnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnng😀😎😏');
-});
+/* istanbul ignore next */
 
 if (!module.parent) {
   app.listen(port, () => {
