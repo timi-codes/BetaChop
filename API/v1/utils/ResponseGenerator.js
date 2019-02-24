@@ -51,7 +51,7 @@ class ResponseGenerator {
         data: this.data,
       });
     }
-    // Here this.type === 'failure'
+    // Here this.type === 'error'
     return res.status(this.statusCode).json({
       status: this.type,
       message: this.message,
