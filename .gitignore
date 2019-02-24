@@ -1,3 +1,4 @@
+# node_modules
 ./API/node_modules/
 ./UI/node_modules/
 
@@ -10,10 +11,10 @@ API/build/
 ./API/.DS_STORE
 
 # Coverage directory
-API/coverage/
+./API/coverage/
 
 # nyc directory
-API/.nyc_output
+./API/.nyc_output
 
 # npm
 npm-debug.log
