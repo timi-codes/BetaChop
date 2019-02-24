@@ -129,7 +129,7 @@
 
     <div id="addNewModal" class="modal">
       <div class="add-new-today">
-        <span class="close">&times;</span>
+        <span class="closeDialog">&times;</span>
         <div class="add-today">
           <img src="../img/image_placeholder.png"/>
           <div class="ct-select-group ct-js-select-group">
@@ -161,15 +161,20 @@
 
       var modal = document.getElementById("addNewModal");
       var btn = document.querySelector(".addBtn");
-      var span = document.getElementsByClassName(".close")[0];
+      var closeDialog = document.querySelector(".closeDialog");
 
-      btn.onclick = function() {
+      btn.onclick = function(e) {
+        e.preventDefault();
         modal.style.display = "block";
       };
 
-      span.onclick = function() {
+      closeDialog.onclick = function(e) {
+        e.preventDefault();
+        console.log("X clicked");
         modal.style.display = "none";
       };
+
+
 
       window.onclick = function(event) {
         if (event.target == modal) {

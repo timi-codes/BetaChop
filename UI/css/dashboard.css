@@ -2,11 +2,12 @@
   --cream-green: #01c2b6;
   --orange: #fb9246;
   --black: #292929;
-  --yellow: #fbb416;
+  --yellow: #fcbf3b;
   --highlight: rgba(94, 254, 53, 0.25);
   --light-grey: #c4c4c490;
   --dark-grey: #a6a6a6;
   --background: #f4f6f9;
+  --yellow-dark: #faae0b;
 }
 
 body {
@@ -341,7 +342,7 @@ td .delete {
 }
 
 /* The Close Button */
-.close {
+.closeDialog {
   color: #aaaaaa;
   float: right;
   font-size: 28px;
@@ -349,8 +350,8 @@ td .delete {
   height: 100%;
 }
 
-.close:hover,
-.close:focus {
+.closeDialog:hover,
+.closeDialog:focus {
   color: #000;
   text-decoration: none;
   cursor: pointer;
@@ -392,6 +393,7 @@ td .delete {
   font-size: 14px;
   resize: none;
   border: 1px solid var(--light-grey);
+  outline: none;
 }
 
 .add-to-menu {
@@ -401,6 +403,10 @@ td .delete {
   margin: 0;
   height: 50px;
   border: none;
+}
+
+.add-to-menu:hover {
+  background-color: var(--yellow-dark);
 }
 
 .add-today {
@@ -448,6 +454,7 @@ td .delete {
   padding: 10px 15px;
   border: 1px solid #dae5f7;
   border-radius: 3px;
+  outline: none;
 }
 .ct-select-group .ct-select option {
   font-size: 18px;
