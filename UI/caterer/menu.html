@@ -35,7 +35,7 @@
         </div>
         <ul id="menu-list">
           <li>
-            <a href="dashboard.html" href="">Today's Menu</a>
+            <a href="dashboard.html">Today's Menu</a>
           </li>
           <li>
             <a class="active" href="menu.html">Menu Options</a>
@@ -51,8 +51,8 @@
 
       <div class="inner">
         <div class="right-content">
-          <div class="meal addBtn">
-            <h4>+ Add New</h4>
+          <div class="meal">
+            <h4 class="addBtn">+ Add New</h4>
           </div>
         </div>
         <div class="food-content">
@@ -64,7 +64,8 @@
               <td>Breakfast</td>
               <td>Timi Tejumola</td>
               <td>
-                <button>Edit</button><button class="delete">Delete</button>
+                <button class="addBtn">Edit</button
+                ><button class="delete">Delete</button>
               </td>
             </tr>
             <tr>
@@ -85,7 +86,8 @@
               <td>Breakfast</td>
               <td>Bode Kilani</td>
               <td>
-                <button>Edit</button><button class="delete">Delete</button>
+                <button class="addBtn">Edit</button
+                ><button class="delete">Delete</button>
               </td>
             </tr>
             <tr>
@@ -95,7 +97,8 @@
               <td>Lunch</td>
               <td>Timi Tejumola</td>
               <td>
-                <button>Edit</button><button class="delete">Delete</button>
+                <button class="addBtn">Edit</button
+                ><button class="delete">Delete</button>
               </td>
             </tr>
           </table>
@@ -109,7 +112,7 @@
 
     <div id="addNewModal" class="modal">
       <div class="modal-content">
-        <span class="close">&times;</span>
+        <span class="closeDialog">&times;</span>
         <div class="modal-inner-content">
           <div class="cuisine add-new menu"><p>Upload</p></div>
           <input
@@ -145,20 +148,23 @@
       navButton.addEventListener("click", toggleNav);
 
       var modal = document.getElementById("addNewModal");
-      var btn = document.querySelector(".addBtn");
-      var span = document.getElementsByClassName(".close")[0];
+      var btn = document.querySelectorAll(".addBtn");
+      var closeDialog = document.querySelector(".closeDialog");
 
-      btn.onclick = function(e) {
-        e.preventDefault();
-        modal.style.display = "block";
-      };
+      btn.forEach(item => {
+        item.onclick = e => {
+          e.preventDefault();
+          modal.style.display = "block";
+        };
+      });
 
-      span.onclick = function() {
+      closeDialog.onclick = function(e) {
         e.preventDefault();
         modal.style.display = "none";
       };
 
-      window.onclick = function(event) {
+      window.onclick = function(e) {
+        e.preventDefault();
         if (event.target == modal) {
           modal.style.display = "none";
         }
