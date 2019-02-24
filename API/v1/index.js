@@ -14,6 +14,10 @@ app.use(`${API_VERSION}/meals`, mealRoutes);
 app.use(`${API_VERSION}/orders`, orderRoutes);
 app.use(`${API_VERSION}/menu`, menuRoutes);
 
+app.get('/', (req, res) => {
+  res.send('My server is runninnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnng😀😎😏');
+});
+
 if (!module.parent) {
   app.listen(port, () => {
     console.log(`Server is running on port ${port}`);

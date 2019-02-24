@@ -11,3 +11,7 @@ script:
   - npm test
 after_success:
   - npm run coverage
+  - npm run coveralls
+  - npm run report-coverage
+  - npm run codeclimate-report
+  - ./node_modules/.bin/mocha ./app/test/**/*.js -R mocha-lcov-reporter | ./node_modules/coveralls/bin/coveralls.js
