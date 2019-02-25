@@ -65,7 +65,7 @@
         </div>
         <div class="food-content">
 
-            <div class="cuisine add-new">
+            <div class="cuisine add-new addBtn">
                     
              </div>
 
@@ -127,6 +127,26 @@
       </footer>
     </div>
 
+    <div id="addNewModal" class="modal">
+      <div class="add-new-today">
+        <span class="closeDialog">&times;</span>
+        <div class="add-today">
+          <img src="../img/image_placeholder.png"/>
+          <div class="ct-select-group ct-js-select-group">
+              <select class="ct-select ct-js-select">
+                  <option>Chicken & Chips</option>
+                  <option>Jollof Rice and Chicken</option>
+                  <option>Spaghetti & Turkey</option>
+                  <option>Yam Poridge</option>
+                </select>
+          </div>
+         
+          <p>Yam poridge with assorted beef and one solo coke</p>
+          <button class="add-to-menu">Add to menu</button>
+        </div>
+      </div>
+    </div>
+
     <script>
       const somethingElse = document.querySelector(".top");
       const navButton = somethingElse.querySelector("button[aria-expanded]");
@@ -137,6 +157,20 @@
         console.log(expanded);
       }
       navButton.addEventListener("click", toggleNav);
+      var modal = document.getElementById("addNewModal");
+      var btn = document.querySelector(".addBtn");
+      var closeDialog = document.querySelector(".closeDialog");
+      btn.onclick = function(e) {
+        modal.style.display = "block";
+      };
+      closeDialog.onclick = function(e) {
+        modal.style.display = "none";
+      };
+      window.onclick = function(event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      };
     </script>
   </body>
 </html>
