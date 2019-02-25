@@ -7,8 +7,6 @@
     <link rel="stylesheet" type="text/css" href="../css/style.css" />
     <link rel="stylesheet" type="text/css" href="../css/dashboard.css" />
     <link rel="shortcut icon" type="image/png" href="../img/favicon.png" />
-    <!-- <script src="./js/dashboard.js" type="text/javascript" /> -->
-
     <title>BetaChop🍗</title>
   </head>
 
@@ -71,7 +69,7 @@
               <td>₦ 400</td>
               <td>Breakfast</td>
               <td>White House</td>
-              <td><button>Edit</button></td>
+              <td><button class="addBtn">Edit</button></td>
             </tr>
             <tr>
               <td><img src="../img/chickenndchips.jpg" /></td>
@@ -79,7 +77,7 @@
               <td>₦ 1500</td>
               <td>Dinner</td>
               <td>AreaChops</td>
-              <td><button>Edit</button></td>
+              <td><button class="addBtn">Edit</button></td>
             </tr>
             <tr>
               <td><img src="../img/spagetti.png" /></td>
@@ -87,7 +85,7 @@
               <td>₦ 500</td>
               <td>Breakfast</td>
               <td>AreaChops</td>
-              <td><button>Edit</button></td>
+              <td><button class="addBtn">Edit</button></td>
             </tr>
             <tr>
               <td><img src="../img/poridge.png" /></td>
@@ -95,27 +93,44 @@
               <td>₦ 500</td>
               <td>Lunch</td>
               <td>Mama Junior</td>
-              <td><button>Edit</button></td>
+              <td><button class="addBtn">Edit</button></td>
             </tr>
           </table>
         </div>
       </div>
+
       <footer class="footer">
         <h2>©2019 Betachop</h2>
         <h3>Made with ❤️ by Timi Tejumola</h3>
       </footer>
-    </div>
 
-    <script>
-      const somethingElse = document.querySelector(".top");
-      const navButton = somethingElse.querySelector("button[aria-expanded]");
-      function toggleNav({ target }) {
-        const expanded =
-          target.getAttribute("aria-expanded") === "true" || false;
-        navButton.setAttribute("aria-expanded", !expanded);
-        console.log(expanded);
-      }
-      navButton.addEventListener("click", toggleNav);
-    </script>
+      <div id="addNewModal" class="modal">
+        <div class="add-new-today">
+          <span class="closeDialog">&times;</span>
+          <div class="add-today">
+            <img src="../img/image_placeholder.png" />
+            <div class="ct-select-group ct-js-select-group">
+              <select class="ct-select ct-js-select">
+                <option>Chicken & Chips</option>
+                <option>Jollof Rice and Chicken</option>
+                <option>Spaghetti & Turkey</option>
+                <option>Yam Poridge</option>
+              </select>
+            </div>
+
+            <div class="ct-select-group ct-js-select-group">
+              <select class="ct-select ct-js-select">
+                <option>Breakfast</option>
+                <option>Lunch</option>
+                <option>Dinner</option>
+              </select>
+            </div>
+
+            <button class="add-to-menu">Done</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="../js/menu.js"></script>
   </body>
 </html>
