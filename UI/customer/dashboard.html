@@ -7,8 +7,6 @@
     <link rel="stylesheet" type="text/css" href="../css/style.css" />
     <link rel="stylesheet" type="text/css" href="../css/dashboard.css" />
     <link rel="shortcut icon" type="image/png" href="../img/favicon.png" />
-    <!-- <script src="./js/dashboard.js" type="text/javascript" /> -->
-
     <title>BetaChop🍗</title>
   </head>
 
@@ -36,7 +34,7 @@
         </div>
           <ul id="menu-list">
             <li>
-              <a href="dashboard.html" class="active" href="">Today's Menu</a>
+              <a href="dashboard.html" class="active">Today's Menu</a>
             </li>
             <li>
               <a href="order.html">My Order</a>
@@ -66,7 +64,7 @@
                     <h4>Chicken & Chips</h>
                         <p>Chicken tigh and chips. Comes with two ketchup pastes</p>
                         <div class="order">
-                            <button class="order-button">Order</button>
+                            <button class="order-button addBtn">Order</button>
                         </div>
                 </div>
 
@@ -78,7 +76,7 @@
                 <h4>Jollof Rice and Chicken</h>
                  <p>Three portions of jollof rice and fried tasty chicken with one coke</p>
                  <div class="order">
-                     <button class="order-button">Order</button>
+                     <button class="order-button addBtn">Order</button>
                  </div>
             </div>
            
@@ -90,7 +88,7 @@
                     <h4>Spaghetti & Turkey</h>
                         <p>four portion of spaghetti and turkey and one bottled water</p>
                         <div class="order">
-                            <button class="order-button">Order</button>
+                            <button class="order-button addBtn">Order</button>
                         </div>
                 </div>
 
@@ -103,7 +101,7 @@
                         <h4>Yam Poridge</h>
                             <p>Yam poridge with assorted beef and one solo coke</p>
                             <div class="order">
-                                <button class="order-button">Order</button>
+                                <button class="order-button addBtn">Order</button>
                             </div>
                     </div>
 
@@ -113,18 +111,26 @@
         <h2>©2019 Betachop</h2>
         <h3>Made with ❤️ by Timi Tejumola</h3>
       </footer>
-    </div>
 
-    <script>
-      const somethingElse = document.querySelector(".top");
-      const navButton = somethingElse.querySelector("button[aria-expanded]");
-      function toggleNav({ target }) {
-        const expanded =
-          target.getAttribute("aria-expanded") === "true" || false;
-        navButton.setAttribute("aria-expanded", !expanded);
-        console.log(expanded);
-      }
-      navButton.addEventListener("click", toggleNav);
-    </script>
+      <div id="addNewModal" class="modal">
+          <div class="add-new-today">
+            <span class="closeDialog">&times;</span>
+            <div class="add-today">
+              <img src="../img/image_placeholder.png" />
+  
+              <div class="ct-select-group ct-js-select-group">
+                <select class="ct-select ct-js-select">
+                  <option>Breakfast</option>
+                  <option>Lunch</option>
+                  <option>Dinner</option>
+                </select>
+              </div>
+  
+              <button class="add-to-menu">Order Now</button>
+            </div>
+          </div>
+        </div>
+    </div>
+    <script src="../js/menu.js"></script>
   </body>
 </html>
