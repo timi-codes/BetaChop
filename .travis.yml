@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+  - "stable"
+before_install: cd API/
+cache:
+  directories:
+    - "node_modules"
+install:
+  - npm install
+script:
+  - npm test
+after_success:
+  - npm run coverage
