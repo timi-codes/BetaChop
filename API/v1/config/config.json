@@ -5,7 +5,8 @@
     "database": "betachop",
     "host": "127.0.0.1",
     "port": 5432,
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "operatorsAliases": false
   },
   "test": {
     "username": "codepreneur",
@@ -19,5 +20,3 @@
     "use_env_variable": "DATABASE_URL"
   }
 }
-
-// postgres://azqfxgwchnzwoi:0d9da47420acb5c9710a752002727a5c2b48ca507eebc9c1ba962f589644ea2e@ec2-54-204-2-25.compute-1.amazonaws.com:5432/d57eabgc2jhd2u

@@ -7,11 +7,13 @@ const env = process.env.NODE_ENV || 'development';
 const config = require(`${__dirname}/../config/config.json`)[env];
 const db = {};
 
+require('dotenv').config();
+
 let sequelize;
 if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable]);
+  sequelize = new Sequelize(process.env.DATABASE_URL);
 } else {
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
+  sequelize = new Sequelize(config.database, config.username, config.password);
 }
 
 fs.readdirSync(__dirname)

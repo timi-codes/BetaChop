@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "description": "a meal book app",
   "main": "v1/index.js",
+  "sequelize": {
+    "require": [
+      "@babel/register"
+    ]
+  },
   "scripts": {
     "test": "nyc --require @babel/register ---reporter=html --reporter=text mocha test/**.test.js --timeout 10000 --exit",
     "dev": "nodemon --exec babel-node v1/index.js",
@@ -10,7 +15,8 @@
     "build-babel": "babel ./ --out-dir build/ --ignore ./node_modules,./coverage,./.babelrc,./package.json,./npm-debug.log,./.travis.yml,./.eslintrc.js,./UI,./README.md",
     "clean": "rm -rf build && mkdir build",
     "build": "npm run clean && npm run build-babel",
-    "coverage": "nyc report --reporter=text-lcov | coveralls"
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "migration": "npm run sequelize db:migrate"
   },
   "repository": {
     "type": "git",
@@ -34,6 +40,7 @@
     "@babel/preset-env": "^7.3.1",
     "@babel/register": "^7.0.0",
     "body-parser": "^1.18.3",
+    "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "pg": "^7.8.1",
     "pg-hstore": "^2.3.2",

@@ -6,6 +6,7 @@ export default {
       size: 'Medium',
       price: '500',
       available: false,
+      image_url: 'jollof1.jpg',
     },
     {
       id: 2,
