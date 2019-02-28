@@ -4,7 +4,7 @@
   "description": "a meal book app",
   "main": "API/index.js",
   "scripts": {
-    "test": "nyc --require @babel/register ---reporter=html --reporter=text mocha test/**.test.js --timeout 10000 --exit",
+    "test": "nyc --require @babel/register ---reporter=html --reporter=text mocha API/test/**.test.js --timeout 10000 --exit",
     "dev": "nodemon --exec babel-node API/index.js",
     "start": "node build/index.js",
     "build-babel": "babel ./ --out-dir build/ --ignore ./node_modules,./coverage,./.babelrc,./package.json,./npm-debug.log,./.travis.yml,./.eslintrc.js,./UI,./README.md",
