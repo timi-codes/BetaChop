@@ -1,9 +1,9 @@
 # node_modules
-API/node_modules/
+node_modules/
 UI/node_modules/
 
 # Babel build directory
-API/build/
+build/
 
 # DS_STORE
 .DS_STORE
@@ -11,13 +11,15 @@ UI/.DS_STORE
 API/.DS_STORE
 
 # Coverage directory
-API/coverage/
+coverage/
 
 # nyc directory
-API/.nyc_output
+.nyc_output
 
 # npm
 npm-debug.log
 
 # .env file
 .env
+
+package-lock.json

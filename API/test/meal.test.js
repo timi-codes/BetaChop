@@ -1,7 +1,7 @@
 import chai from 'chai';
 import 'chai/register-should';
 import chaiHttp from 'chai-http';
-import app from '../v1/index';
+import app from '../index';
 import dummyData from '../v1/utils/dummyData';
 
 chai.use(chaiHttp);

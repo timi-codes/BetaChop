@@ -1,11 +1,11 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import mealRoutes from './routes/meal.route';
-import orderRoutes from './routes/order.route';
-import menuRoutes from './routes/menu.route';
+import mealRoutes from './v1/routes/meal.route';
+import orderRoutes from './v1/routes/order.route';
+import menuRoutes from './v1/routes/menu.route';
 
 const app = express();
-const port = process.env.PORT || 7778;
+const port = process.env.PORT || 7777;
 const API_VERSION = '/api/v1';
 
 app.use(bodyParser.json());
