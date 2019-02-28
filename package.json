@@ -1,7 +1,7 @@
 {
   "name": "betachop",
   "version": "1.0.0",
-  "description": "a meal book app",
+  "description": "A meal booking app",
   "main": "API/index.js",
   "scripts": {
     "ui": "run-script-os",
