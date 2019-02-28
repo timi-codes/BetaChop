@@ -1,18 +1,15 @@
-"use strict";
-
-module.exports = function (sequelize, DataTypes) {
-  var Order = sequelize.define('Order', {
+module.exports = (sequelize, DataTypes) => {
+  const Order = sequelize.define('Order', {
     type: {
       type: DataTypes.ENUM,
       values: ['breakfast', 'lunch', 'dinner'],
-      allowNull: false
-    }
+      allowNull: false,
+    },
   });
 
-  Order.associate = function (models) {
-    Order.belongsTo(models.Meal, {
+  Order.associate = (models) => {
+    Order.hasMany(models.Meal, {
       foreignKey: 'mealId',
-      onDelete: 'CASCADE'
     });
   };
 
