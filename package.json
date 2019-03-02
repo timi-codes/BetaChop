@@ -1,9 +1,12 @@
 {
   "name": "betachop",
   "version": "1.0.0",
-  "description": "a meal book app",
+  "description": "A meal booking app",
   "main": "API/index.js",
   "scripts": {
+    "ui": "run-script-os",
+    "ui:win32": "browser-sync ui --server --files 'UI/**/*.css, UI/**/*.html, UI/**/*.js, !node_modules/**/*' --directory --port 7777 --browser \"C:\\Program Files\\Firefox Developer Edition\\firefox.exe\"",
+    "ui:darwin:linux": "browser-sync ui --server --files 'UI/**/*.css, UI/**/*.html, UI/**/*.js, !node_modules/**/*' --directory --port 7777 --browser 'Firefox Developer Edition'",
     "test": "nyc --require @babel/register ---reporter=html --reporter=text mocha API/test/**.test.js --timeout 10000 --exit",
     "dev": "nodemon --exec babel-node API/index.js",
     "start": "node build/index.js",
@@ -11,7 +14,7 @@
     "clean": "rm -rf build && mkdir build",
     "build": "npm run clean && npm run build-babel",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "migration": "npm run sequelize db:migrate"
+    "migration": " API/v1 npm run sequelize db:migrate"
   },
   "repository": {
     "type": "git",
@@ -50,6 +53,8 @@
     "eslint-plugin-import": "^2.16.0",
     "mocha": "^5.2.0",
     "nodemon": "^1.18.10",
-    "nyc": "^13.3.0"
+    "nyc": "^13.3.0",
+    "browser-sync": "^2.26.3",
+    "run-script-os": "^1.0.3"
   }
 }

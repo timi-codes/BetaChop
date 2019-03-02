@@ -1,5 +1,5 @@
 import dummyData from '../utils/dummyData';
-import Meal from '../models/meal.model';
+import { Meal } from '../models';
 
 /**
  * meal services performs all action related to meal - fetching all meal, adding a new meal,
@@ -7,36 +7,20 @@ import Meal from '../models/meal.model';
  */
 const MealService = {
   /**
-   * @description Retrieve and return all meals from our dunny data
-   * @returns {Array} meal object array
+   * @description Retrieve and return all meals
+   * @returns {Array} of meal
    */
   fetchAllMeals() {
-    return dummyData.meals.map((meal) => {
-      const newMeal = new Meal();
-      newMeal.id = meal.id;
-      newMeal.name = meal.name;
-      newMeal.size = meal.size;
-      newMeal.price = meal.price;
-
-      return newMeal;
-    });
+    return Meal.findAll();
   },
 
   /**
-   * @description Takes a new meal object and adds it our dummy data
+   * @description Takes a new meal object
    * @param {object} meal
-   * @returns {object} meal
+   * @returns {object} created meal
    */
-  addAMeal(meal) {
-    const mealLength = dummyData.meals.length;
-    const lastId = dummyData.meals[mealLength - 1].id;
-    const newId = lastId + 1;
-
-    const newMeal = meal;
-    newMeal.id = newId;
-
-    dummyData.meals.push(newMeal);
-    return meal;
+  addAMeal(newMeal) {
+    return Meal.create(newMeal);
   },
 
   /**
