@@ -14,7 +14,7 @@
     "clean": "rm -rf build && mkdir build",
     "build": "npm run clean && npm run build-babel",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "migration": "npm run sequelize db:migrate"
+    "migration": " API/v1 npm run sequelize db:migrate"
   },
   "repository": {
     "type": "git",
