@@ -1,3 +1,4 @@
+import Utility from './helpers';
 /**
  * a class for api response
  */
@@ -5,7 +6,7 @@ class ResponseGenerator {
   constructor() {
     this.statusCode = null;
     this.type = null;
-    this.data = [] || {};
+    this.data = null;
     this.message = null;
   }
 
@@ -17,12 +18,9 @@ class ResponseGenerator {
 
   setSuccess(statusCode, message, data) {
     this.statusCode = statusCode;
-    if (message != null) {
-      this.message = message;
-    }
-    if (data != null) {
-      this.data = data;
-    }
+    this.message = message;
+    this.data = data;
+
     this.type = 'success';
   }
 
@@ -44,12 +42,14 @@ class ResponseGenerator {
    * @returns {object} responseObject
    */
   send(res) {
+    const filteredResponse = Utility.stripNull({
+      status: this.type,
+      message: this.message,
+      data: this.data,
+    });
+
     if (this.type === 'success') {
-      return res.status(this.statusCode).json({
-        status: this.type,
-        message: this.message,
-        data: this.data,
-      });
+      return res.status(this.statusCode).json(filteredResponse);
     }
     // Here this.type === 'error'
     return res.status(this.statusCode).json({

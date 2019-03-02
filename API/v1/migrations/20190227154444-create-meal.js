@@ -1,7 +1,7 @@
 module.exports = {
   up: function up(queryInterface, Sequelize) {
     return queryInterface.createTable('Meals', {
-      id: {
+      mealId: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
@@ -23,17 +23,18 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      createdAt: {
-        allowNull: false,
+      availableDate: {
         type: Sequelize.DATE,
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
+        onDelete: 'CASCADE',
+        references: {
+          model: 'Menus',
+          key: 'date',
+          as: 'availableDate',
+        },
       },
     });
   },
-  down: function down(queryInterface, Sequelize) {
-    return queryInterface.dropTable('Todos');
+  down: function down(queryInterface /** , Sequelize */) {
+    return queryInterface.dropTable('Meals');
   },
 };

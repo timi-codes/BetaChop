@@ -7,21 +7,10 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      createdAt: {
+      date: {
         allowNull: false,
         type: Sequelize.DATE,
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE,
-      },
-      mealId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Meals',
-          key: 'id',
-          as: 'mealId',
-        },
+        unique: true,
       },
     });
   },

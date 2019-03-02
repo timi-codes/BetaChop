@@ -19,8 +19,12 @@ const MealController = {
    */
   fetchAllMeals(req, res) {
     const allMeals = MealService.fetchAllMeals();
-    response.setSuccess(200, '', allMeals);
-    return response.send(res);
+    return allMeals
+      .then((meals) => {
+        response.setSuccess(200, 'Meals was successfully fetched!', meals);
+        response.send(res);
+      })
+      .catch(error => res.status(400).send(error));
   },
 
   /**
@@ -30,15 +34,20 @@ const MealController = {
    * @returns {object} apiResponse
    */
   addAMeal(req, res) {
-    if (!req.body.name || !req.body.price || !req.body.size) {
+    if (!req.body.name || !req.body.price || !req.body.size || !req.body.imageUrl) {
       response.setError(400, 'All parameters are required');
       return response.send(res);
     }
 
     const newMeal = req.body;
     const createdMeal = MealService.addAMeal(newMeal);
-    response.setSuccess(201, 'Meal successfully added!', createdMeal);
-    return response.send(res);
+
+    return createdMeal
+      .then((meal) => {
+        response.setSuccess(201, 'Meal successfully added!', meal);
+        response.send(res);
+      })
+      .catch(error => res.status(400).send(error));
   },
 
   /**

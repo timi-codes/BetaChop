@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "codepreneur",
+    "password": null,
+    "database": "betachop",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "operatorsAliases": false,
+    "define": {
+      "timestamps": false
+    }
+  },
+  "test": {
+    "username": "codepreneur",
+    "password": "password",
+    "database": "betachop",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "use_env_variable": "DATABASE_URL"
+  }
+}
