@@ -1,7 +1,7 @@
 module.exports = {
   up: function up(queryInterface, Sequelize) {
     return queryInterface.createTable('Meals', {
-      mealId: {
+      id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,

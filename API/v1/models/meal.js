@@ -17,6 +17,5 @@ module.exports = (sequelize, DataTypes) => {
     });
   };
 
-  Meal.removeAttribute('id');
   return Meal;
 };

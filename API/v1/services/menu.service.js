@@ -1,4 +1,5 @@
 import dummyData from '../utils/dummyData';
+import { Menu, Meal } from '../models';
 
 /**
  * menu services performs all action related to menu-
@@ -10,11 +11,17 @@ const MenuService = {
    * @returns {Array} menu object array
    */
   setUpMenu(id) {
-    const foundMeal = dummyData.meals.find(meal => meal.id === Number(id));
+    // const foundMeal = dummyData.meals.find(meal => meal.id === Number(id));
+    const foundMeal = Meal.findAll({ where: { id: Number(id) } });
 
     if (foundMeal) {
-      foundMeal.available = true;
-
+      // if meal is found update availability date to today
+      foundMeal.update(
+        {
+          availableDate: new Date(),
+        },
+        { where: { id: Number(id) } },
+      );
       // checks if meal has already been added to menulist
       const isAdded = dummyData.menu.find(meal => meal.id === Number(id));
 
