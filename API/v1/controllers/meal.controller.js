@@ -22,7 +22,7 @@ class MealController {
     return allMeals
       .then((meals) => {
         if (meals.length === 0) {
-          response.setSuccess(200, 'No meal is available!');
+          response.setSuccess(200, 'No meal found!');
         } else {
           response.setSuccess(200, 'Meals was successfully fetched!', meals);
         }
@@ -120,10 +120,10 @@ class MealController {
   static deleteAMeal(req, res) {
     const { id } = req.params;
 
-    // if (Number.isNaN(Number(id))) {
-    //   response.setError(400, 'Invalid ID. ID must be a number');
-    //   response.send(res);
-    // }
+    if (Number.isNaN(Number(id))) {
+      response.setError(400, 'Invalid ID. ID must be a number');
+      response.send(res);
+    }
     const deletedMeal = MealService.deleteAMeal(id);
 
     deletedMeal

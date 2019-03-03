@@ -1,4 +1,3 @@
-import dummyData from '../utils/dummyData';
 import { Meal } from '../models';
 
 /**
@@ -38,13 +37,17 @@ class MealService {
    * @returns {object} foundMeal
    */
   static async updateAMeal(id, updatedMeal) {
-    const foundMeal = await Meal.findByPk(Number(id));
+    try {
+      const foundMeal = await Meal.findByPk(Number(id));
 
-    if (foundMeal) {
-      await Meal.update(updatedMeal, { where: { id: Number(id) } });
-      return updatedMeal;
+      if (foundMeal) {
+        await Meal.update(updatedMeal, { where: { id: Number(id) } });
+        return updatedMeal;
+      }
+      return foundMeal;
+    } catch (e) {
+      throw e;
     }
-    return foundMeal;
   }
 
   /**
@@ -53,8 +56,12 @@ class MealService {
    * @returns {object} foundMeal
    */
   static async getAMeal(id) {
-    const foundMeal = await Meal.findByPk(Number(id));
-    return foundMeal;
+    try {
+      const foundMeal = await Meal.findByPk(Number(id));
+      return foundMeal;
+    } catch (e) {
+      throw e;
+    }
   }
 
   /**
