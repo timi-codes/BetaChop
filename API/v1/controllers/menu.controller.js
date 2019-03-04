@@ -8,24 +8,27 @@ const response = new ResponseGenerator();
  * fetching today's menu,
  * setup menu for today,
  */
-const MenuController = {
+class MenuController {
   /**
    * @description retrieve and return menu for the day
    * @param {object} req
    * @param {object} res
    * @returns {Array} menu object array
    */
-  fetchMenu(req, res) {
+  static fetchMenu(req, res) {
     const allMenu = MenuService.fetchMenu();
-    const menuKeys = Object.keys(allMenu);
 
-    if (menuKeys.length === 0) {
-      response.setSuccess(200, 'Menu list for today is empty', null);
-    } else {
-      response.setSuccess(200, null, allMenu);
-    }
-    return response.send(res);
-  },
+    allMenu
+      .then((menus) => {
+        if (menus.length === 0) {
+          response.setSuccess(200, 'Menu list for today is empty');
+        } else {
+          response.setSuccess(200, null, menus);
+        }
+        response.send(res);
+      })
+      .catch(error => res.status(500).send(error));
+  }
 
   /**
    * @description add a meal to today menu
@@ -33,24 +36,32 @@ const MenuController = {
    * @param {object} res
    * @returns {object} apiResponse
    */
-  setUpMenu(req, res) {
+  static setUpMenu(req, res) {
     const { id } = req.body;
-    const addMeal = MenuService.setUpMenu(id);
 
     if (!id) {
       response.setError(400, 'meal id is required');
+      response.send(res);
     } else if (Number.isNaN(Number(id))) {
       response.setError(400, 'Invalid ID. ID must be a number');
-    } else if (addMeal == null) {
-      response.setError(404, `Meal with id ${id} cannot be found`);
-    } else if (typeof addMeal === 'string') {
-      const msg = addMeal;
-      response.setSuccess(200, msg, null);
-    } else {
-      response.setSuccess(201, 'Meal successfully added to Menu List', addMeal);
+      response.send(res);
     }
-    return response.send(res);
-  },
-};
+
+    const addedMeal = MenuService.setUpMenu(id);
+
+    addedMeal
+      .then((meal) => {
+        if (meal == null) {
+          response.setError(404, `Meal with id ${id} cannot be found`);
+        } else if (meal.availableToday) {
+          response.setSuccess(200, 'Meal has already been added to menu list');
+        } else {
+          response.setSuccess(201, 'Meal successfully added to Menu List', meal);
+        }
+        response.send(res);
+      })
+      .catch(error => res.status(500).send(error));
+  }
+}
 
 export default MenuController;

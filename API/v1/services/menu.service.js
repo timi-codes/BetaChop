@@ -1,46 +1,39 @@
-import dummyData from '../utils/dummyData';
-import { Menu, Meal } from '../models';
+import { Meal } from '../models';
 
 /**
  * menu services performs all action related to menu-
  * fetch menu for the day and setup menu for the day
  */
-const MenuService = {
+class MenuService {
   /**
    * @description Setup the meal for the day
    * @returns {Array} menu object array
    */
-  setUpMenu(id) {
-    // const foundMeal = dummyData.meals.find(meal => meal.id === Number(id));
-    const foundMeal = Meal.findAll({ where: { id: Number(id) } });
+  static async setUpMenu(id) {
+    try {
+      const foundMeal = await Meal.findByPk(Number(id));
 
-    if (foundMeal) {
-      // if meal is found update availability date to today
-      foundMeal.update(
-        {
-          availableDate: new Date(),
-        },
-        { where: { id: Number(id) } },
-      );
-      // checks if meal has already been added to menulist
-      const isAdded = dummyData.menu.find(meal => meal.id === Number(id));
-
-      if (isAdded) {
-        return 'Meal has already been added to menu list';
+      if (foundMeal) {
+        await Meal.update({ availableToday: true }, { where: { id: Number(id) } });
       }
-      dummyData.menu.push(foundMeal);
-    }
 
-    return foundMeal;
-  },
+      return foundMeal;
+    } catch (error) {
+      throw error;
+    }
+  }
 
   /**
    * @description Retrieve and return all menu from our dummyy data
    * @returns {Array} menu object array
    */
-  fetchMenu() {
-    return dummyData.menu.filter(meal => meal.available === true);
-  },
-};
+  static async fetchMenu() {
+    try {
+      return await Meal.findAll({ where: { availableToday: true } });
+    } catch (error) {
+      throw error;
+    }
+  }
+}
 
 export default MenuService;

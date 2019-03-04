@@ -23,14 +23,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      availableDate: {
-        type: Sequelize.DATE,
-        onDelete: 'CASCADE',
-        references: {
-          model: 'Menus',
-          key: 'date',
-          as: 'availableDate',
-        },
+      availableToday: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
       },
     });
   },
