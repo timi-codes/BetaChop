@@ -13,5 +13,11 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: false,
     },
   });
+  Meal.associate = (models) => {
+    Meal.hasMany(models.Order, {
+      foreignKey: 'mealId',
+      as: 'Orders',
+    });
+  };
   return Meal;
 };

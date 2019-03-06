@@ -7,14 +7,15 @@
     "ui": "run-script-os",
     "ui:win32": "browser-sync ui --server --files 'UI/**/*.css, UI/**/*.html, UI/**/*.js, !node_modules/**/*' --directory --port 7777 --browser \"C:\\Program Files\\Firefox Developer Edition\\firefox.exe\"",
     "ui:darwin:linux": "browser-sync ui --server --files 'UI/**/*.css, UI/**/*.html, UI/**/*.js, !node_modules/**/*' --directory --port 7777 --browser 'Firefox Developer Edition'",
-    "test": "nyc --require @babel/register ---reporter=html --reporter=text mocha API/test/**.test.js --timeout 10000 --exit",
-    "dev": "nodemon --exec babel-node API/index.js",
+    "start-dev": "nodemon --exec babel-node API/index.js",
     "start": "node build/index.js",
-    "build-babel": "babel ./ --out-dir build/ --ignore ./node_modules,./coverage,./.babelrc,./package.json,./npm-debug.log,./.travis.yml,./.eslintrc.js,./UI,./README.md",
-    "clean": "rm -rf build && mkdir build",
+    "pretest": "sequelize db:migrate:undo:all --env test && sequelize db:migrate --env test && sequelize db:seed:all --env test",
+    "test": "nyc --require @babel/register ---reporter=html --reporter=text mocha API/test/**.test.js --timeout 10000 --exit",
+    "build-babel": "babel ./API --out-dir dist/ --ignore ./node_modules,./coverage,./.babelrc,./package.json,./npm-debug.log,./.travis.yml,./.eslintrc.js,./UI,./README.md",
+    "clean": "rm -rf dist && mkdir dist",
     "build": "npm run clean && npm run build-babel",
-    "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "migration": " API/v1 npm run sequelize db:migrate"
+    "coveralls": "nyc npm test&& nyc report --reporter=text-lcov | coveralls",
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",
@@ -37,14 +38,18 @@
     "@babel/node": "^7.2.2",
     "@babel/preset-env": "^7.3.1",
     "@babel/register": "^7.0.0",
+    "@babel/runtime": "^7.3.4",
     "body-parser": "^1.18.3",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "pg": "^7.8.1",
     "pg-hstore": "^2.3.2",
-    "sequelize": "^4.42.0"
+    "sequelize": "^4.42.0",
+    "sequelize-cli": "^5.4.0"
   },
   "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.3.4",
+    "browser-sync": "^2.26.3",
     "chai": "^4.2.0",
     "chai-http": "^4.2.1",
     "coveralls": "^3.0.2",
@@ -54,7 +59,7 @@
     "mocha": "^5.2.0",
     "nodemon": "^1.18.10",
     "nyc": "^13.3.0",
-    "browser-sync": "^2.26.3",
-    "run-script-os": "^1.0.3"
+    "run-script-os": "^1.0.3",
+    "should": "^13.2.3"
   }
 }

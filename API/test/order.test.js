@@ -2,7 +2,6 @@ import chai from 'chai';
 import 'chai/register-should';
 import chaiHttp from 'chai-http';
 import app from '../index';
-import dummyData from '../v1/utils/dummyData';
 
 chai.use(chaiHttp);
 
@@ -17,7 +16,7 @@ describe('Order', () => {
    */
   describe('POST /orders', () => {
     it("it should place an order for a meal available in the today's menu", (done) => {
-      const id = Number(dummyData.menu[0].id);
+      const id = 2;
       const validMeal = {
         mealId: id,
         type: 'breakfast',
@@ -109,9 +108,9 @@ describe('Order', () => {
    */
   describe('PUT /orders/:orderId', () => {
     it("it should update an ordered meal with another meal available in today's menu", (done) => {
-      const orderId = Number(dummyData.orders[0].id);
+      const orderId = 3;
       // This meal is available for today's menu
-      const availableMealId = Number(dummyData.menu[0].id);
+      const availableMealId = 3;
 
       const newOrder = {
         mealId: availableMealId,
@@ -126,19 +125,15 @@ describe('Order', () => {
           res.should.have.status(201);
           res.body.should.be.a('object');
           res.body.should.have.property('message').eql('Order was successfully updated');
-          res.body.data.should.have.property('type').eql('dinner');
-          res.body.data.meal.should.have.property('name').eql('Jollof Rice');
-
           done();
         });
     });
 
     it("it should throw an error when order is updated with a meal that is not available in today's menu", (done) => {
-      const orderId = Number(dummyData.orders[0].id);
+      const orderId = 2;
 
       // This meal is not available in today's menu
-      const meal = dummyData.meals[5];
-      const unAvailableMealId = Number(meal.id);
+      const unAvailableMealId = 4;
 
       const newOrder = {
         mealId: unAvailableMealId,
@@ -162,7 +157,7 @@ describe('Order', () => {
     it('it should throw an error when wrong orderId is passed', (done) => {
       // This meal is not available in today's menu
       const orderId = 100;
-      const availableMealId = Number(dummyData.menu[0].id);
+      const availableMealId = 2;
 
       const newOrder = {
         mealId: availableMealId,
@@ -186,7 +181,7 @@ describe('Order', () => {
     it('it should throw an error when  orderId or mealId is not a number', (done) => {
       // This meal is not available in today's menu
       const orderId = '1c';
-      const availableMealId = Number(dummyData.menu[0].id);
+      const availableMealId = 2;
 
       const newOrder = {
         mealId: availableMealId,

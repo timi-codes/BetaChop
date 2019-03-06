@@ -1,66 +1,76 @@
-import dummyData from '../utils/dummyData';
-// import Order from '../models/order.model';
+import database from '../database/models';
 
-// /**
-//  * order services performs all action related to order-
-//  * order a meal, modify an order, get all orders
-//  */
-// const OrderService = {
-//   /**
-//    * @description Retrieve and return all orders from our dummyy data
-//    * @returns {Array} order object array
-//    */
-//   fetchAllOrders() {
-//     return dummyData.orders.map((order) => {
-//       const newOrder = new Order();
-//       newOrder.id = order.id;
-//       newOrder.type = order.type;
-//       newOrder.meal = order.meal;
-//       return newOrder;
-//     });
-//   },
+/**
+ * order services performs all action related to order-
+ * order a meal, modify an order, get all orders
+ */
+class OrderService {
+  /**
+   * @description Retrieve and return all orders from our dummyy data
+   * @returns {Array} order object array
+   */
+  static async fetchAllOrders() {
+    try {
+      return await database.Order.findAll({
+        include: [
+          {
+            model: database.Meal,
+            as: 'meal',
+            where: { availableToday: true },
+          },
+        ],
+        attributes: { exclude: ['mealId'] },
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
 
-//   /**
-//    * @description Order a meal
-//    * @returns {Array} order object array
-//    */
-//   orderAMeal(id, type) {
-//     const foundMeal = dummyData.menu.find(meal => meal.id === Number(id));
+  /**
+   * @description Order a meal
+   * @returns {Array} order object array
+   */
+  static async orderAMeal(id, type) {
+    try {
+      const foundMeal = await database.Meal.findByPk(Number(id));
 
-//     if (foundMeal) {
-//       const orderLength = dummyData.orders.length;
-//       const lastId = dummyData.orders[orderLength - 1].id;
-//       const newId = lastId + 1;
+      if (foundMeal) {
+        return await database.Order.create({
+          type,
+          mealId: foundMeal.id,
+        });
+      }
+      return foundMeal;
+    } catch (e) {
+      throw e;
+    }
+  }
 
-//       const newOrder = new Order();
-//       newOrder.id = newId;
-//       newOrder.type = type;
-//       newOrder.meal = foundMeal;
-//       dummyData.orders.push(newOrder);
+  /**
+   * @description Updates an existing order with a new order object
+   * @param { int } id
+   * @param {object} updatedOrder
+   * @returns {object} updated order
+   */
+  static async updateAnOrder(orderId, mealId, type) {
+    try {
+      const foundOrder = await database.Order.findByPk(Number(orderId));
+      const newMeal = await database.Meal.findByPk(Number(mealId));
 
-//       return newOrder;
-//     }
+      if (foundOrder && newMeal && newMeal.availableToday) {
+        return await database.Order.update(
+          { mealId: newMeal.id, type },
+          { where: { id: Number(orderId) } },
+        );
+      }
+      if (!newMeal.availableToday && newMeal == null) {
+        return "Meal is not available in today's menu";
+      }
+      return null;
+    } catch (e) {
+      throw e;
+    }
+  }
+}
 
-//     return foundMeal;
-//   },
-
-//   /**
-//    * @description Updates an existing order with a new order object
-//    * @param { int } id
-//    * @param {object} updatedOrder
-//    * @returns {object} updated order
-//    */
-//   updateAnOrder(orderId, mealId, type) {
-//     const foundOrder = dummyData.orders.find(order => order.id === Number(orderId));
-//     const newMeal = dummyData.menu.find(meal => meal.id === Number(mealId));
-
-//     if (foundOrder && newMeal) {
-//       foundOrder.type = type;
-//       foundOrder.meal = newMeal;
-//       return foundOrder;
-//     }
-//     return null;
-//   },
-// };
-
-// export default OrderService;
+export default OrderService;

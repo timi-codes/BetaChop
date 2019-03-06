@@ -1,4 +1,4 @@
-import { Meal } from '../models';
+import database from '../database/models';
 
 /**
  * meal services performs all action related to meal - fetching all meal, adding a new meal,
@@ -11,9 +11,9 @@ class MealService {
    */
   static async fetchAllMeals() {
     try {
-      return await Meal.findAll();
-    } catch (e) {
-      throw e;
+      return await database.Meal.findAll();
+    } catch (error) {
+      throw error;
     }
   }
 
@@ -24,9 +24,9 @@ class MealService {
    */
   static async addAMeal(newMeal) {
     try {
-      return await Meal.create(newMeal);
-    } catch (e) {
-      throw e;
+      return await database.Meal.create(newMeal);
+    } catch (error) {
+      throw error;
     }
   }
 
@@ -38,15 +38,15 @@ class MealService {
    */
   static async updateAMeal(id, updatedMeal) {
     try {
-      const foundMeal = await Meal.findByPk(Number(id));
+      const foundMeal = await database.Meal.findByPk(Number(id));
 
       if (foundMeal) {
-        await Meal.update(updatedMeal, { where: { id: Number(id) } });
+        await database.Meal.update(updatedMeal, { where: { id: Number(id) } });
         return updatedMeal;
       }
       return foundMeal;
-    } catch (e) {
-      throw e;
+    } catch (error) {
+      throw error;
     }
   }
 
@@ -57,10 +57,10 @@ class MealService {
    */
   static async getAMeal(id) {
     try {
-      const foundMeal = await Meal.findByPk(Number(id));
+      const foundMeal = await database.Meal.findByPk(Number(id));
       return foundMeal;
-    } catch (e) {
-      throw e;
+    } catch (error) {
+      throw error;
     }
   }
 
@@ -71,14 +71,14 @@ class MealService {
    */
   static async deleteAMeal(id) {
     try {
-      const foundMeal = await Meal.findByPk(Number(id));
+      const foundMeal = await database.Meal.findByPk(Number(id));
       if (foundMeal) {
-        const deleteRecord = await Meal.destroy({ where: { id: Number(id) } });
+        const deleteRecord = await database.Meal.destroy({ where: { id: Number(id) } });
         return deleteRecord;
       }
       return 0;
-    } catch (e) {
-      throw e;
+    } catch (error) {
+      throw error;
     }
   }
 }
