@@ -1,7 +1,7 @@
 module.exports = {
   up: function up(queryInterface, Sequelize) {
     return queryInterface.createTable('Meals', {
-      mealId: {
+      id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
@@ -23,14 +23,10 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING,
       },
-      availableDate: {
-        type: Sequelize.DATE,
-        onDelete: 'CASCADE',
-        references: {
-          model: 'Menus',
-          key: 'date',
-          as: 'availableDate',
-        },
+      availableToday: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
       },
     });
   },

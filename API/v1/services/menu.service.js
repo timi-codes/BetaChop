@@ -1,39 +1,39 @@
-import dummyData from '../utils/dummyData';
+import database from '../database/models';
 
 /**
  * menu services performs all action related to menu-
  * fetch menu for the day and setup menu for the day
  */
-const MenuService = {
+class MenuService {
   /**
    * @description Setup the meal for the day
    * @returns {Array} menu object array
    */
-  setUpMenu(id) {
-    const foundMeal = dummyData.meals.find(meal => meal.id === Number(id));
+  static async setUpMenu(id) {
+    try {
+      const foundMeal = await database.Meal.findByPk(Number(id));
 
-    if (foundMeal) {
-      foundMeal.available = true;
-
-      // checks if meal has already been added to menulist
-      const isAdded = dummyData.menu.find(meal => meal.id === Number(id));
-
-      if (isAdded) {
-        return 'Meal has already been added to menu list';
+      if (foundMeal) {
+        await database.Meal.update({ availableToday: true }, { where: { id: Number(id) } });
       }
-      dummyData.menu.push(foundMeal);
-    }
 
-    return foundMeal;
-  },
+      return foundMeal;
+    } catch (error) {
+      throw error;
+    }
+  }
 
   /**
    * @description Retrieve and return all menu from our dummyy data
    * @returns {Array} menu object array
    */
-  fetchMenu() {
-    return dummyData.menu.filter(meal => meal.available === true);
-  },
-};
+  static async fetchMenu() {
+    try {
+      return await database.Meal.findAll({ where: { availableToday: true } });
+    } catch (error) {
+      throw error;
+    }
+  }
+}
 
 export default MenuService;

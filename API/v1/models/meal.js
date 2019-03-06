@@ -7,16 +7,11 @@ module.exports = (sequelize, DataTypes) => {
     size: DataTypes.STRING,
     price: DataTypes.STRING,
     imageUrl: DataTypes.STRING,
+    availableToday: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+    },
   });
-
-  Meal.associate = (models) => {
-    Meal.belongsTo(models.Menu, {
-      onDelete: 'CASCADE',
-      foreignKey: 'availableDate',
-      targetKey: 'date',
-    });
-  };
-
-  Meal.removeAttribute('id');
   return Meal;
 };
