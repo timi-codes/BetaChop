@@ -156,7 +156,7 @@ describe('Meal', () => {
 
     it('it should throw an error if user supply a wrong email and password combination ', (done) => {
       const loginCredentials = {
-        email: 'timitejumolaenouch@gmail.com',
+        email: 'timitejumolaenouchjjjhhhhhhj@gmail.com',
         password: 'passwordsdd',
       };
       chai
@@ -174,7 +174,7 @@ describe('Meal', () => {
 
     it('it should login the user in', (done) => {
       const loginCredentials = {
-        email: 'timitejumolaenouch@gmail.com',
+        email: 'timitejumolaenouchjjjhhhhhhj@gmail.com',
         password: 'password',
       };
       chai
