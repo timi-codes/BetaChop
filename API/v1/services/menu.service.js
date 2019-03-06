@@ -1,4 +1,4 @@
-import { Meal } from '../models';
+import database from '../database/models';
 
 /**
  * menu services performs all action related to menu-
@@ -11,10 +11,10 @@ class MenuService {
    */
   static async setUpMenu(id) {
     try {
-      const foundMeal = await Meal.findByPk(Number(id));
+      const foundMeal = await database.Meal.findByPk(Number(id));
 
       if (foundMeal) {
-        await Meal.update({ availableToday: true }, { where: { id: Number(id) } });
+        await database.Meal.update({ availableToday: true }, { where: { id: Number(id) } });
       }
 
       return foundMeal;
@@ -29,7 +29,7 @@ class MenuService {
    */
   static async fetchMenu() {
     try {
-      return await Meal.findAll({ where: { availableToday: true } });
+      return await database.Meal.findAll({ where: { availableToday: true } });
     } catch (error) {
       throw error;
     }
