@@ -79,14 +79,14 @@ describe('Meal', () => {
         firstname: 'Kolades',
         lastname: 'Bolades',
         email: 'timitejumolaenouchjjjhhhhhhj@gmail.com',
-        password: 'password',
+        password: 'passw',
       };
       chai
         .request(app)
         .post('/api/v1/auth/signup/')
         .send(newUser)
         .end((err, res) => {
-          // res.should.have.status(201);
+          res.should.have.status(201);
           res.body.should.be.a('object');
           res.body.should.have.property('message').eql('Account was successfully created!');
           res.body.data.should.have.property('firstname');
@@ -175,7 +175,7 @@ describe('Meal', () => {
     it('it should login the user in', (done) => {
       const loginCredentials = {
         email: 'timitejumolaenouchjjjhhhhhhj@gmail.com',
-        password: 'password',
+        password: 'passw',
       };
       chai
         .request(app)
