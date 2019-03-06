@@ -76,8 +76,8 @@ describe('Meal', () => {
 
     it('it should create a new user', (done) => {
       const newUser = {
-        firstname: 'Kolade',
-        lastname: 'Bolade',
+        firstname: 'Kolades',
+        lastname: 'Bolades',
         email: 'timitejumolaenouch@gmail.com',
         password: 'password',
       };
