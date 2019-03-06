@@ -28,6 +28,13 @@ module.exports = {
         allowNull: false,
         defaultValue: false,
       },
+      userId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Users',
+          key: 'id',
+        },
+      },
     });
   },
   down: function down(queryInterface /** , Sequelize */) {

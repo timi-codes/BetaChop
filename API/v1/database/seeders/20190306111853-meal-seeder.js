@@ -8,6 +8,7 @@ module.exports = {
         price: '300',
         imageUrl: 'amalaokro.png',
         availableToday: false,
+        userId: 2,
       },
       {
         name: 'Jollof Rice',
@@ -15,6 +16,7 @@ module.exports = {
         price: '400',
         imageUrl: 'jollofrice.png',
         availableToday: false,
+        userId: 2,
       },
       {
         name: 'Sea Food Okro',
@@ -22,6 +24,7 @@ module.exports = {
         price: '2000',
         imageUrl: 'seafoodokro.png',
         availableToday: true,
+        userId: 2,
       },
       {
         name: 'Amala & Okro',
@@ -29,6 +32,7 @@ module.exports = {
         price: '300',
         imageUrl: 'amalaokro.png',
         availableToday: false,
+        userId: 1,
       },
     ],
     {},

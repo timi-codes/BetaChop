@@ -9,11 +9,25 @@ module.exports = {
     type: {
       type: Sequelize.STRING,
     },
+    userId: {
+      type: Sequelize.INTEGER,
+      references: {
+        model: 'Users',
+        key: 'id',
+      },
+    },
     mealId: {
       type: Sequelize.INTEGER,
       onDelete: 'CASCADE',
       references: {
         model: 'Meals',
+        key: 'id',
+      },
+    },
+    catererId: {
+      type: Sequelize.INTEGER,
+      references: {
+        model: 'Users',
         key: 'id',
       },
     },

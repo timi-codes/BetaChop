@@ -16,18 +16,30 @@ class UserController {
    * @returns {object} created user
    */
   static async createUser(req, res) {
-    const { user } = req.body;
+    const user = req.body;
+
+    if (!req.body.email) {
+      response.setError(400, 'Email Address is required');
+      return response.send(res);
+    }
+    if (!req.body.password) {
+      response.setError(400, 'Password is required');
+      return response.send(res);
+    }
+    if (!req.body.roleId) {
+      user.roleId = 1;
+    }
 
     try {
       const createdUser = await UserService.createUser(user);
       if (createdUser) {
-        response.setSuccess(200, 'Account was successfully created!', createdUser);
+        response.setSuccess(201, 'Account was successfully created!', createdUser);
       } else {
         response.setError(400, 'There was an error creating account');
       }
       return response.send(res);
     } catch (error) {
-      response.setError(400, error);
+      response.setError(400, error.message);
       return response.send(res);
     }
   }
@@ -39,17 +51,33 @@ class UserController {
    * @returns {object} created user
    */
   static async loginUser(req, res) {
-    if (!req.body.name || !req.body.price || !req.body.size || !req.body.imageUrl) {
-      response.setError(400, 'All parameters are required');
+    const login = req.body;
+
+    if (!login.email) {
+      response.setError(400, 'Email Address is required');
+      return response.send(res);
+    }
+    if (!login.password) {
+      response.setError(400, 'Password is required');
       return response.send(res);
     }
 
     try {
-      const loginUser = await UserService.loginUser(req.body.login);
-      response.setSuccess(200, loginUser);
+      const token = await UserService.loginUser(login);
+      if (token == null) {
+        response.setError(404, 'User profile cannot be found!');
+      } else if (token === 'string') {
+        const invalidCredentials = token;
+        response.setError(400, invalidCredentials);
+      } else {
+        const tokenResponse = {
+          token,
+        };
+        response.setSuccess(200, null, tokenResponse);
+      }
       return response.send(res);
     } catch (error) {
-      response.setError(400, error);
+      response.setError(400, error.message);
       return response.send(res);
     }
   }

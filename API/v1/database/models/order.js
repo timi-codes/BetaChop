@@ -3,6 +3,15 @@ module.exports = (sequelize, DataTypes) => {
     type: DataTypes.STRING,
   });
   Order.associate = (models) => {
+    Order.belongsTo(models.User, {
+      foreignKey: 'userId',
+      as: 'user',
+    });
+    Order.belongsTo(models.User, {
+      foreignKey: 'catererId',
+      as: 'caterer',
+    });
+
     Order.belongsTo(models.Meal, {
       foreignKey: 'mealId',
       as: 'meal',
