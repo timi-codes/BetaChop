@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 import mealRoutes from './v1/routes/meal.route';
 import orderRoutes from './v1/routes/order.route';
 import menuRoutes from './v1/routes/menu.route';
+import userRoutes from './v1/routes/user.route';
 
 config.config();
 const app = express();
@@ -15,6 +16,7 @@ app.use(bodyParser.json());
 app.use(`${API_VERSION}/meals`, mealRoutes);
 app.use(`${API_VERSION}/orders`, orderRoutes);
 app.use(`${API_VERSION}/menu`, menuRoutes);
+app.use(`${API_VERSION}/auth`, userRoutes);
 
 /* istanbul ignore next */
 
