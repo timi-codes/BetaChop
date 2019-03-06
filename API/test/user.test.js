@@ -78,7 +78,7 @@ describe('Meal', () => {
       const newUser = {
         firstname: 'Kolades',
         lastname: 'Bolades',
-        email: 'timitejumolaenouch@gmail.com',
+        email: 'timitejumolaenouchjjjhhhhhhj@gmail.com',
         password: 'password',
       };
       chai
