@@ -2,7 +2,6 @@ import chai from 'chai';
 import 'chai/register-should';
 import chaiHttp from 'chai-http';
 import app from '../index';
-import dummyData from '../v1/utils/dummyData';
 
 chai.use(chaiHttp);
 
@@ -16,7 +15,7 @@ describe('Menu', () => {
    */
   describe('POST /menu', () => {
     it('it should add a meal given the id to the menu', (done) => {
-      const mealId = Number(dummyData.meals[1].id);
+      const mealId = 4;
       const meal = {
         id: mealId,
       };
@@ -33,7 +32,7 @@ describe('Menu', () => {
     });
 
     it('it should send a message if meal has already been added', (done) => {
-      const mealId = Number(dummyData.meals[1].id);
+      const mealId = 3;
       const meal = {
         id: mealId,
       };

@@ -7,6 +7,16 @@ cache:
     - "node_modules"
 install:
   - npm install
+services:
+  - postgresql
+env:
+  - NODE_ENV=test
+before_script:
+  - psql -c 'create database betachop;' -U postgres
+  - psql -c "CREATE USER root WITH PASSWORD 'password';" -U postgres
+  - npm run build
+  - sequelize db:migrate
+  - sequelize db:seed:all
 script:
   - npm test
 after_success:

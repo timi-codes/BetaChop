@@ -2,7 +2,6 @@ import chai from 'chai';
 import 'chai/register-should';
 import chaiHttp from 'chai-http';
 import app from '../index';
-import dummyData from '../v1/utils/dummyData';
 
 chai.use(chaiHttp);
 
@@ -11,23 +10,6 @@ describe('Meal', () => {
   beforeEach((done) => {
     done();
   });
-
-  /**
-   * Test the GET /meals/ route
-   */
-  describe('GET /meals', () => {
-    it('it should get all the meals', (done) => {
-      chai
-        .request(app)
-        .get('/api/v1/meals')
-        .end((err, res) => {
-          res.should.have.status(200);
-          res.body.data.should.be.a('array');
-          done();
-        });
-    });
-  });
-
   /**
    * Test the POST /meals/ route
    */
@@ -55,6 +37,7 @@ describe('Meal', () => {
         name: 'Porridge',
         size: 'Small',
         price: '300',
+        imageUrl: 'poridgesmall.png',
       };
       chai
         .request(app)
@@ -74,11 +57,27 @@ describe('Meal', () => {
   });
 
   /**
+   * Test the GET /meals/ route
+   */
+  describe('GET /meals', () => {
+    it('it should get all the meals', (done) => {
+      chai
+        .request(app)
+        .get('/api/v1/meals')
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.data.should.be.a('array');
+          done();
+        });
+    });
+  });
+
+  /**
    * Test the GET /meals/:id route
    */
   describe('GET /meals/:id', () => {
     it('it should GET a meal by the given id', (done) => {
-      const mealId = Number(dummyData.meals[0].id);
+      const mealId = 1;
       chai
         .request(app)
         .get(`/api/v1/meals/${mealId}`)
@@ -120,12 +119,12 @@ describe('Meal', () => {
     });
   });
 
-  /**
-   * Test  PUT /meals/:id route
-   */
+  // /**
+  //  * Test  PUT /meals/:id route
+  //  */
   describe('PUT /meals/:id', () => {
     it('it should update a book given the id', (done) => {
-      const mealId = Number(dummyData.meals[0].id);
+      const mealId = 1;
       const updateMeal = { name: 'Coconut Rice', price: '300' };
       chai
         .request(app)
@@ -172,24 +171,10 @@ describe('Meal', () => {
     });
   });
 
-  /**
-   * Test  DELETE /meals/:id route
-   */
+  // /**
+  //  * Test  DELETE /meals/:id route
+  //  */
   describe('DELETE /meal/:id', () => {
-    it('it should delete a meal given the id', (done) => {
-      const mealId = Number(dummyData.meals[0].id);
-
-      chai
-        .request(app)
-        .delete(`/api/v1/meals/${mealId}`)
-        .end((err, res) => {
-          res.should.have.status(200);
-          res.body.should.be.a('object');
-          res.body.should.have.property('message').eql('Meal was successfully deleted');
-          done();
-        });
-    });
-
     it('it should not DELETE a meal that is not available', (done) => {
       const mealId = 10000;
       chai
@@ -212,6 +197,20 @@ describe('Meal', () => {
           res.should.have.status(400);
           res.body.should.be.a('object');
           res.body.should.have.property('message').eql('Invalid ID. ID must be a number');
+          done();
+        });
+    });
+
+    it('it should delete a meal given the id', (done) => {
+      const mealId = 1;
+
+      chai
+        .request(app)
+        .delete(`/api/v1/meals/${mealId}`)
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a('object');
+          res.body.should.have.property('message').eql('Meal was successfully deleted');
           done();
         });
     });
