@@ -14,6 +14,10 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
   Meal.associate = (models) => {
+    Meal.belongsTo(models.User, {
+      foreignKey: 'userId',
+      as: 'Caterer',
+    });
     Meal.hasMany(models.Order, {
       foreignKey: 'mealId',
       as: 'Orders',

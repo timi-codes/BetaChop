@@ -10,6 +10,7 @@ module.exports = {
     define: {
       timestamps: false,
     },
+    secret_key: process.env.SECRET_KEY,
   },
   test: {
     username: 'codepreneur',
@@ -22,6 +23,7 @@ module.exports = {
     define: {
       timestamps: false,
     },
+    secret_key: process.env.SECRET_KEY,
   },
   production: {
     environment: 'production',
