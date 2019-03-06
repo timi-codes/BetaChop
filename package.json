@@ -10,7 +10,7 @@
     "start-dev": "nodemon --exec babel-node API/index.js",
     "start": "node dist/index.js",
     "pretest": "sequelize db:migrate:undo:all --env test && sequelize db:migrate --env test && sequelize db:seed:all --env test",
-    "test": "nyc --require @babel/register ---reporter=html --reporter=text mocha API/test/**.test.js --timeout 10000 --exit",
+    "test": "nyc --require @babel/register ---reporter=html --reporter=text mocha API/test/**.test.js --exit",
     "build-babel": "babel ./API --out-dir dist/ --ignore ./node_modules,./coverage,./.babelrc,./package.json,./npm-debug.log,./.travis.yml,./.eslintrc.js,./UI,./README.md",
     "clean": "rm -rf dist && mkdir dist",
     "build": "NODE_ENV=production npm run clean && npm run build-babel",
