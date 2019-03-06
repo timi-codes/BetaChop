@@ -1,7 +1,6 @@
 language: node_js
 node_js:
   - "stable"
-before_install: cd API/
 cache:
   directories:
     - "node_modules"
@@ -10,11 +9,13 @@ install:
 services:
   - postgresql
 env:
-  - NODE_ENV=test
+  global:
+    - NODE_ENV=test
 before_script:
   - psql -c 'create database betachop;' -U postgres
-  - psql -c "CREATE USER root WITH PASSWORD 'password';" -U postgres
+  - psql -c "CREATE USER codepreneur WITH PASSWORD null;" -U postgres
   - npm run build
+  - npm install -g sequelize-cli
   - sequelize db:migrate
   - sequelize db:seed:all
 script:
