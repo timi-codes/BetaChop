@@ -3,7 +3,7 @@ node_modules/
 UI/node_modules/
 
 # Babel build directory
-#dist/
+dist/
 
 # DS_STORE
 .DS_STORE
