@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "A meal booking app",
   "main": "API/index.js",
+  "engines": {
+    "node": "11.6.0",
+    "npm": "6.5.0-next.0"
+  },
   "scripts": {
     "ui": "run-script-os",
     "ui:win32": "browser-sync ui --server --files 'UI/**/*.css, UI/**/*.html, UI/**/*.js, !node_modules/**/*' --directory --port 7777 --browser \"C:\\Program Files\\Firefox Developer Edition\\firefox.exe\"",
