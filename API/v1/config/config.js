@@ -39,6 +39,5 @@ module.exports = {
       native: true,
     },
     logging: true,
-      }
   },
 };
