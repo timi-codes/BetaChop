@@ -10,7 +10,6 @@ module.exports = {
     define: {
       timestamps: false,
     },
-    secret_key: process.env.JWT_SECRET,
   },
   test: {
     username: 'codepreneur',
@@ -23,7 +22,6 @@ module.exports = {
     define: {
       timestamps: false,
     },
-    secret_key: process.env.JWT_SECRET,
   },
   production: {
     dialect: 'postgres',

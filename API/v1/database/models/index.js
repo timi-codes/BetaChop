@@ -9,14 +9,14 @@ const config = configJson[env];
 const db = {};
 
 let sequelize;
-if (env === 'production') {
-  sequelize = new Sequelize(process.env.DATABASE_URL, {
-    dialect: 'postgres',
-    operatorsAliases: false,
-  });
-} else {
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
-}
+// if (env === 'production') {
+sequelize = new Sequelize(process.env.DATABASE_URL, {
+  dialect: 'postgres',
+  operatorsAliases: false,
+});
+// } else {
+// sequelize = new Sequelize(config.database, config.username, config.password, config);
+// }
 
 readdirSync(__dirname)
   .filter(file => file.indexOf('.') !== 0 && file !== basename && file.slice(-3) === '.js')
