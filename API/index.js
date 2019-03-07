@@ -1,8 +1,9 @@
 import config from 'dotenv';
 import express from 'express';
 import bodyParser from 'body-parser';
-import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
+import swaggerDocument from './swagger.json';
+
 import mealRoutes from './v1/routes/meal.route';
 import orderRoutes from './v1/routes/order.route';
 import menuRoutes from './v1/routes/menu.route';
@@ -15,6 +16,7 @@ const API_VERSION = '/api/v1';
 
 app.use(bodyParser.json());
 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(`${API_VERSION}/meals`, mealRoutes);
 app.use(`${API_VERSION}/orders`, orderRoutes);
 app.use(`${API_VERSION}/menu`, menuRoutes);

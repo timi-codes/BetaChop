@@ -43,7 +43,8 @@ class MenuController {
     if (!id) {
       response.setError(400, 'meal id is required');
       return response.send(res);
-    } if (Number.isNaN(Number(id))) {
+    }
+    if (Number.isNaN(Number(id))) {
       response.setError(400, 'Invalid ID. ID must be a number');
       return response.send(res);
     }

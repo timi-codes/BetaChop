@@ -25,21 +25,17 @@ class UserService {
 
       const createdUser = await database.User.create(user);
 
-      const {
-        firstname, lastname, email, id: userId,
-      } = createdUser;
+      const { username, email, id: userId } = createdUser;
 
       const payload = {
         userId,
-        firstname,
-        lastname,
+        username,
         roleId,
       };
 
       const token = jwtSigner(payload);
       const userProfile = {
-        firstname,
-        lastname,
+        username,
         email,
         token,
       };
