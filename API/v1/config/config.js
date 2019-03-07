@@ -26,6 +26,6 @@ module.exports = {
     secret_key: process.env.JWT_SECRET,
   },
   production: {
-    environment: 'production',
+    dialect: 'postgres',
   },
 };
