@@ -16,8 +16,7 @@ describe('Meal', () => {
   describe('POST /auth/signup', () => {
     it('it should not POST a new user without without email address field', (done) => {
       const newUser = {
-        firstname: 'Kolade',
-        lastname: 'Bolade',
+        username: 'Kolade',
         password: 'password',
       };
       chai
@@ -35,8 +34,7 @@ describe('Meal', () => {
 
     it('it should not POST a new user  without password field', (done) => {
       const newUser = {
-        firstname: 'Kolade',
-        lastname: 'Bolade',
+        username: 'Kolade',
         email: 'tejumolamofe@gmail.com',
       };
       chai
@@ -54,8 +52,7 @@ describe('Meal', () => {
 
     it('it should not POST a new user if the email address already exist in the system', (done) => {
       const newUser = {
-        firstname: 'Kolade',
-        lastname: 'Bolade',
+        username: 'Kolade',
         email: 'timitejumola@gmail.com',
         password: 'password',
       };
@@ -76,8 +73,7 @@ describe('Meal', () => {
 
     it('it should create a new user', (done) => {
       const newUser = {
-        firstname: 'Kolades',
-        lastname: 'Bolades',
+        username: 'Bolades',
         email: 'timijk@gmail.com',
         password: 'passw',
       };
@@ -89,8 +85,7 @@ describe('Meal', () => {
           res.should.have.status(201);
           res.body.should.be.a('object');
           res.body.should.have.property('message').eql('Account was successfully created!');
-          res.body.data.should.have.property('firstname');
-          res.body.data.should.have.property('lastname');
+          res.body.data.should.have.property('username');
           res.body.data.should.have.property('email');
           res.body.data.should.have.property('token');
           done();

@@ -34,8 +34,6 @@ class UserController {
       const createdUser = await UserService.createUser(user);
       if (createdUser) {
         response.setSuccess(201, 'Account was successfully created!', createdUser);
-      } else {
-        response.setError(400, 'There was an error creating account');
       }
       return response.send(res);
     } catch (error) {
@@ -73,7 +71,7 @@ class UserController {
         const tokenResponse = {
           token,
         };
-        response.setSuccess(200, null, tokenResponse);
+        response.setSuccess(200, 'Successfully log in user', tokenResponse);
       }
       return response.send(res);
     } catch (error) {
