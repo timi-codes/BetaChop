@@ -34,5 +34,11 @@ module.exports = {
     define: {
       timestamps: false,
     },
+    dialectOption: {
+      ssl: true,
+      native: true,
+    },
+    logging: true,
+      }
   },
 };
