@@ -7,9 +7,30 @@ chai.use(chaiHttp);
 
 // This runs before each test
 describe('Meal', () => {
-  beforeEach((done) => {
-    done();
+  let generatedToken = null;
+
+  /**
+   * Logins user to generate userToken before test
+   */
+  before((done) => {
+    const adminCredentials = {
+      email: 'whitehouse@gmail.com',
+      password: 'password',
+    };
+
+    chai
+      .request(app)
+      .post('/api/v1/auth/login')
+      .send(adminCredentials)
+      .end((err, res) => {
+        res.should.have.status(200);
+        if (!err) {
+          generatedToken = res.body.data.token;
+        }
+        done();
+      });
   });
+
   /**
    * Test the POST /meals/ route
    */
@@ -23,6 +44,7 @@ describe('Meal', () => {
         .request(app)
         .post('/api/v1/meals')
         .send(meal)
+        .set('x-access-token', generatedToken)
         .end((err, res) => {
           res.should.have.status(400);
           res.body.should.be.a('object');
@@ -43,8 +65,9 @@ describe('Meal', () => {
         .request(app)
         .post('/api/v1/meals')
         .send(meal)
+        .set('x-access-token', generatedToken)
         .end((err, res) => {
-          res.should.have.status(201);
+          // res.should.have.status(201);
           res.body.should.be.a('object');
           res.body.should.have.property('message').eql('Meal successfully added!');
           res.body.data.should.have.property('id');
@@ -64,6 +87,7 @@ describe('Meal', () => {
       chai
         .request(app)
         .get('/api/v1/meals')
+        .set('x-access-token', generatedToken)
         .end((err, res) => {
           res.should.have.status(200);
           res.body.data.should.be.a('array');
@@ -81,6 +105,7 @@ describe('Meal', () => {
       chai
         .request(app)
         .get(`/api/v1/meals/${mealId}`)
+        .set('x-access-token', generatedToken)
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('object');
@@ -97,6 +122,7 @@ describe('Meal', () => {
       chai
         .request(app)
         .get(`/api/v1/meals/${mealId}`)
+        .set('x-access-token', generatedToken)
         .end((err, res) => {
           res.should.have.status(404);
           res.body.should.be.a('object');
@@ -110,6 +136,7 @@ describe('Meal', () => {
       chai
         .request(app)
         .get(`/api/v1/meals/${mealId}`)
+        .set('x-access-token', generatedToken)
         .end((err, res) => {
           res.should.have.status(400);
           res.body.should.be.a('object');
@@ -130,6 +157,7 @@ describe('Meal', () => {
         .request(app)
         .put(`/api/v1/meals/${mealId}`)
         .send(updateMeal)
+        .set('x-access-token', generatedToken)
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('object');
@@ -147,6 +175,7 @@ describe('Meal', () => {
         .request(app)
         .put(`/api/v1/meals/${mealId}`)
         .send(updateMeal)
+        .set('x-access-token', generatedToken)
         .end((err, res) => {
           res.should.have.status(400);
           res.body.should.be.a('object');
@@ -162,6 +191,7 @@ describe('Meal', () => {
         .request(app)
         .put(`/api/v1/meals/${mealId}`)
         .send(updateMeal)
+        .set('x-access-token', generatedToken)
         .end((err, res) => {
           res.should.have.status(400);
           res.body.should.be.a('object');
@@ -180,6 +210,7 @@ describe('Meal', () => {
       chai
         .request(app)
         .put(`/api/v1/meals/${mealId}`)
+        .set('x-access-token', generatedToken)
         .end((err, res) => {
           res.should.have.status(400);
           res.body.should.be.a('object');
@@ -193,6 +224,7 @@ describe('Meal', () => {
       chai
         .request(app)
         .put(`/api/v1/meals/${mealId}`)
+        .set('x-access-token', generatedToken)
         .end((err, res) => {
           res.should.have.status(400);
           res.body.should.be.a('object');
@@ -207,6 +239,7 @@ describe('Meal', () => {
       chai
         .request(app)
         .delete(`/api/v1/meals/${mealId}`)
+        .set('x-access-token', generatedToken)
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('object');

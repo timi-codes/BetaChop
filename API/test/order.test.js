@@ -7,6 +7,8 @@ chai.use(chaiHttp);
 
 // This runs before each test
 describe('Order', () => {
+  const userToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjQsImZpcnN0bmFtZSI6IlRpbWkiLCJsYXN0bmFtZSI6IlRlanVtb2xhIiwiZW1haWwiOiJ0aW1pdGVqQGdtYWlsLmNvbSIsInJvbGVJZCI6MiwiaWF0IjoxNTUxOTUzOTk0LCJleHAiOjE1NTIwNDAzOTR9.boS_e9VZePnW2MFCAk2S0niFW6aCQm3KRPdZEVorugM';
+
   beforeEach((done) => {
     done();
   });
@@ -25,6 +27,7 @@ describe('Order', () => {
         .request(app)
         .post('/api/v1/orders')
         .send(validMeal)
+        .set('x-access-token', userToken)
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('object');
@@ -43,6 +46,7 @@ describe('Order', () => {
         .request(app)
         .post('/api/v1/orders')
         .send(validMeal)
+        .set('x-access-token', userToken)
         .end((err, res) => {
           res.should.have.status(404);
           res.body.should.be.a('object');
@@ -59,6 +63,7 @@ describe('Order', () => {
         .request(app)
         .post('/api/v1/orders')
         .send(validMeal)
+        .set('x-access-token', userToken)
         .end((err, res) => {
           res.should.have.status(400);
           res.body.should.be.a('object');
@@ -76,6 +81,7 @@ describe('Order', () => {
         .request(app)
         .post('/api/v1/orders')
         .send(validMeal)
+        .set('x-access-token', userToken)
         .end((err, res) => {
           res.should.have.status(400);
           res.body.should.be.a('object');
@@ -94,6 +100,7 @@ describe('Order', () => {
         .request(app)
         .post('/api/v1/orders')
         .send(validMeal)
+        .set('x-access-token', userToken)
         .end((err, res) => {
           res.should.have.status(400);
           res.body.should.be.a('object');
@@ -121,6 +128,7 @@ describe('Order', () => {
         .request(app)
         .put(`/api/v1/orders/${orderId}`)
         .send(newOrder)
+        .set('x-access-token', userToken)
         .end((err, res) => {
           res.should.have.status(201);
           res.body.should.be.a('object');
@@ -144,6 +152,7 @@ describe('Order', () => {
         .request(app)
         .put(`/api/v1/orders/${orderId}`)
         .send(newOrder)
+        .set('x-access-token', userToken)
         .end((err, res) => {
           res.should.have.status(400);
           res.body.should.be.a('object');
@@ -168,6 +177,7 @@ describe('Order', () => {
         .request(app)
         .put(`/api/v1/orders/${orderId}`)
         .send(newOrder)
+        .set('x-access-token', userToken)
         .end((err, res) => {
           res.should.have.status(400);
           res.body.should.be.a('object');
@@ -192,6 +202,7 @@ describe('Order', () => {
         .request(app)
         .put(`/api/v1/orders/${orderId}`)
         .send(newOrder)
+        .set('x-access-token', userToken)
         .end((err, res) => {
           res.should.have.status(400);
           res.body.should.be.a('object');
@@ -209,6 +220,7 @@ describe('Order', () => {
       chai
         .request(app)
         .get('/api/v1/orders')
+        .set('x-access-token', userToken)
         .end((err, res) => {
           res.should.have.status(200);
           res.body.data.should.be.a('array');

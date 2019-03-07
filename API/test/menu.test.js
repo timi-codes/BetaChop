@@ -6,8 +6,28 @@ import app from '../index';
 chai.use(chaiHttp);
 
 describe('Menu', () => {
-  beforeEach((done) => {
-    done();
+  let generatedToken = null;
+
+  /**
+   * Logins user to generate userToken before test
+   */
+  before((done) => {
+    const adminCredentials = {
+      email: 'whitehouse@gmail.com',
+      password: 'password',
+    };
+
+    chai
+      .request(app)
+      .post('/api/v1/auth/login')
+      .send(adminCredentials)
+      .end((err, res) => {
+        res.should.have.status(200);
+        if (!err) {
+          generatedToken = res.body.data.token;
+        }
+        done();
+      });
   });
 
   /**
@@ -23,6 +43,7 @@ describe('Menu', () => {
         .request(app)
         .post('/api/v1/menu')
         .send(meal)
+        .set('x-access-token', generatedToken)
         .end((err, res) => {
           res.should.have.status(201);
           res.body.should.have.property('message').eql('Meal successfully added to Menu List');
@@ -40,6 +61,7 @@ describe('Menu', () => {
         .request(app)
         .post('/api/v1/menu')
         .send(meal)
+        .set('x-access-token', generatedToken)
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('object');
@@ -56,6 +78,7 @@ describe('Menu', () => {
         .request(app)
         .post('/api/v1/menu')
         .send(meal)
+        .set('x-access-token', generatedToken)
         .end((err, res) => {
           res.should.have.status(404);
           res.body.should.be.a('object');
@@ -70,6 +93,7 @@ describe('Menu', () => {
         .request(app)
         .post('/api/v1/menu')
         .send(meal)
+        .set('x-access-token', generatedToken)
         .end((err, res) => {
           res.should.have.status(400);
           res.body.should.be.a('object');
@@ -86,6 +110,7 @@ describe('Menu', () => {
         .request(app)
         .post('/api/v1/menu')
         .send(meal)
+        .set('x-access-token', generatedToken)
         .end((err, res) => {
           res.should.have.status(400);
           res.body.should.be.a('object');
@@ -103,6 +128,7 @@ describe('Menu', () => {
       chai
         .request(app)
         .get('/api/v1/menu')
+        .set('x-access-token', generatedToken)
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('object');

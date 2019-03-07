@@ -78,7 +78,7 @@ describe('Meal', () => {
       const newUser = {
         firstname: 'Kolades',
         lastname: 'Bolades',
-        email: 'timitejumolaenouchjjjhhhhhhj@gmail.com',
+        email: 'timijk@gmail.com',
         password: 'passw',
       };
       chai
@@ -156,7 +156,7 @@ describe('Meal', () => {
 
     it('it should throw an error if user supply a wrong email and password combination ', (done) => {
       const loginCredentials = {
-        email: 'timitejumolaenouchjjjhhhhhhj@gmail.com',
+        email: 'timijk@gmail.com',
         password: 'passwordsdd',
       };
       chai
@@ -174,7 +174,7 @@ describe('Meal', () => {
 
     it('it should login the user in', (done) => {
       const loginCredentials = {
-        email: 'timitejumolaenouchjjjhhhhhhj@gmail.com',
+        email: 'timijk@gmail.com',
         password: 'passw',
       };
       chai
