@@ -7,22 +7,20 @@ const basename = _basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 const config = configJson[env];
 const db = {};
-
+process.env.NODE_ENV = 'production';
 let sequelize;
-if (env === 'production') {
-  sequelize = new Sequelize(process.env.HEROKU_URI, {
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
-    dialect: 'postgres',
-    dialectOption: {
-      ssl: true,
-      native: true,
-    },
-    logging: true,
-  });
-} else {
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
-}
+// if (process.env.NODE_ENV) {
+//   sequelize = new Sequelize(process.env.DATABASE_URL, {
+//     dialect: 'postgres',
+//     dialectOption: {
+//       ssl: true,
+//       native: true,
+//     },
+//     logging: true,
+//   });
+// } else {
+sequelize = new Sequelize(config.database, config.username, config.password, config);
+// }
 
 readdirSync(__dirname)
   .filter(file => file.indexOf('.') !== 0 && file !== basename && file.slice(-3) === '.js')
