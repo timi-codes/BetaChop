@@ -10,9 +10,15 @@ const db = {};
 
 let sequelize;
 if (env === 'production') {
-  sequelize = new Sequelize(process.env.DATABASE_URL, {
+  sequelize = new Sequelize(process.env.HEROKU_URI, {
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
     dialect: 'postgres',
-    operatorsAliases: false,
+    dialectOption: {
+      ssl: true,
+      native: true,
+    },
+    logging: true,
   });
 } else {
   sequelize = new Sequelize(config.database, config.username, config.password, config);
