@@ -44,6 +44,8 @@ class MealController {
       return response.send(res);
     }
     const newMeal = req.body;
+    const { userId } = req.token;
+    newMeal.userId = userId;
 
     try {
       const createdMeal = await MealService.addAMeal(newMeal);

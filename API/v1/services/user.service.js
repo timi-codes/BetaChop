@@ -13,7 +13,9 @@ class UserService {
    */
   static async createUser(user) {
     try {
-      user.password = hashPassword(user.password);
+      const { password, roleId } = user;
+
+      user.password = hashPassword(password);
 
       const isUser = await database.User.findOne({ where: { email: user.email } });
 
@@ -31,6 +33,7 @@ class UserService {
         userId,
         firstname,
         lastname,
+        roleId,
       };
 
       const token = jwtSigner(payload);

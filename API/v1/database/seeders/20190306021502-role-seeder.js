@@ -5,14 +5,14 @@ module.exports = {
     'Roles',
     [
       {
-        name: 'caterer',
-        description: 'The role for the caterers',
+        name: 'user',
+        description: 'The role for the regular users',
         createdAt: now,
         updatedAt: now,
       },
       {
-        name: 'user',
-        description: 'The role for the regular users',
+        name: 'caterer',
+        description: 'The role for the caterers',
         createdAt: now,
         updatedAt: now,
       },
