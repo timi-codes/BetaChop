@@ -1,12 +1,13 @@
 import { Router } from 'express';
 import MealController from '../controllers/meal.controller';
+import AuthMiddleware from '../middlewares/authMiddleware';
 
 const router = Router();
 
-router.get('/', MealController.fetchAllMeals);
-router.post('/', MealController.addAMeal);
-router.get('/:id', MealController.getAMeal);
-router.put('/:id', MealController.updateAMeal);
-router.delete('/:id', MealController.deleteAMeal);
+router.get('/', AuthMiddleware, MealController.fetchAllMeals);
+router.post('/', AuthMiddleware, MealController.addAMeal);
+router.get('/:id', AuthMiddleware, MealController.getAMeal);
+router.put('/:id', AuthMiddleware, MealController.updateAMeal);
+router.delete('/:id', AuthMiddleware, MealController.deleteAMeal);
 
 export default router;
