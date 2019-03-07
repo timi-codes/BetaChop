@@ -2,14 +2,14 @@
   "openapi": "3.0.0",
   "info": {
     "version": "1.0.0",
-    "title": "Book A Meal",
-    "description": "Meal Booking Application",
+    "title": "BetaChop",
+    "description": "A Meal Booking Application",
     "license": {
       "name": "MIT",
       "url": "https://opensource.org/licenses/MIT"
     },
     "contact": {
-      "email": "timilehin.olumofin@gmail.com"
+      "email": "tejumoladavid@gmail.com"
     }
   },
   "tags": [
