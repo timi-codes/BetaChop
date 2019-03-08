@@ -11,7 +11,12 @@ const db = {};
 let sequelize;
 console.log(env);
 if (config.environment === 'production') {
-  sequelize = new Sequelize(process.env[config.environment], config);
+  sequelize = new Sequelize(process.env[config.environment], {
+    dialectOptions: {
+      ssl: true,
+      native: true,
+    },
+  });
 } else {
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
