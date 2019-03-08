@@ -9,7 +9,6 @@ if (process.env.NODE_ENV != 'production'){
 };
 }
 
-
 module.exports = {
   "config": path.resolve('./dist/v1/config', 'config.js'),
   "models-path": path.resolve('./dist/v1/database','models'),
