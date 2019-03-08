@@ -22,6 +22,10 @@ Application was deployed to Heroku. Use public URL [https://betachop.herokuapp.c
 
 Pivotal Tracker Stories can found here [Pivotal tracker](https://www.pivotaltracker.com/n/projects/2242112).
 
+## Swagger API Documentation
+
+API Documentation was generated with [swagger](https://betachop.herokuapp.com/api-docs).
+
 ---
 
 ## Technologies Used
