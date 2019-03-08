@@ -1,7 +1,8 @@
-const config = require('dotenv');
+"use strict";
+
+var config = require('dotenv');
 
 config.config();
-
 module.exports = {
   development: {
     username: 'codepreneur',
@@ -13,12 +14,12 @@ module.exports = {
     operatorsAliases: false,
     ssl: true,
     define: {
-      timestamps: false,
+      timestamps: false
     },
     dialectOption: {
       ssl: true,
-      native: true,
-    },
+      native: true
+    }
   },
   test: {
     username: 'codepreneur',
@@ -30,12 +31,12 @@ module.exports = {
     ssl: true,
     operatorsAliases: false,
     define: {
-      timestamps: false,
+      timestamps: false
     },
     dialectOption: {
       ssl: true,
-      native: true,
-    },
+      native: true
+    }
   },
   production: {
     environment: 'production',
@@ -48,12 +49,12 @@ module.exports = {
     ssl: true,
     operatorsAliases: false,
     define: {
-      timestamps: false,
+      timestamps: false
     },
     dialectOption: {
       ssl: true,
-      native: true,
+      native: true
     },
-    logging: true,
-  },
+    logging: true
+  }
 };
