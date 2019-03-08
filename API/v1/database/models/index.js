@@ -6,13 +6,13 @@ import configJson from '../../config/config';
 
 pg.defaults.ssl = true;
 const basename = _basename(__filename);
-const env = process.env.NODE_ENV || 'production';
+const env = process.env.NODE_ENV || 'development';
 const config = configJson[env];
 const db = {};
 let sequelize;
 console.log(env);
-if (env === 'production') {
-  sequelize = new Sequelize(config.uri, config);
+if (config.environment === 'production') {
+  sequelize = new Sequelize(process.env[config.use_env_variable]);
 } else {
   // sequelize = new Sequelize(
   //   'postgres://zdycbqstcpqddg:cbeeca55ddc249db336ebc9870b8260fb0c55a22fd366315fe406d01dfe0a54d@ec2-174-129-236-21.compute-1.amazonaws.com:5432/d7cdlo945mtmn3?ssl=true',
