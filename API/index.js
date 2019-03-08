@@ -23,7 +23,7 @@ app.use(`${API_VERSION}/menu`, menuRoutes);
 app.use(`${API_VERSION}/auth`, userRoutes);
 
 app.get('/', (req, res) => {
-  res.send('GET request to the homepage');
+  res.send('This app server is runninoninown 😀😎😋');
 });
 
 if (!module.parent) {
