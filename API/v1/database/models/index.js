@@ -17,9 +17,10 @@ if (env === 'production') {
       native: true,
     },
   });
-} else {
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
+// else {
+//   sequelize = new Sequelize(config.database, config.username, config.password, config);
+// }
 
 readdirSync(__dirname)
   .filter(file => file.indexOf('.') !== 0 && file !== basename && file.slice(-3) === '.js')
