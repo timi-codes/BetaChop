@@ -11,7 +11,7 @@ const db = {};
 let sequelize;
 console.log(env);
 if (config.environment === 'production') {
-  sequelize = new Sequelize(process.env.DATABASE_URL, config);
+  sequelize = new Sequelize(process.env[config.environment], config);
 } else {
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }

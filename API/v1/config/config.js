@@ -38,6 +38,7 @@ module.exports = {
     },
   },
   production: {
+    environment: 'DATABASE_URL',
     dialect: 'postgres',
     port: 5432,
     ssl: true,
