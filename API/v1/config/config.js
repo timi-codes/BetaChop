@@ -40,15 +40,5 @@ module.exports = {
   production: {
     environment: 'DATABASE_URL',
     dialect: 'postgres',
-    port: 5432,
-    ssl: true,
-    operatorsAliases: false,
-    dialectOption: {
-      ssl: true,
-      native: true,
-    },
-    define: {
-      timestamps: false,
-    },
   },
 };
