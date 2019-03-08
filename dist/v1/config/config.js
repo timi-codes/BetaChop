@@ -39,6 +39,8 @@ module.exports = {
     }
   },
   production: {
-    environment: 'production'
+    environment: 'production',
+    dialect: 'postgres',
+    operatorsAliases: false
   }
 };
