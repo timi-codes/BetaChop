@@ -1,15 +1,17 @@
 const path = require('path');
 
-if (process.env.NODE_ENV === 'production'){
-module.exports = {
-  "models-path": path.resolve('./dist/v1/database','models'),
-  "seeders-path": path.resolve('./dist/v1/database','seeders'),
-  "migrations-path": path.resolve('./dist/v1/database','migrations')
-};
-}
+if (process.env.NODE_ENV != 'production'){
  module.exports = {
   "config": path.resolve('./API/v1/config', 'config.js'),
   "models-path": path.resolve('./API/v1/database','models'),
   "seeders-path": path.resolve('./API/v1/database','seeders'),
   "migrations-path": path.resolve('./API/v1/database','migrations')
+};
+}
+
+module.exports = {
+  "config": path.resolve('./dist/v1/config', 'config.js'),
+  "models-path": path.resolve('./dist/v1/database','models'),
+  "seeders-path": path.resolve('./dist/v1/database','seeders'),
+  "migrations-path": path.resolve('./dist/v1/database','migrations')
 };
