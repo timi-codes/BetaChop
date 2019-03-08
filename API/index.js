@@ -22,6 +22,10 @@ app.use(`${API_VERSION}/orders`, orderRoutes);
 app.use(`${API_VERSION}/menu`, menuRoutes);
 app.use(`${API_VERSION}/auth`, userRoutes);
 
+app.get('/', (req, res) => {
+  res.send('GET request to the homepage');
+});
+
 if (!module.parent) {
   app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
