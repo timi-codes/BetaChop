@@ -40,7 +40,7 @@ module.exports = {
   production: {
     environment: 'production',
     host: 'ec2-174-129-236-21.compute-1.amazonaws.com',
-    uri: process.env.DATABASE_URL,
+    use_env_variable: 'DATABASE_URL',
     dialect: 'postgres',
     port: 5432,
     ssl: true,

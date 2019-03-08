@@ -11,7 +11,7 @@ const db = {};
 let sequelize;
 console.log(env);
 if (env === 'production') {
-  sequelize = new Sequelize(config.uri, {
+  sequelize = new Sequelize(process.env[config.use_env_variable, {
     dialectOptions: {
       ssl: true,
       native: true,
