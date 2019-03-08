@@ -10,7 +10,7 @@ const config = configJson[env];
 const db = {};
 let sequelize;
 console.log(env);
-if (config.environment === 'production') {
+if (env === 'production') {
   sequelize = new Sequelize(process.env[config.environment], {
     dialectOptions: {
       ssl: true,
