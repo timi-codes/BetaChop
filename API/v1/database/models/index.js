@@ -4,7 +4,7 @@ import Sequelize from 'sequelize';
 import pg from 'pg';
 import configJson from '../../config/config';
 
-pg.defaults.ssl = true;
+// pg.defaults.ssl = true;
 const basename = _basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 const config = configJson[env];
