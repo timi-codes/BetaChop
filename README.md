@@ -24,7 +24,7 @@ Pivotal Tracker Stories can found here [Pivotal tracker](https://www.pivotaltrac
 
 ## Swagger API Documentation
 
-API Documentation was generated with [swagger](https://betachop.herokuapp.com/api-docs).
+API Documenttion was generated with [swagger](https://betachop.herokuapp.com/api-docs).
 
 ---
 
