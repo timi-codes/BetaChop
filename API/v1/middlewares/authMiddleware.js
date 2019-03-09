@@ -34,7 +34,14 @@ const decodeToken = (req, res, next, token) => {
  * @returns {Object} Object
  */
 const AuthMiddleware = (req, res, next) => {
-  let token = req.headers['x-access-token'] || req.headers.token || req.body.token || req.params.token;
+  let token = req.headers['x-access-token']
+    || req.headers.Authorization
+    || req.headers.token
+    || req.headers.authorization;
+
+  if (token.startsWith('Bearer ')) {
+    token = token.slice(7, token.length);
+  }
   if (process.env.NODE_ENV === 'test') {
     if (!token) {
       token = 1;
