@@ -47,7 +47,7 @@ class MenuService {
           {
             model: database.User,
             as: 'caterer',
-            attributes: { exclude: ['password'] },
+            attributes: { exclude: ['password', 'roleId'] },
           },
         ],
         attributes: { exclude: ['catererId'] },
