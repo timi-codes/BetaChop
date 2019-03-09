@@ -40,7 +40,7 @@ module.exports = {
   },
   production: {
     environment: 'production',
-    uri: process.env.DATABASE_URL,
+    use_env_variable: 'DATABASE_URL',
     dialect: 'postgres',
     port: 5432,
     ssl: true,
@@ -48,6 +48,9 @@ module.exports = {
     dialectOption: {
       ssl: true,
       native: true
+    },
+    define: {
+      timestamps: false
     }
   }
 };

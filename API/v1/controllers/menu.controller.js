@@ -26,7 +26,7 @@ class MenuController {
       }
       return response.send(res);
     } catch (error) {
-      response.setError(400, error);
+      response.setError(400, error.message);
       return response.send(res);
     }
   }
@@ -39,6 +39,7 @@ class MenuController {
    */
   static async setUpMenu(req, res) {
     const { id } = req.body;
+    const { userId } = req.token;
 
     if (!id) {
       response.setError(400, 'meal id is required');
@@ -50,18 +51,15 @@ class MenuController {
     }
 
     try {
-      const addedMeal = await MenuService.setUpMenu(id);
+      const addedMeal = await MenuService.setUpMenu(id, userId);
+      const [rowsUpdate, [updatedMeal]] = addedMeal;
 
-      if (addedMeal == null) {
-        response.setError(404, `Meal with id ${id} cannot be found`);
-      } else if (addedMeal.availableToday) {
-        response.setSuccess(200, 'Meal has already been added to menu list');
-      } else {
-        response.setSuccess(201, 'Meal successfully added to Menu List', addedMeal);
+      if (rowsUpdate > 0) {
+        response.setSuccess(201, 'Meal successfully added to Menu List', updatedMeal);
       }
       return response.send(res);
     } catch (error) {
-      response.setError(400, error);
+      response.setError(400, error.message);
       return response.send(res);
     }
   }

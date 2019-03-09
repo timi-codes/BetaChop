@@ -18,8 +18,8 @@ module.exports = function (sequelize, DataTypes) {
 
   Meal.associate = function (models) {
     Meal.belongsTo(models.User, {
-      foreignKey: 'userId',
-      as: 'Caterer'
+      foreignKey: 'catererId',
+      as: 'caterer'
     });
     Meal.hasMany(models.Order, {
       foreignKey: 'mealId',

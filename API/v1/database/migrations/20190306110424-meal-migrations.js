@@ -28,7 +28,7 @@ module.exports = {
         allowNull: false,
         defaultValue: false,
       },
-      userId: {
+      catererId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Users',
@@ -37,6 +37,7 @@ module.exports = {
       },
     });
   },
+
   down: function down(queryInterface /** , Sequelize */) {
     return queryInterface.dropTable('Meals');
   },

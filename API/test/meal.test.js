@@ -8,11 +8,10 @@ chai.use(chaiHttp);
 // This runs before each test
 describe('Meal', () => {
   let generatedToken = null;
-
   /**
    * Logins user to generate userToken before test
    */
-  before((done) => {
+  before('Login user to obtain auth token to be used in other operations', (done) => {
     const adminCredentials = {
       email: 'whitehouse@gmail.com',
       password: 'password',
@@ -67,7 +66,7 @@ describe('Meal', () => {
         .send(meal)
         .set('x-access-token', generatedToken)
         .end((err, res) => {
-          // res.should.have.status(201);
+          res.should.have.status(201);
           res.body.should.be.a('object');
           res.body.should.have.property('message').eql('Meal successfully added!');
           res.body.data.should.have.property('id');

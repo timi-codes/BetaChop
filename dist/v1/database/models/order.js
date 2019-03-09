@@ -8,15 +8,15 @@ module.exports = function (sequelize, DataTypes) {
   Order.associate = function (models) {
     Order.belongsTo(models.User, {
       foreignKey: 'userId',
-      as: 'user'
+      as: 'User'
     });
     Order.belongsTo(models.User, {
       foreignKey: 'catererId',
-      as: 'caterer'
+      as: 'Caterer'
     });
     Order.belongsTo(models.Meal, {
       foreignKey: 'mealId',
-      as: 'meal'
+      as: 'Meal'
     });
   };
 

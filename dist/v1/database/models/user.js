@@ -8,16 +8,22 @@ module.exports = function (sequelize, DataTypes) {
       unique: true
     },
     password: DataTypes.STRING
-  }, {});
+  }, {
+    defaultScope: {
+      attributes: {
+        exclude: ['password']
+      }
+    }
+  });
 
   User.associate = function (models) {
     User.belongsTo(models.Role, {
       foreignKey: 'roleId',
-      as: 'roles'
+      as: 'Role'
     });
     User.hasMany(models.Meal, {
-      foreignKey: 'userId',
-      as: 'meals'
+      foreignKey: 'catererId',
+      as: 'Meals'
     });
   };
 

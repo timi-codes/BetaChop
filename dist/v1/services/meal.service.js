@@ -32,20 +32,24 @@ function () {
     key: "fetchAllMeals",
 
     /**
-     * @description Retrieve and return all meals
+     * @description Retrieve and return all meals belong to the authenticated   c aterer
      * @returns {Array} of meal or throw error
      */
     value: function () {
       var _fetchAllMeals = (0, _asyncToGenerator2.default)(
       /*#__PURE__*/
-      _regenerator.default.mark(function _callee() {
+      _regenerator.default.mark(function _callee(catererId) {
         return _regenerator.default.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.prev = 0;
                 _context.next = 3;
-                return _models.default.Meal.findAll();
+                return _models.default.Meal.findAll({
+                  where: {
+                    catererId: catererId
+                  }
+                });
 
               case 3:
                 return _context.abrupt("return", _context.sent);
@@ -63,7 +67,7 @@ function () {
         }, _callee, null, [[0, 6]]);
       }));
 
-      function fetchAllMeals() {
+      function fetchAllMeals(_x) {
         return _fetchAllMeals.apply(this, arguments);
       }
 
@@ -105,14 +109,14 @@ function () {
         }, _callee2, null, [[0, 6]]);
       }));
 
-      function addAMeal(_x) {
+      function addAMeal(_x2) {
         return _addAMeal.apply(this, arguments);
       }
 
       return addAMeal;
     }()
     /**
-     * @description Updates a meal
+     * @description Updates a meal belonging to the currently logged in caterer
      * @param { int } id
      * @param {object} updatedMeal
      * @returns {object} foundMeal
@@ -123,7 +127,7 @@ function () {
     value: function () {
       var _updateAMeal = (0, _asyncToGenerator2.default)(
       /*#__PURE__*/
-      _regenerator.default.mark(function _callee3(id, updatedMeal) {
+      _regenerator.default.mark(function _callee3(id, updatedMeal, catererId) {
         var foundMeal;
         return _regenerator.default.wrap(function _callee3$(_context3) {
           while (1) {
@@ -131,7 +135,12 @@ function () {
               case 0:
                 _context3.prev = 0;
                 _context3.next = 3;
-                return _models.default.Meal.findByPk(Number(id));
+                return _models.default.Meal.findOne({
+                  where: {
+                    id: Number(id),
+                    catererId: catererId
+                  }
+                });
 
               case 3:
                 foundMeal = _context3.sent;
@@ -152,7 +161,7 @@ function () {
                 return _context3.abrupt("return", updatedMeal);
 
               case 8:
-                return _context3.abrupt("return", foundMeal);
+                return _context3.abrupt("return", null);
 
               case 11:
                 _context3.prev = 11;
@@ -167,14 +176,14 @@ function () {
         }, _callee3, null, [[0, 11]]);
       }));
 
-      function updateAMeal(_x2, _x3) {
+      function updateAMeal(_x3, _x4, _x5) {
         return _updateAMeal.apply(this, arguments);
       }
 
       return updateAMeal;
     }()
     /**
-     * @description Finds a meal record
+     * @description Finds a meal record belonging to the currently logged in caterer
      * @param { int } id
      * @returns {object} foundMeal
      */
@@ -184,7 +193,7 @@ function () {
     value: function () {
       var _getAMeal = (0, _asyncToGenerator2.default)(
       /*#__PURE__*/
-      _regenerator.default.mark(function _callee4(id) {
+      _regenerator.default.mark(function _callee4(id, catererId) {
         var foundMeal;
         return _regenerator.default.wrap(function _callee4$(_context4) {
           while (1) {
@@ -192,7 +201,12 @@ function () {
               case 0:
                 _context4.prev = 0;
                 _context4.next = 3;
-                return _models.default.Meal.findByPk(Number(id));
+                return _models.default.Meal.findOne({
+                  where: {
+                    id: Number(id),
+                    catererId: catererId
+                  }
+                });
 
               case 3:
                 foundMeal = _context4.sent;
@@ -211,14 +225,14 @@ function () {
         }, _callee4, null, [[0, 7]]);
       }));
 
-      function getAMeal(_x4) {
+      function getAMeal(_x6, _x7) {
         return _getAMeal.apply(this, arguments);
       }
 
       return getAMeal;
     }()
     /**
-     * @description Delete a meal record
+     * @description Delete a meal record belonging to the currently logged in caterer
      * @param { int } id
      * @returns {object} meal
      */
@@ -228,7 +242,7 @@ function () {
     value: function () {
       var _deleteAMeal = (0, _asyncToGenerator2.default)(
       /*#__PURE__*/
-      _regenerator.default.mark(function _callee5(id) {
+      _regenerator.default.mark(function _callee5(id, catererId) {
         var foundMeal, deleteRecord;
         return _regenerator.default.wrap(function _callee5$(_context5) {
           while (1) {
@@ -236,7 +250,12 @@ function () {
               case 0:
                 _context5.prev = 0;
                 _context5.next = 3;
-                return _models.default.Meal.findByPk(Number(id));
+                return _models.default.Meal.findOne({
+                  where: {
+                    id: Number(id),
+                    catererId: catererId
+                  }
+                });
 
               case 3:
                 foundMeal = _context5.sent;
@@ -249,7 +268,8 @@ function () {
                 _context5.next = 7;
                 return _models.default.Meal.destroy({
                   where: {
-                    id: Number(id)
+                    id: Number(id),
+                    catererId: catererId
                   }
                 });
 
@@ -273,7 +293,7 @@ function () {
         }, _callee5, null, [[0, 12]]);
       }));
 
-      function deleteAMeal(_x5) {
+      function deleteAMeal(_x8, _x9) {
         return _deleteAMeal.apply(this, arguments);
       }
 

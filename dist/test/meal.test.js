@@ -19,7 +19,7 @@ describe('Meal', function () {
    * Logins user to generate userToken before test
    */
 
-  before(function (done) {
+  before('Login user to obtain auth token to be used in other operations', function (done) {
     var adminCredentials = {
       email: 'whitehouse@gmail.com',
       password: 'password'

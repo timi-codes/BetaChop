@@ -15,25 +15,17 @@ var _sequelize = _interopRequireDefault(require("sequelize"));
 
 var _config = _interopRequireDefault(require("../../config/config"));
 
-// pg.defaults.ssl = true;
 var basename = (0, _path.basename)(__filename);
 var env = process.env.NODE_ENV || 'development';
 var config = _config.default[env];
 var db = {};
 var sequelize;
-console.log(env);
 
 if (env === 'production') {
-  sequelize = new _sequelize.default(process.env[config.uri], {
-    dialectOptions: {
-      ssl: true,
-      native: true
-    }
-  });
-} // else {
-//   sequelize = new Sequelize(config.database, config.username, config.password, config);
-// }
-
+  sequelize = new _sequelize.default(process.env[config.use_env_variable], config);
+} else {
+  sequelize = new _sequelize.default(config.database, config.username, config.password, config);
+}
 
 (0, _fs.readdirSync)(__dirname).filter(function (file) {
   return file.indexOf('.') !== 0 && file !== basename && file.slice(-3) === '.js';

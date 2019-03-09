@@ -55,25 +55,26 @@ function () {
               case 0:
                 _context.prev = 0;
                 password = user.password, roleId = user.roleId;
-                user.password = (0, _passHasher.default)(password);
-                _context.next = 5;
+                _context.next = 4;
                 return _models.default.User.findOne({
                   where: {
                     email: user.email
                   }
                 });
 
-              case 5:
+              case 4:
                 isUser = _context.sent;
 
                 if (!isUser) {
-                  _context.next = 8;
+                  _context.next = 7;
                   break;
                 }
 
                 throw new Error('User with this email address already exist!');
 
-              case 8:
+              case 7:
+                // Create user
+                user.password = (0, _passHasher.default)(password);
                 _context.next = 10;
                 return _models.default.User.create(user);
 
@@ -142,7 +143,7 @@ function () {
                 user = _context2.sent;
 
                 if (!user) {
-                  _context2.next = 14;
+                  _context2.next = 15;
                   break;
                 }
 
@@ -153,7 +154,7 @@ function () {
                 bcryptResponse = _context2.sent;
 
                 if (!bcryptResponse) {
-                  _context2.next = 13;
+                  _context2.next = 14;
                   break;
                 }
 
@@ -162,25 +163,26 @@ function () {
                   userId: userId
                 }, data);
                 token = (0, _jwtSigner.default)(userProfile);
+                console.log(token);
                 return _context2.abrupt("return", token);
 
-              case 13:
+              case 14:
                 throw new Error('Invalid user credentials');
 
-              case 14:
+              case 15:
                 return _context2.abrupt("return", null);
 
-              case 17:
-                _context2.prev = 17;
+              case 18:
+                _context2.prev = 18;
                 _context2.t0 = _context2["catch"](0);
                 throw _context2.t0;
 
-              case 20:
+              case 21:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, null, [[0, 17]]);
+        }, _callee2, null, [[0, 18]]);
       }));
 
       function loginUser(_x2) {

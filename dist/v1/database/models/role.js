@@ -9,20 +9,7 @@ module.exports = function (sequelize, DataTypes) {
       primaryKey: true
     },
     name: DataTypes.STRING,
-    displayName: DataTypes.STRING,
-    description: DataTypes.STRING,
-    permissions: {
-      type: DataTypes.ARRAY(DataTypes.STRING),
-      allowNull: true,
-      defaultValue: []
-    }
-  }, {
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt',
-    deletedAt: 'deletedAt',
-    timestamps: true,
-    paranoid: true,
-    underscored: true
+    description: DataTypes.STRING
   });
 
   Role.associate = function (models) {

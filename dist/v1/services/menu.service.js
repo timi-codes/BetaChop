@@ -32,13 +32,13 @@ function () {
     key: "setUpMenu",
 
     /**
-     * @description Setup the meal for the day
+     * @description Updates the availability of a meal for today for logged in caterer
      * @returns {Array} menu object array
      */
     value: function () {
       var _setUpMenu = (0, _asyncToGenerator2.default)(
       /*#__PURE__*/
-      _regenerator.default.mark(function _callee(id) {
+      _regenerator.default.mark(function _callee(id, catererId) {
         var foundMeal;
         return _regenerator.default.wrap(function _callee$(_context) {
           while (1) {
@@ -46,49 +46,70 @@ function () {
               case 0:
                 _context.prev = 0;
                 _context.next = 3;
-                return _models.default.Meal.findByPk(Number(id));
+                return _models.default.Meal.findOne({
+                  where: {
+                    id: id,
+                    catererId: catererId
+                  }
+                });
 
               case 3:
                 foundMeal = _context.sent;
 
-                if (!foundMeal) {
-                  _context.next = 7;
+                if (!(foundMeal && foundMeal.availableToday)) {
+                  _context.next = 6;
                   break;
                 }
 
-                _context.next = 7;
+                throw new Error('Meal has already been added to menu list');
+
+              case 6:
+                if (!foundMeal) {
+                  _context.next = 10;
+                  break;
+                }
+
+                _context.next = 9;
                 return _models.default.Meal.update({
                   availableToday: true
                 }, {
+                  returning: true,
                   where: {
                     id: Number(id)
-                  }
+                  },
+                  include: [{
+                    model: _models.default.User,
+                    as: 'caterer'
+                  }]
                 });
 
-              case 7:
-                return _context.abrupt("return", foundMeal);
+              case 9:
+                return _context.abrupt("return", _context.sent);
 
               case 10:
-                _context.prev = 10;
+                throw new Error("Meal with id ".concat(id, " cannot be found"));
+
+              case 13:
+                _context.prev = 13;
                 _context.t0 = _context["catch"](0);
                 throw _context.t0;
 
-              case 13:
+              case 16:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 10]]);
+        }, _callee, null, [[0, 13]]);
       }));
 
-      function setUpMenu(_x) {
+      function setUpMenu(_x, _x2) {
         return _setUpMenu.apply(this, arguments);
       }
 
       return setUpMenu;
     }()
     /**
-     * @description Retrieve and return all menu from our dummyy data
+     * @description Retrieve and return all menu from all caterers
      * @returns {Array} menu object array
      */
 
@@ -107,6 +128,13 @@ function () {
                 return _models.default.Meal.findAll({
                   where: {
                     availableToday: true
+                  },
+                  include: [{
+                    model: _models.default.User,
+                    as: 'caterer'
+                  }],
+                  attributes: {
+                    exclude: ['catererId']
                   }
                 });
 

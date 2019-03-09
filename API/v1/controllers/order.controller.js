@@ -16,7 +16,8 @@ class OrderController {
    * @returns {Array} order object array
    */
   static fetchAllOrders(req, res) {
-    const allOrders = OrderService.fetchAllOrders();
+    const { userId } = req.token;
+    const allOrders = OrderService.fetchAllOrders(userId);
     return allOrders
       .then((meals) => {
         if (meals.length === 0) {
@@ -36,19 +37,25 @@ class OrderController {
    * @returns {object} apiResponse
    */
   static orderAMeal(req, res) {
+    const { userId } = req.token;
+    const { mealId, type, catererId } = req.body;
+
     if (!req.body.mealId || !req.body.type) {
       response.setSuccess(400, 'All parameters are required', null);
       return response.send(res);
     }
 
-    const { mealId, type } = req.body;
+    if (!catererId) {
+      response.setSuccess(400, 'catererId field is required', null);
+      return response.send(res);
+    }
 
     if (Number.isNaN(Number(mealId))) {
       response.setError(400, 'Invalid mealId. mealId must be a number');
       return response.send(res);
     }
 
-    const orderedMeal = OrderService.orderAMeal(mealId, type);
+    const orderedMeal = OrderService.orderAMeal(mealId, type, userId, catererId);
 
     return orderedMeal
       .then((order) => {

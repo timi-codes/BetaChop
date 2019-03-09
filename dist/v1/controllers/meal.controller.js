@@ -21,7 +21,7 @@ var _ResponseGenerator = _interopRequireDefault(require("../utils/ResponseGenera
 
 var response = new _ResponseGenerator.default();
 /**
- * meal controller performs controls  request and response -
+ * caterer meal controller performs controls  request and response -
  * fetching all meal,
  * adding a new meal,
  * updating an existing meal and
@@ -39,25 +39,27 @@ function () {
     key: "fetchAllMeals",
 
     /**
-     * @description retrieve and return all meals from our data
+     * @description retrieve and return all meals that
+     * belongs to the currently logged in user
      * @param {object} req
      * @param {object} res
-     * @returns {Array} meal object array
+     * @returns {Array} meal object
      */
     value: function () {
       var _fetchAllMeals = (0, _asyncToGenerator2.default)(
       /*#__PURE__*/
       _regenerator.default.mark(function _callee(req, res) {
-        var allMeals;
+        var userId, allMeals;
         return _regenerator.default.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.prev = 0;
-                _context.next = 3;
-                return _meal.default.fetchAllMeals();
+                userId = req.token.userId;
+                _context.next = 4;
+                return _meal.default.fetchAllMeals(userId);
 
-              case 3:
+              case 4:
                 allMeals = _context.sent;
 
                 if (allMeals.length === 0) {
@@ -68,18 +70,18 @@ function () {
 
                 return _context.abrupt("return", response.send(res));
 
-              case 8:
-                _context.prev = 8;
+              case 9:
+                _context.prev = 9;
                 _context.t0 = _context["catch"](0);
                 response.setError(400, _context.t0);
                 return _context.abrupt("return", response.send(res));
 
-              case 12:
+              case 13:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 8]]);
+        }, _callee, null, [[0, 9]]);
       }));
 
       function fetchAllMeals(_x, _x2) {
@@ -89,7 +91,7 @@ function () {
       return fetchAllMeals;
     }()
     /**
-     * @description create a meal record
+     * @description create a meal record with the id of the curently logged in user
      * @param {object} req
      * @param {object} res
      * @returns {object} apiResponse
@@ -117,7 +119,7 @@ function () {
               case 3:
                 newMeal = req.body;
                 userId = req.token.userId;
-                newMeal.userId = userId;
+                newMeal.catererId = userId;
                 _context2.prev = 6;
                 _context2.next = 9;
                 return _meal.default.addAMeal(newMeal);
@@ -130,7 +132,7 @@ function () {
               case 14:
                 _context2.prev = 14;
                 _context2.t0 = _context2["catch"](6);
-                response.setError(400, _context2.t0);
+                response.setError(400, _context2.t0.message);
                 return _context2.abrupt("return", response.send(res));
 
               case 18:
@@ -148,7 +150,7 @@ function () {
       return addAMeal;
     }()
     /**
-     * @description update a meal record
+     * @description update a meal record belong to the currently logged in user
      * @param {object} req
      * @param {object} res
      * @returns {object} apiResponse
@@ -160,28 +162,29 @@ function () {
       var _updateAMeal = (0, _asyncToGenerator2.default)(
       /*#__PURE__*/
       _regenerator.default.mark(function _callee3(req, res) {
-        var newMeal, id, updateMeal;
+        var newMeal, id, userId, updateMeal;
         return _regenerator.default.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
                 newMeal = req.body;
                 id = req.params.id;
+                userId = req.token.userId;
 
                 if (!Number.isNaN(Number(id))) {
-                  _context3.next = 5;
+                  _context3.next = 6;
                   break;
                 }
 
                 response.setSuccess(400, 'Invalid ID. ID must be a number');
                 return _context3.abrupt("return", response.send(res));
 
-              case 5:
-                _context3.prev = 5;
-                _context3.next = 8;
-                return _meal.default.updateAMeal(id, newMeal);
+              case 6:
+                _context3.prev = 6;
+                _context3.next = 9;
+                return _meal.default.updateAMeal(id, newMeal, userId);
 
-              case 8:
+              case 9:
                 updateMeal = _context3.sent;
 
                 if (updateMeal === null) {
@@ -192,18 +195,18 @@ function () {
 
                 return _context3.abrupt("return", response.send(res));
 
-              case 13:
-                _context3.prev = 13;
-                _context3.t0 = _context3["catch"](5);
+              case 14:
+                _context3.prev = 14;
+                _context3.t0 = _context3["catch"](6);
                 response.setError(400, _context3.t0);
                 return _context3.abrupt("return", response.send(res));
 
-              case 17:
+              case 18:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, null, [[5, 13]]);
+        }, _callee3, null, [[6, 14]]);
       }));
 
       function updateAMeal(_x5, _x6) {
@@ -213,7 +216,7 @@ function () {
       return updateAMeal;
     }()
     /**
-     * @description get a specific meal
+     * @description get a specific meal belonging to the currently logged in user
      * @param {object} req
      * @param {object} res
      * @returns {object} found meal
@@ -225,27 +228,28 @@ function () {
       var _getAMeal = (0, _asyncToGenerator2.default)(
       /*#__PURE__*/
       _regenerator.default.mark(function _callee4(req, res) {
-        var id, foundMeal;
+        var id, userId, foundMeal;
         return _regenerator.default.wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
                 id = req.params.id;
+                userId = req.token.userId;
 
                 if (!Number.isNaN(Number(id))) {
-                  _context4.next = 4;
+                  _context4.next = 5;
                   break;
                 }
 
                 response.setError(400, 'Invalid ID. ID must be a number');
                 return _context4.abrupt("return", response.send(res));
 
-              case 4:
-                _context4.prev = 4;
-                _context4.next = 7;
-                return _meal.default.getAMeal(id);
+              case 5:
+                _context4.prev = 5;
+                _context4.next = 8;
+                return _meal.default.getAMeal(id, userId);
 
-              case 7:
+              case 8:
                 foundMeal = _context4.sent;
 
                 if (foundMeal === null) {
@@ -256,18 +260,18 @@ function () {
 
                 return _context4.abrupt("return", response.send(res));
 
-              case 12:
-                _context4.prev = 12;
-                _context4.t0 = _context4["catch"](4);
+              case 13:
+                _context4.prev = 13;
+                _context4.t0 = _context4["catch"](5);
                 response.setError(400, _context4.t0);
                 return _context4.abrupt("return", response.send(res));
 
-              case 16:
+              case 17:
               case "end":
                 return _context4.stop();
             }
           }
-        }, _callee4, null, [[4, 12]]);
+        }, _callee4, null, [[5, 13]]);
       }));
 
       function getAMeal(_x7, _x8) {
@@ -277,7 +281,7 @@ function () {
       return getAMeal;
     }()
     /**
-     * @description get a specific meal
+     * @description delete a specific meal belonging to the currently logged in user
      * @param {object} req
      * @param {object} res
      * @returns {object} response
@@ -289,27 +293,28 @@ function () {
       var _deleteAMeal = (0, _asyncToGenerator2.default)(
       /*#__PURE__*/
       _regenerator.default.mark(function _callee5(req, res) {
-        var id, deletedRecord;
+        var id, userId, deletedRecord;
         return _regenerator.default.wrap(function _callee5$(_context5) {
           while (1) {
             switch (_context5.prev = _context5.next) {
               case 0:
                 id = req.params.id;
+                userId = req.token.userId;
 
                 if (!Number.isNaN(Number(id))) {
-                  _context5.next = 4;
+                  _context5.next = 5;
                   break;
                 }
 
                 response.setError(400, 'Invalid ID. ID must be a number');
                 return _context5.abrupt("return", response.send(res));
 
-              case 4:
-                _context5.prev = 4;
-                _context5.next = 7;
-                return _meal.default.deleteAMeal(id);
+              case 5:
+                _context5.prev = 5;
+                _context5.next = 8;
+                return _meal.default.deleteAMeal(id, userId);
 
-              case 7:
+              case 8:
                 deletedRecord = _context5.sent;
 
                 if (deletedRecord === 1) {
@@ -320,18 +325,18 @@ function () {
 
                 return _context5.abrupt("return", response.send(res));
 
-              case 12:
-                _context5.prev = 12;
-                _context5.t0 = _context5["catch"](4);
+              case 13:
+                _context5.prev = 13;
+                _context5.t0 = _context5["catch"](5);
                 response.setError(400, _context5.t0);
                 return _context5.abrupt("return", response.send(res));
 
-              case 16:
+              case 17:
               case "end":
                 return _context5.stop();
             }
           }
-        }, _callee5, null, [[4, 12]]);
+        }, _callee5, null, [[5, 13]]);
       }));
 
       function deleteAMeal(_x9, _x10) {

@@ -31,6 +31,9 @@ app.use("".concat(API_VERSION, "/meals"), _meal.default);
 app.use("".concat(API_VERSION, "/orders"), _order.default);
 app.use("".concat(API_VERSION, "/menu"), _menu.default);
 app.use("".concat(API_VERSION, "/auth"), _user.default);
+app.get('/', function (req, res) {
+  res.send('This app server is runninoninown 😀😎😋');
+});
 
 if (!module.parent) {
   app.listen(port, function () {

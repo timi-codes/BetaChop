@@ -7,6 +7,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
+var _slicedToArray2 = _interopRequireDefault(require("@babel/runtime/helpers/slicedToArray"));
+
 var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
 
 var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
@@ -69,7 +71,7 @@ function () {
               case 8:
                 _context.prev = 8;
                 _context.t0 = _context["catch"](0);
-                response.setError(400, _context.t0);
+                response.setError(400, _context.t0.message);
                 return _context.abrupt("return", response.send(res));
 
               case 12:
@@ -99,60 +101,59 @@ function () {
       var _setUpMenu = (0, _asyncToGenerator2.default)(
       /*#__PURE__*/
       _regenerator.default.mark(function _callee2(req, res) {
-        var id, addedMeal;
+        var id, userId, addedMeal, _addedMeal, rowsUpdate, _addedMeal$, updatedMeal;
+
         return _regenerator.default.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
                 id = req.body.id;
+                userId = req.token.userId;
 
                 if (id) {
-                  _context2.next = 4;
+                  _context2.next = 5;
                   break;
                 }
 
                 response.setError(400, 'meal id is required');
                 return _context2.abrupt("return", response.send(res));
 
-              case 4:
+              case 5:
                 if (!Number.isNaN(Number(id))) {
-                  _context2.next = 7;
+                  _context2.next = 8;
                   break;
                 }
 
                 response.setError(400, 'Invalid ID. ID must be a number');
                 return _context2.abrupt("return", response.send(res));
 
-              case 7:
-                _context2.prev = 7;
-                _context2.next = 10;
-                return _menu.default.setUpMenu(id);
+              case 8:
+                _context2.prev = 8;
+                _context2.next = 11;
+                return _menu.default.setUpMenu(id, userId);
 
-              case 10:
+              case 11:
                 addedMeal = _context2.sent;
+                _addedMeal = (0, _slicedToArray2.default)(addedMeal, 2), rowsUpdate = _addedMeal[0], _addedMeal$ = (0, _slicedToArray2.default)(_addedMeal[1], 1), updatedMeal = _addedMeal$[0];
 
-                if (addedMeal == null) {
-                  response.setError(404, "Meal with id ".concat(id, " cannot be found"));
-                } else if (addedMeal.availableToday) {
-                  response.setSuccess(200, 'Meal has already been added to menu list');
-                } else {
-                  response.setSuccess(201, 'Meal successfully added to Menu List', addedMeal);
+                if (rowsUpdate > 0) {
+                  response.setSuccess(201, 'Meal successfully added to Menu List', updatedMeal);
                 }
 
                 return _context2.abrupt("return", response.send(res));
 
-              case 15:
-                _context2.prev = 15;
-                _context2.t0 = _context2["catch"](7);
-                response.setError(400, _context2.t0);
+              case 17:
+                _context2.prev = 17;
+                _context2.t0 = _context2["catch"](8);
+                response.setError(400, _context2.t0.message);
                 return _context2.abrupt("return", response.send(res));
 
-              case 19:
+              case 21:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, null, [[7, 15]]);
+        }, _callee2, null, [[8, 17]]);
       }));
 
       function setUpMenu(_x3, _x4) {

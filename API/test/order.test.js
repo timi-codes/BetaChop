@@ -35,11 +35,14 @@ describe('Order', () => {
    * Test the POST /orders/ route
    */
   describe('POST /orders', () => {
+    const catererId = 2;
+
     it("it should place an order for a meal available in the today's menu", (done) => {
       const id = 2;
       const validMeal = {
         mealId: id,
         type: 'breakfast',
+        catererId,
       };
       chai
         .request(app)
@@ -59,6 +62,7 @@ describe('Order', () => {
       const validMeal = {
         mealId: id,
         type: 'breakfast',
+        catererId,
       };
       chai
         .request(app)
@@ -76,6 +80,7 @@ describe('Order', () => {
     it('it should not place an order for a meal without "mealId" parameter', (done) => {
       const validMeal = {
         type: 'breakfast',
+        catererId,
       };
       chai
         .request(app)
@@ -94,6 +99,7 @@ describe('Order', () => {
       const id = 50;
       const validMeal = {
         mealId: id,
+        catererId,
       };
       chai
         .request(app)
@@ -108,11 +114,31 @@ describe('Order', () => {
         });
     });
 
+    it('it should not place an order for a meal without "catererId" parameter', (done) => {
+      const id = 2;
+      const validMeal = {
+        mealId: id,
+        type: 'breakfast',
+      };
+      chai
+        .request(app)
+        .post('/api/v1/orders')
+        .send(validMeal)
+        .set('x-access-token', generatedToken)
+        .end((err, res) => {
+          res.should.have.status(400);
+          res.body.should.be.a('object');
+          res.body.should.have.property('message').eql('catererId field is required');
+          done();
+        });
+    });
+
     it('it should throw an error when a number is not passed as mealId', (done) => {
       const id = '5c'; // Invalid mealId
       const validMeal = {
         mealId: id,
         type: 'breakfast',
+        catererId,
       };
       chai
         .request(app)

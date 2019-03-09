@@ -30,7 +30,7 @@ module.exports = {
         allowNull: false,
         defaultValue: false
       },
-      userId: {
+      catererId: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Users',

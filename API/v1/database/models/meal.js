@@ -15,12 +15,12 @@ module.exports = (sequelize, DataTypes) => {
   });
   Meal.associate = (models) => {
     Meal.belongsTo(models.User, {
-      foreignKey: 'userId',
-      as: 'Caterer',
+      foreignKey: 'catererId',
+      as: 'caterer',
     });
     Meal.hasMany(models.Order, {
       foreignKey: 'mealId',
-      as: 'Orders',
+      as: 'orders',
     });
   };
   return Meal;
