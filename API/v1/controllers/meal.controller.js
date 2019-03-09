@@ -4,7 +4,7 @@ import ResponseGenerator from '../utils/ResponseGenerator';
 const response = new ResponseGenerator();
 
 /**
- * meal controller performs controls  request and response -
+ * caterer meal controller performs controls  request and response -
  * fetching all meal,
  * adding a new meal,
  * updating an existing meal and
@@ -12,14 +12,16 @@ const response = new ResponseGenerator();
  */
 class MealController {
   /**
-   * @description retrieve and return all meals from our data
+   * @description retrieve and return all meals that
+   * belongs to the currently logged in user
    * @param {object} req
    * @param {object} res
-   * @returns {Array} meal object array
+   * @returns {Array} meal object
    */
   static async fetchAllMeals(req, res) {
     try {
-      const allMeals = await MealService.fetchAllMeals();
+      const { userId } = req.token;
+      const allMeals = await MealService.fetchAllMeals(userId);
       if (allMeals.length === 0) {
         response.setSuccess(200, 'No meal found!');
       } else {
@@ -33,7 +35,7 @@ class MealController {
   }
 
   /**
-   * @description create a meal record
+   * @description create a meal record with the id of the curently logged in user
    * @param {object} req
    * @param {object} res
    * @returns {object} apiResponse
@@ -45,21 +47,20 @@ class MealController {
     }
     const newMeal = req.body;
     const { userId } = req.token;
-    newMeal.userId = userId;
+    newMeal.catererId = userId;
 
     try {
       const createdMeal = await MealService.addAMeal(newMeal);
-
       response.setSuccess(201, 'Meal successfully added!', createdMeal);
       return response.send(res);
     } catch (error) {
-      response.setError(400, error);
+      response.setError(400, error.message);
       return response.send(res);
     }
   }
 
   /**
-   * @description update a meal record
+   * @description update a meal record belong to the currently logged in user
    * @param {object} req
    * @param {object} res
    * @returns {object} apiResponse
@@ -67,6 +68,7 @@ class MealController {
   static async updateAMeal(req, res) {
     const newMeal = req.body;
     const { id } = req.params;
+    const { userId } = req.token;
 
     if (Number.isNaN(Number(id))) {
       response.setSuccess(400, 'Invalid ID. ID must be a number');
@@ -74,7 +76,7 @@ class MealController {
     }
 
     try {
-      const updateMeal = await MealService.updateAMeal(id, newMeal);
+      const updateMeal = await MealService.updateAMeal(id, newMeal, userId);
 
       if (updateMeal === null) {
         response.setError(400, `Meal with id ${id} cannot be found`);
@@ -89,13 +91,14 @@ class MealController {
   }
 
   /**
-   * @description get a specific meal
+   * @description get a specific meal belonging to the currently logged in user
    * @param {object} req
    * @param {object} res
    * @returns {object} found meal
    */
   static async getAMeal(req, res) {
     const { id } = req.params;
+    const { userId } = req.token;
 
     if (Number.isNaN(Number(id))) {
       response.setError(400, 'Invalid ID. ID must be a number');
@@ -103,7 +106,7 @@ class MealController {
     }
 
     try {
-      const foundMeal = await MealService.getAMeal(id);
+      const foundMeal = await MealService.getAMeal(id, userId);
 
       if (foundMeal === null) {
         response.setError(404, 'Meal cannot be found');
@@ -118,13 +121,14 @@ class MealController {
   }
 
   /**
-   * @description get a specific meal
+   * @description delete a specific meal belonging to the currently logged in user
    * @param {object} req
    * @param {object} res
    * @returns {object} response
    */
   static async deleteAMeal(req, res) {
     const { id } = req.params;
+    const { userId } = req.token;
 
     if (Number.isNaN(Number(id))) {
       response.setError(400, 'Invalid ID. ID must be a number');
@@ -132,7 +136,7 @@ class MealController {
     }
 
     try {
-      const deletedRecord = await MealService.deleteAMeal(id);
+      const deletedRecord = await MealService.deleteAMeal(id, userId);
 
       if (deletedRecord === 1) {
         response.setSuccess(200, 'Meal was successfully deleted');

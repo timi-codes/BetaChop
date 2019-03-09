@@ -35,7 +35,7 @@ describe('Menu', () => {
    */
   describe('POST /menu', () => {
     it('it should add a meal given the id to the menu', (done) => {
-      const mealId = 4;
+      const mealId = 5;
       const meal = {
         id: mealId,
       };
@@ -53,7 +53,7 @@ describe('Menu', () => {
     });
 
     it('it should send a message if meal has already been added', (done) => {
-      const mealId = 3;
+      const mealId = 5;
       const meal = {
         id: mealId,
       };
@@ -63,7 +63,7 @@ describe('Menu', () => {
         .send(meal)
         .set('x-access-token', generatedToken)
         .end((err, res) => {
-          res.should.have.status(200);
+          res.should.have.status(400);
           res.body.should.be.a('object');
           res.body.should.have.property('message').eql('Meal has already been added to menu list');
           done();
@@ -80,7 +80,7 @@ describe('Menu', () => {
         .send(meal)
         .set('x-access-token', generatedToken)
         .end((err, res) => {
-          res.should.have.status(404);
+          res.should.have.status(400);
           res.body.should.be.a('object');
           res.body.should.have.property('message').eql(`Meal with id ${meal.id} cannot be found`);
           done();

@@ -15,13 +15,14 @@ class UserService {
     try {
       const { password, roleId } = user;
 
-      user.password = hashPassword(password);
-
       const isUser = await database.User.findOne({ where: { email: user.email } });
 
       if (isUser) {
         throw new Error('User with this email address already exist!');
       }
+
+      // Create user
+      user.password = hashPassword(password);
 
       const createdUser = await database.User.create(user);
 
@@ -54,6 +55,7 @@ class UserService {
   static async loginUser(login) {
     try {
       const user = await database.User.findOne({ where: { email: login.email } });
+
       if (user) {
         const bcryptResponse = await validPassword(login.password, user.password);
         if (bcryptResponse) {

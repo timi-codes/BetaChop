@@ -9,17 +9,23 @@ class OrderService {
    * @description Retrieve and return all orders from our dummyy data
    * @returns {Array} order object array
    */
-  static async fetchAllOrders() {
+  static async fetchAllOrders(catererId) {
     try {
       return await database.Order.findAll({
+        where: { catererId },
         include: [
           {
             model: database.Meal,
             as: 'meal',
             where: { availableToday: true },
           },
+          {
+            model: database.User,
+            as: 'user',
+            attributes: { exclude: ['catererId', 'password', 'roleId'] },
+          },
         ],
-        attributes: { exclude: ['mealId'] },
+        attributes: { exclude: ['mealId', 'catererId', 'userId'] },
       });
     } catch (error) {
       throw error;
@@ -30,7 +36,7 @@ class OrderService {
    * @description Order a meal
    * @returns {Array} order object array
    */
-  static async orderAMeal(id, type) {
+  static async orderAMeal(id, type, userId, catererId) {
     try {
       const foundMeal = await database.Meal.findByPk(Number(id));
 
@@ -38,6 +44,8 @@ class OrderService {
         return await database.Order.create({
           type,
           mealId: foundMeal.id,
+          userId,
+          catererId,
         });
       }
       return foundMeal;
