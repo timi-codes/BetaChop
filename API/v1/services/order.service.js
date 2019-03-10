@@ -63,16 +63,15 @@ class OrderService {
   static async updateAnOrder(orderId, mealId, type) {
     try {
       const foundOrder = await database.Order.findByPk(Number(orderId));
-      const newMeal = await database.Meal.findByPk(Number(mealId));
+      const newMeal = await database.Meal.findOne({
+        where: { id: Number(mealId), availableToday: true },
+      });
 
       if (foundOrder && newMeal && newMeal.availableToday) {
         return await database.Order.update(
           { mealId: newMeal.id, type },
           { where: { id: Number(orderId) } },
         );
-      }
-      if (!newMeal.availableToday && newMeal == null) {
-        return "Meal is not available in today's menu";
       }
       return null;
     } catch (e) {
