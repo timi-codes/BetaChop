@@ -27,7 +27,10 @@ class OrderController {
         }
         response.send(res);
       })
-      .catch(error => res.status(500).send(error));
+      .catch((error) => {
+        response.setError(400, error.message);
+        return response.send(res);
+      });
   }
 
   /**
@@ -66,7 +69,10 @@ class OrderController {
         }
         response.send(res);
       })
-      .catch(error => res.status(500).send(error));
+      .catch((error) => {
+        response.setError(400, error.message);
+        return response.send(res);
+      });
   }
 
   /**
@@ -75,7 +81,7 @@ class OrderController {
    * @param {object} res
    * @returns {object} apiResponse
    */
-  static updateAnOrder(req, res) {
+  static async updateAnOrder(req, res) {
     const { mealId, type } = req.body;
     const { id } = req.params;
 
@@ -84,21 +90,22 @@ class OrderController {
       return response.send(res);
     }
 
-    const updateOrder = OrderService.updateAnOrder(id, mealId, type);
+    try {
+      const updateOrder = await OrderService.updateAnOrder(id, mealId, type);
 
-    return updateOrder
-      .then((order) => {
-        if (order === 'string') {
-          const orderMessage = order;
-          response.setSuccess(200, orderMessage);
-        } else if (order === null || order === 0) {
-          response.setError(400, `Order with id ${id} or Meal with id ${mealId} cannot be found`);
-        } else {
-          response.setSuccess(201, 'Order was successfully updated');
-        }
-        response.send(res);
-      })
-      .catch(error => res.status(500).send(error));
+      if (updateOrder === 'string') {
+        const orderMessage = updateOrder;
+        response.setSuccess(200, orderMessage);
+      } else if (updateOrder === null || updateOrder === 0) {
+        response.setError(400, `Order with id ${id} or Meal with id ${mealId} cannot be found`);
+      } else {
+        response.setSuccess(201, 'Order was successfully updated');
+      }
+      return response.send(res);
+    } catch (error) {
+      response.setError(400, error.message);
+      return response.send(res);
+    }
   }
 }
 

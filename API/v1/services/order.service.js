@@ -71,7 +71,7 @@ class OrderService {
           { where: { id: Number(orderId) } },
         );
       }
-      if (!newMeal.availableToday && newMeal == null) {
+      if (newMeal && !newMeal.availableToday) {
         return "Meal is not available in today's menu";
       }
       return null;
