@@ -3,6 +3,7 @@ import 'chai/register-should';
 import chaiHttp from 'chai-http';
 import app from '../index';
 import Utility from '../v1/utils/helpers';
+import TestUtility from '../v1/utils/testUtils';
 
 chai.use(chaiHttp);
 
@@ -51,9 +52,13 @@ describe('Order', () => {
         .send(validMeal)
         .set('x-access-token', generatedToken)
         .end((err, res) => {
-          res.should.have.status(200);
-          res.body.should.be.a('object');
-          res.body.should.have.property('message').eql('Your order has been placed');
+          if (!Utility.isOrderTime()) {
+            TestUtility.orderTimerTestResponse(res);
+          } else {
+            res.should.have.status(200);
+            res.body.should.be.a('object');
+            res.body.should.have.property('message').eql('Your order has been placed');
+          }
           done();
         });
     });
@@ -71,9 +76,13 @@ describe('Order', () => {
         .send(validMeal)
         .set('x-access-token', generatedToken)
         .end((err, res) => {
-          res.should.have.status(404);
-          res.body.should.be.a('object');
-          res.body.should.have.property('message').eql('This meal cannot be found');
+          if (!Utility.isOrderTime()) {
+            TestUtility.orderTimerTestResponse(res);
+          } else {
+            res.should.have.status(404);
+            res.body.should.be.a('object');
+            res.body.should.have.property('message').eql('This meal cannot be found');
+          }
           done();
         });
     });
@@ -89,9 +98,13 @@ describe('Order', () => {
         .send(validMeal)
         .set('x-access-token', generatedToken)
         .end((err, res) => {
-          res.should.have.status(400);
-          res.body.should.be.a('object');
-          res.body.should.have.property('message').eql('All parameters are required');
+          if (!Utility.isOrderTime()) {
+            TestUtility.orderTimerTestResponse(res);
+          } else {
+            res.should.have.status(400);
+            res.body.should.be.a('object');
+            res.body.should.have.property('message').eql('All parameters are required');
+          }
           done();
         });
     });
@@ -108,9 +121,13 @@ describe('Order', () => {
         .send(validMeal)
         .set('x-access-token', generatedToken)
         .end((err, res) => {
-          res.should.have.status(400);
-          res.body.should.be.a('object');
-          res.body.should.have.property('message').eql('All parameters are required');
+          if (!Utility.isOrderTime()) {
+            TestUtility.orderTimerTestResponse(res);
+          } else {
+            res.should.have.status(400);
+            res.body.should.be.a('object');
+            res.body.should.have.property('message').eql('All parameters are required');
+          }
           done();
         });
     });
@@ -127,9 +144,13 @@ describe('Order', () => {
         .send(validMeal)
         .set('x-access-token', generatedToken)
         .end((err, res) => {
-          res.should.have.status(400);
-          res.body.should.be.a('object');
-          res.body.should.have.property('message').eql('catererId field is required');
+          if (!Utility.isOrderTime()) {
+            TestUtility.orderTimerTestResponse(res);
+          } else {
+            res.should.have.status(400);
+            res.body.should.be.a('object');
+            res.body.should.have.property('message').eql('catererId field is required');
+          }
           done();
         });
     });
@@ -147,9 +168,13 @@ describe('Order', () => {
         .send(validMeal)
         .set('x-access-token', generatedToken)
         .end((err, res) => {
-          res.should.have.status(400);
-          res.body.should.be.a('object');
-          res.body.should.have.property('message').eql('Invalid mealId. mealId must be a number');
+          if (!Utility.isOrderTime()) {
+            TestUtility.orderTimerTestResponse(res);
+          } else {
+            res.should.have.status(400);
+            res.body.should.be.a('object');
+            res.body.should.have.property('message').eql('Invalid mealId. mealId must be a number');
+          }
           done();
         });
     });
@@ -175,9 +200,13 @@ describe('Order', () => {
         .send(newOrder)
         .set('x-access-token', generatedToken)
         .end((err, res) => {
-          res.should.have.status(201);
-          res.body.should.be.a('object');
-          res.body.should.have.property('message').eql('Order was successfully updated');
+          if (!Utility.isOrderTime()) {
+            TestUtility.orderTimerTestResponse(res);
+          } else {
+            res.should.have.status(201);
+            res.body.should.be.a('object');
+            res.body.should.have.property('message').eql('Order was successfully updated');
+          }
           done();
         });
     });
@@ -199,14 +228,8 @@ describe('Order', () => {
         .send(newOrder)
         .set('x-access-token', generatedToken)
         .end((err, res) => {
-          if (!Utility.isOrderTime) {
-            res.should.have.status(403);
-            res.body.should.be.a('object');
-            res.body.should.have
-              .property('message')
-              .eql(
-                "Sorry, Order can't be placed now because we've closed for the day. (if you are testing you can change the time in orderTimermiddleware)",
-              );
+          if (!Utility.isOrderTime()) {
+            TestUtility.orderTimerTestResponse(res);
           } else {
             res.should.have.status(400);
             res.body.should.be.a('object');
@@ -234,14 +257,8 @@ describe('Order', () => {
         .send(newOrder)
         .set('x-access-token', generatedToken)
         .end((err, res) => {
-          if (!Utility.isOrderTime) {
-            res.should.have.status(403);
-            res.body.should.be.a('object');
-            res.body.should.have
-              .property('message')
-              .eql(
-                "Sorry, Order can't be placed now because we've closed for the day. (if you are testing you can change the time in orderTimermiddleware)",
-              );
+          if (!Utility.isOrderTime()) {
+            TestUtility.orderTimerTestResponse(res);
           } else {
             res.should.have.status(400);
             res.body.should.be.a('object');
@@ -269,9 +286,13 @@ describe('Order', () => {
         .send(newOrder)
         .set('x-access-token', generatedToken)
         .end((err, res) => {
-          res.should.have.status(400);
-          res.body.should.be.a('object');
-          res.body.should.have.property('message').eql("Invalid ID. ID's must be a number");
+          if (!Utility.isOrderTime()) {
+            TestUtility.orderTimerTestResponse(res);
+          } else {
+            res.should.have.status(400);
+            res.body.should.be.a('object');
+            res.body.should.have.property('message').eql("Invalid ID. ID's must be a number");
+          }
           done();
         });
     });
