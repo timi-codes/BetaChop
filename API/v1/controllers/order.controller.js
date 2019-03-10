@@ -44,12 +44,7 @@ class OrderController {
     const { mealId, type, catererId } = req.body;
 
     if (!req.body.mealId || !req.body.type) {
-      response.setSuccess(400, 'All parameters are required', null);
-      return response.send(res);
-    }
-
-    if (!catererId) {
-      response.setSuccess(400, 'catererId field is required', null);
+      response.setSuccess(400, 'All parameters are required(mealId,type,catererId)', null);
       return response.send(res);
     }
 
