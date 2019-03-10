@@ -93,10 +93,7 @@ class OrderController {
     try {
       const updateOrder = await OrderService.updateAnOrder(id, mealId, type);
 
-      if (updateOrder === 'string') {
-        const orderMessage = updateOrder;
-        response.setSuccess(200, orderMessage);
-      } else if (updateOrder === null || updateOrder === 0) {
+      if (updateOrder === null || updateOrder === 0) {
         response.setError(400, `Order with id ${id} or Meal with id ${mealId} cannot be found`);
       } else {
         response.setSuccess(201, 'Order was successfully updated');
