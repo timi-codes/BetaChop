@@ -1,4 +1,5 @@
 import ResponseGenerator from '../utils/ResponseGenerator';
+import Utility from '../utils/helpers';
 
 const response = new ResponseGenerator();
 
@@ -16,15 +17,11 @@ const OrderTimerMiddleWare = (req, res, next) => {
     response.setError(419, 'How the hell did you get pass the authentication middleware');
     return response.send(res);
   }
-  const now = new Date();
-  const currentTime = now.getHours();
-  const openTime = 9; // We open for order by 9:00am
-  const closeTime = 18; // We close for the day by 6:00pm
 
-  if (!(currentTime >= openTime && closeTime <= 18)) {
+  if (!Utility.isOrderTime()) {
     response.setError(
       403,
-      `Sorry, Order can't be placed now because we've closed for the day. (if you are testing you can change the time in orderTimermiddleware)${currentTime}`,
+      'Sorry, Order can\'t be placed now because we\'ve closed for the day. (if you are testing you can change the time in orderTimermiddleware)',
     );
     return response.send(res);
   }

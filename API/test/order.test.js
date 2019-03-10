@@ -2,6 +2,7 @@ import chai from 'chai';
 import 'chai/register-should';
 import chaiHttp from 'chai-http';
 import app from '../index';
+import Utility from '../v1/utils/helpers';
 
 chai.use(chaiHttp);
 
@@ -198,11 +199,21 @@ describe('Order', () => {
         .send(newOrder)
         .set('x-access-token', generatedToken)
         .end((err, res) => {
-          res.should.have.status(400);
-          res.body.should.be.a('object');
-          res.body.should.have
-            .property('message')
-            .eql(`Order with id ${orderId} or Meal with id ${unAvailableMealId} cannot be found`);
+          if (!Utility.isOrderTime) {
+            res.should.have.status(403);
+            res.body.should.be.a('object');
+            res.body.should.have
+              .property('message')
+              .eql(
+                "Sorry, Order can't be placed now because we've closed for the day. (if you are testing you can change the time in orderTimermiddleware)",
+              );
+          } else {
+            res.should.have.status(400);
+            res.body.should.be.a('object');
+            res.body.should.have
+              .property('message')
+              .eql(`Order with id ${orderId} or Meal with id ${unAvailableMealId} cannot be found`);
+          }
           done();
         });
     });
@@ -223,11 +234,21 @@ describe('Order', () => {
         .send(newOrder)
         .set('x-access-token', generatedToken)
         .end((err, res) => {
-          res.should.have.status(400);
-          res.body.should.be.a('object');
-          res.body.should.have
-            .property('message')
-            .eql(`Order with id ${orderId} or Meal with id ${availableMealId} cannot be found`);
+          if (!Utility.isOrderTime) {
+            res.should.have.status(403);
+            res.body.should.be.a('object');
+            res.body.should.have
+              .property('message')
+              .eql(
+                "Sorry, Order can't be placed now because we've closed for the day. (if you are testing you can change the time in orderTimermiddleware)",
+              );
+          } else {
+            res.should.have.status(400);
+            res.body.should.be.a('object');
+            res.body.should.have
+              .property('message')
+              .eql(`Order with id ${orderId} or Meal with id ${availableMealId} cannot be found`);
+          }
           done();
         });
     });
