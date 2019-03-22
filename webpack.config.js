@@ -28,8 +28,8 @@ module.exports = {
   },
   plugins: [
     new HtmlWebPackPlugin({
-      template: './client/src/index.html',
-      filename: './client/index.html',
+      template: './client/public/index.html',
+      filename: './index.html',
     }),
     new MiniCssExtractPlugin({
       filename: '[name].css',
