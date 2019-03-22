@@ -43,7 +43,7 @@ class OrderController {
     const { userId } = req.token;
     const { mealId, type, catererId } = req.body;
 
-    if (!req.body.mealId || !req.body.type) {
+    if (!req.body.mealId || !req.body.type || !req.body.catererId) {
       response.setSuccess(400, 'All parameters are required(mealId,type,catererId)', null);
       return response.send(res);
     }

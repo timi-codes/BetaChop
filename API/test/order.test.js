@@ -103,7 +103,9 @@ describe('Order', () => {
           } else {
             res.should.have.status(400);
             res.body.should.be.a('object');
-            res.body.should.have.property('message').eql('All parameters are required');
+            res.body.should.have
+              .property('message')
+              .eql('All parameters are required(mealId,type,catererId)');
           }
           done();
         });
@@ -126,7 +128,9 @@ describe('Order', () => {
           } else {
             res.should.have.status(400);
             res.body.should.be.a('object');
-            res.body.should.have.property('message').eql('All parameters are required');
+            res.body.should.have
+              .property('message')
+              .eql('All parameters are required(mealId,type,catererId)');
           }
           done();
         });
@@ -149,7 +153,9 @@ describe('Order', () => {
           } else {
             res.should.have.status(400);
             res.body.should.be.a('object');
-            res.body.should.have.property('message').eql('catererId field is required');
+            res.body.should.have
+              .property('message')
+              .eql('All parameters are required(mealId,type,catererId)');
           }
           done();
         });
