@@ -50,9 +50,9 @@ footer a {
 h1 {
   font-weight: 700;
   line-height: 39px;
-  font-size: 35px;
+  font-size: 46px;
   color: var(--black);
-  max-width: 400;
+  max-width: 300;
 }
 
 h2 {
