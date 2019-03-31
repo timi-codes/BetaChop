@@ -3,5 +3,10 @@ module.exports = {
   env: {
     node: true,
     mocha: true,
+    jest: true,
+  },
+  globals: {
+    localStorage: true,
+    fetch: true,
   },
 };
