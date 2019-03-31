@@ -48,6 +48,7 @@
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.0.0",
     "@babel/runtime": "^7.3.4",
+    "axios": "^0.18.0",
     "babel-loader": "^8.0.5",
     "bcrypt": "^3.0.4",
     "bcryptjs": "^2.4.3",
@@ -77,6 +78,7 @@
     "webpack-cli": "^3.2.3"
   },
   "devDependencies": {
+    "@redux-saga/testing-utils": "^1.0.2",
     "browser-sync": "^2.26.3",
     "chai": "^4.2.0",
     "chai-http": "^4.2.1",
@@ -88,6 +90,7 @@
     "nodemon": "^1.18.10",
     "nyc": "^13.3.0",
     "run-script-os": "^1.0.3",
-    "should": "^13.2.3"
+    "should": "^13.2.3",
+    "tape": "^4.10.1"
   }
 }
