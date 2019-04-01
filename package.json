@@ -22,7 +22,8 @@
     "coveralls": "nyc npm test&& nyc report --reporter=text-lcov | coveralls",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "client-server": "webpack-dev-server --mode development ./client/index.js --output ./client/dist/main.js --open",
-    "build-wp": "webpack --mode production ./client/index.js --output ./client/dist/main.js"
+    "build-wp": "webpack --mode production ./client/index.js --output ./client/dist/main.js",
+    "saga-test": "babel-node ./client/src/sagas/authSaga/auth.spec.js | tap-spec"
   },
   "repository": {
     "type": "git",
@@ -91,6 +92,7 @@
     "nyc": "^13.3.0",
     "run-script-os": "^1.0.3",
     "should": "^13.2.3",
+    "tap-spec": "^5.0.0",
     "tape": "^4.10.1"
   }
 }
