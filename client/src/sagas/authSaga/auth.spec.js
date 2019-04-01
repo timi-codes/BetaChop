@@ -4,7 +4,7 @@ import {
 } from 'redux-saga/effects';
 import { createMockTask, cloneableGenerator } from '@redux-saga/testing-utils';
 import { loginFlow, authorize } from './auth';
-import * as api from '../api';
+import * as api from '../Api';
 
 const email = 'test@test.test';
 const password = 'testpassword';

@@ -1,7 +1,7 @@
 import {
   take, call, put, fork, cancel, cancelled,
 } from 'redux-saga/effects';
-import * as api from '../api';
+import * as api from '../Api';
 
 export function* authorize(email, password) {
   try {
