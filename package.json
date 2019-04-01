@@ -15,14 +15,15 @@
     "heroku-postbuild": "NODE_ENV=production && npm run build",
     "start": "sequelize db:migrate:undo:all && sequelize db:migrate && sequelize db:seed:all && node dist/index.js",
     "pretest": "sequelize db:migrate:undo:all --env test && sequelize db:migrate --env test && sequelize db:seed:all --env test",
-    "test": "set NODE_ENV=test && nyc --require @babel/register ---reporter=html --reporter=text mocha API/test/**.test.js --timeout 20000 --exit",
+    "test": "set NODE_ENV=test && nyc --require @babel/register ---reporter=html --reporter=text mocha API/test/**.test.js --timeout 20000 --exit && npm run saga-test ",
     "build-babel": "babel ./API --out-dir dist/ --copy-files --ignore ./node_modules,./coverage,./.babelrc,./package.json,./npm-debug.log,./.travis.yml,./.eslintrc.js,./UI,./README.md",
     "clean": "rm -rf dist && mkdir dist",
     "build": "npm run clean && npm run build-babel",
     "coveralls": "nyc npm test&& nyc report --reporter=text-lcov | coveralls",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "client-server": "webpack-dev-server --mode development ./client/index.js --output ./client/dist/main.js --open",
-    "build-wp": "webpack --mode production ./client/index.js --output ./client/dist/main.js"
+    "build-wp": "webpack --mode production ./client/index.js --output ./client/dist/main.js",
+    "saga-test": "babel-node ./client/src/sagas/authSaga/auth.spec.js | tap-spec"
   },
   "repository": {
     "type": "git",
@@ -91,6 +92,7 @@
     "nyc": "^13.3.0",
     "run-script-os": "^1.0.3",
     "should": "^13.2.3",
+    "tap-spec": "^5.0.0",
     "tape": "^4.10.1"
   }
 }

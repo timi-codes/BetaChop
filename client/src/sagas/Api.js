@@ -11,7 +11,7 @@ export const storeItem = (token) => {
   setAuthorizationToken(token);
 };
 
-export const clearitem = () => {
+export const clearItem = () => {
   localStorage.removeItem('token');
   setAuthorizationToken(false);
 };

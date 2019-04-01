@@ -1,11 +1,11 @@
 import {
   take, call, put, fork, cancel, cancelled,
 } from 'redux-saga/effects';
-import api from '../api';
+import * as api from '../Api';
 
 export function* authorize(email, password) {
   try {
-    const { data } = yield call(api.authorize, email, password);
+    const { data } = yield call(api.login, { email, password });
     yield put({ type: 'LOGIN_SUCCESS', data });
     yield call(api.storeItem, { token: data.token });
   } catch (error) {
