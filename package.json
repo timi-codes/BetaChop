@@ -51,7 +51,7 @@
     "@babel/runtime": "^7.3.4",
     "axios": "^0.18.0",
     "babel-loader": "^8.0.5",
-    "bcrypt": "^3.0.4",
+    "bcrypt": "^5.0.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "css-loader": "^2.1.1",
